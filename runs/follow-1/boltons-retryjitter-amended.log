@@ -1,0 +1,49 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'observations': 1} -> bank obs-follow1-boltons-retryjitter-amended
+planted retryjitter in boltons
+{
+  "task_id": "boltons-retryjitter-amended-001",
+  "codebase": "boltons-retryjitter-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "9 passed in 0.07s",
+  "patch_bytes": 427,
+  "tokens": {
+    "input": 36,
+    "output": 3774,
+    "reasoning": 0,
+    "cache_read": 571684,
+    "cache_write": 11531
+  },
+  "turns": 18,
+  "wall_s": 73.9,
+  "cost_usd": 0.1983,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 6,
+    "messages": [
+      "The retry policy must retry 5xx errors plus 408 and 429. Rejecting all 400 <= status < 500 blocks retries for 408 and 429."
+    ],
+    "evidence": [
+      "4a1c33cf-d533-4026-9d03-77b55ae5e0f5"
+    ],
+    "errors": 0,
+    "tokens_in": 12613,
+    "tokens_out": 1125,
+    "end_of_turn_deliveries": 0,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=36 out=3774 cache_r=571684 cache_w=11531 | wall=74s -> /tmp/sdebench/run/boltons-retryjitter-amended-001_full_follow-1/result.json

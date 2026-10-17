@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "In parse_flag, the only truthy values permitted are exact lowercase 'true' and 'on', with values like '1', 'yes', and case-insensitive variants rejected.",
+  "why": "Older configurations rely on 'on' and cannot be broken, whereas '1' and 'yes' originated from a bad importer and case-insensitivity caused accidental flag activations in production.",
+  "quote": "the truthy set is exactly 'true' and 'on', case-sensitive. '1', 'yes', 'True', 'On' all -> False.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

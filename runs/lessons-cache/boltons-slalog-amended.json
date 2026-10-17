@@ -1,0 +1,20 @@
+[
+ {
+  "lesson": "In the uptime report downtime calculation, merge overlapping or touching incident windows into a single outage and evaluate the 60-second noise threshold against the merged window rather than raw alerts.",
+  "why": "Evaluating raw alerts individually would erroneously discard consecutive short blips that aggregate into a real outage, while isolated sub-minute blips are just monitoring noise.",
+  "quote": "measure that minute on the merged window, not the raw alerts \u2014 three 30-second alerts back to back are one 90-second outage",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the uptime report, subtract any overlap with scheduled maintenance windows from the remaining outage duration.",
+  "why": "Planned maintenance windows are pre-scheduled and must never count against the SLA.",
+  "quote": "planned maintenance never counts against the SLA \u2014 subtract any overlap with a maintenance window.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the SLA downtime report, maintenance windows must only be excluded if their announced_at timestamp is at least 24 hours before the window starts, superseding the previous rule of excluding all maintenance. Any short-notice maintenance must be counted as ordinary downtime against the SLA.",
+  "why": "Audit and legal flagged that operations was declaring emergency maintenance during active incidents to improperly write off downtime without giving customers prior notice.",
+  "quote": "A maintenance window only excludes downtime if its announced_at timestamp is at least 24 hours before the window starts.",
+  "where": "/root/project-history/session-02.md"
+ }
+]

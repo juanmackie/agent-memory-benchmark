@@ -1,0 +1,53 @@
+planted dedupe in boltons
+planted dedupe in boltons
+[boltons-dedupe-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'lessons': 2, 'commits': 200} -> bank watch-cc-hs-1-boltons-dedupe-amended
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Duplicate contacts must be keyed on both the lowercased email and the calendar day of the update, not just the lowercased email alone. So
+  ↳ watcher turn 2: 🧠 Note from this project's memory (past sessions and commits): Collisions must be resolved by keeping the record with more non-empty fields rather than the latest updated timestamp. On a tie in filled
+planted dedupe in boltons
+{
+  "task_id": "boltons-dedupe-amended-001",
+  "codebase": "boltons-dedupe-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "11 passed in 0.01s",
+  "patch_bytes": 1494,
+  "tokens": {
+    "input": 38,
+    "output": 9028,
+    "reasoning": 0,
+    "cache_read": 626258,
+    "cache_write": 16183
+  },
+  "turns": 19,
+  "wall_s": 125.6,
+  "cost_usd": 0.5961,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Duplicate contacts must be keyed on both the lowercased email and the calendar day of the update, not just the lowercased email alone.",
+      "Collisions must be resolved by keeping the record with more non-empty fields rather than the latest updated timestamp. On a tie in filled field count, keep the primary CRM-side record."
+    ],
+    "evidence": [
+      "lesson-0",
+      "chat-1"
+    ],
+    "errors": 0,
+    "tokens_in": 3420,
+    "tokens_out": 438,
+    "end_of_turn_deliveries": 2,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=38 out=9028 cache_r=626258 cache_w=16183 | wall=126s -> /tmp/sdebench/run/boltons-dedupe-amended-001_full_cc-hs-1/result.json

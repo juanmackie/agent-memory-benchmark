@@ -1,0 +1,14 @@
+[
+ {
+  "lesson": "In apply_discounts, multiple percentage discounts must compound sequentially on the running amount rather than being summed together.",
+  "why": "Summing percentages caused two 50% off coupons to zero out the item instead of reducing it to $25.",
+  "quote": "make them compound sequentially, applying each to the running amount",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In apply_discounts, all percentage discounts must be applied before fixed-dollar discounts, ignoring the order in which coupons were submitted.",
+  "why": "Evaluating coupons in submission order allowed customers to manipulate the sequence to their advantage and conflicted with finance's pricing model.",
+  "quote": "Percent first, always. Then the fixed amount.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

@@ -12,3 +12,5 @@ data/tempo/
 .vercel
 .env*.local
 .env
+runs/hs/*.log
+runs/banks/*.log

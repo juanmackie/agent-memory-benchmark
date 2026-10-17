@@ -1,0 +1,52 @@
+planted slalog in boltons
+planted slalog in boltons
+[boltons-slalog-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-slalog-amended
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Merged outages under 60 seconds must be ignored before subtracting maintenance overlaps. The current change merges overlapping intervals 
+planted slalog in boltons
+  ↳ intervention 1: 2 failed, 14 passed in 0.04s
+planted slalog in boltons
+{
+  "task_id": "boltons-slalog-amended-001",
+  "codebase": "boltons-slalog-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "16 passed in 0.02s",
+  "patch_bytes": 1343,
+  "tokens": {
+    "input": 38,
+    "output": 7403,
+    "reasoning": 0,
+    "cache_read": 629590,
+    "cache_write": 17168
+  },
+  "turns": 19,
+  "wall_s": 90.4,
+  "cost_usd": 0.5493,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 3,
+    "messages": [
+      "Merged outages under 60 seconds must be ignored before subtracting maintenance overlaps. The current change merges overlapping intervals but does not drop merged spans under 60 seconds."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5466,
+    "tokens_out": 465,
+    "end_of_turn_deliveries": 1,
+    "learned": 2
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=38 out=7403 cache_r=629590 cache_w=17168 | wall=90s -> /tmp/sdebench/run/boltons-slalog-amended-001_full_cc-hs-learn/result.json

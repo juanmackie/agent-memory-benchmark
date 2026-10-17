@@ -1,0 +1,50 @@
+planted tagmerge in boltons
+planted tagmerge in boltons
+[boltons-tagmerge-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-tagmerge-amended
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): A '-name' tombstone must suppress matching tags from lower-precedence sources only, never removing tags already asserted by higher-preced
+planted tagmerge in boltons
+{
+  "task_id": "boltons-tagmerge-amended-001",
+  "codebase": "boltons-tagmerge-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.01s",
+  "patch_bytes": 1290,
+  "tokens": {
+    "input": 32,
+    "output": 5890,
+    "reasoning": 0,
+    "cache_read": 530678,
+    "cache_write": 15029
+  },
+  "turns": 16,
+  "wall_s": 77.9,
+  "cost_usd": 0.3746,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "A '-name' tombstone must suppress matching tags from lower-precedence sources only, never removing tags already asserted by higher-precedence sources. Your change clears previously asserted tags from 'out' when a tombstone is encountered."
+    ],
+    "evidence": [
+      "chat-1"
+    ],
+    "errors": 0,
+    "tokens_in": 4247,
+    "tokens_out": 674,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=32 out=5890 cache_r=530678 cache_w=15029 | wall=78s -> /tmp/sdebench/run/boltons-tagmerge-amended-001_full_cc-hs-1/result.json

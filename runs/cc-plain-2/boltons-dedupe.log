@@ -1,0 +1,39 @@
+planted dedupe in boltons
+planted dedupe in boltons
+[boltons-dedupe-001] history=full model=claude-sonnet-5 — initial attempt…
+planted dedupe in boltons
+  ↳ intervention 1: 5 failed, 6 passed in 0.03s
+planted dedupe in boltons
+  ↳ intervention 2: 1 failed, 10 passed in 0.02s
+planted dedupe in boltons
+{
+  "task_id": "boltons-dedupe-001",
+  "codebase": "boltons-dedupe",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 2,
+  "capped": false,
+  "final_pytest": "11 passed in 0.01s",
+  "patch_bytes": 774,
+  "tokens": {
+    "input": 40,
+    "output": 12706,
+    "reasoning": 0,
+    "cache_read": 681008,
+    "cache_write": 20991
+  },
+  "turns": 20,
+  "wall_s": 156.3,
+  "cost_usd": 0.7378,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=2 | tokens in=40 out=12706 cache_r=681008 cache_w=20991 | wall=156s -> /tmp/sdebench/run/boltons-dedupe-001_full_cc-plain-2/result.json

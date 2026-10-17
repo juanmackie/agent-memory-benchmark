@@ -1,0 +1,49 @@
+built boltons-findhashtags @ 979fa9b6
+built boltons-findhashtags @ 979fa9b6
+[boltons-findhashtags-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-findhashtags
+built boltons-findhashtags @ 979fa9b6
+{
+  "task_id": "boltons-findhashtags-001",
+  "codebase": "boltons-findhashtags",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "19 passed in 0.05s",
+  "patch_bytes": 909,
+  "tokens": {
+    "input": 34,
+    "output": 2622,
+    "reasoning": 0,
+    "cache_read": 534288,
+    "cache_write": 10069
+  },
+  "turns": 17,
+  "wall_s": 60.5,
+  "cost_usd": 0.1734,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Numeric hashtags should be kept if they are 4-digit years (1900-2099) for year campaigns. Filtering out all tags where `tag.isdigit()` drops valid year tags like #2024."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 3876,
+    "tokens_out": 515,
+    "end_of_turn_deliveries": 0,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=34 out=2622 cache_r=534288 cache_w=10069 | wall=61s -> /tmp/sdebench/run/boltons-findhashtags-001_full_cc-hs-1/result.json

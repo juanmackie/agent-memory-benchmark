@@ -1,0 +1,49 @@
+planted discount in boltons
+planted discount in boltons
+[boltons-discount-001] history=full model=claude-sonnet-5 — initial attempt…
+planted discount in boltons
+  ↳ intervention 1: 1 failed, 3 passed in 0.15s
+planted discount in boltons
+{
+  "task_id": "boltons-discount-001",
+  "codebase": "boltons-discount",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "4 passed in 0.06s",
+  "patch_bytes": 597,
+  "tokens": {
+    "input": 30,
+    "output": 3302,
+    "reasoning": 0,
+    "cache_read": 455579,
+    "cache_write": 9373
+  },
+  "turns": 15,
+  "wall_s": 85.4,
+  "cost_usd": 0.2885,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat boltons-discount#0 established that discount order must be deterministic: apply all percentage discounts first (compounding), followed by fixed-amount discounts, ignoring submission order. The current diff applies discounts in input order."
+    ],
+    "evidence": [
+      "chat:boltons-discount#0"
+    ],
+    "errors": 0,
+    "tokens_in": 5421,
+    "tokens_out": 271,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=30 out=3302 cache_r=455579 cache_w=9373 | wall=85s -> /tmp/sdebench/run/boltons-discount-001_full_cc-watch-1/result.json

@@ -1,0 +1,52 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-unitparse-amended
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): A bare number must be parsed as MiB (1024 ** 2 bytes) regardless of kind. The current code still returns raw bytes for inputs without a u
+planted unitparse in boltons
+  ↳ intervention 1: 5 failed, 9 passed in 0.03s
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-amended-001",
+  "codebase": "boltons-unitparse-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1049,
+  "tokens": {
+    "input": 56,
+    "output": 11556,
+    "reasoning": 0,
+    "cache_read": 992688,
+    "cache_write": 21684
+  },
+  "turns": 28,
+  "wall_s": 150.7,
+  "cost_usd": 0.735,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 3,
+    "messages": [
+      "A bare number must be parsed as MiB (1024 ** 2 bytes) regardless of kind. The current code still returns raw bytes for inputs without a unit suffix."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5282,
+    "tokens_out": 624,
+    "end_of_turn_deliveries": 1,
+    "learned": 4
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=56 out=11556 cache_r=992688 cache_w=21684 | wall=151s -> /tmp/sdebench/run/boltons-unitparse-amended-001_full_cc-hs-learn/result.json

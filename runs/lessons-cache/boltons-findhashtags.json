@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "In find_hashtags, drop hashtags that consist entirely of digits unless they are 4-digit years (1900-2099); filtering all pure numeric tags indiscriminately was rejected.",
+  "why": "The platform runs year campaigns like #2024 and #2025, making 4-digit years valid tags while other numeric tags clutter trends.",
+  "quote": "drop a hashtag if it's all digits UNLESS it's a 4-digit year (1900-2099), which we keep.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

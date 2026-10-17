@@ -1,0 +1,3 @@
+featflag4-w1   solved=True corrections=0 agent=$0.1674 agent_time=37.6s memory=$0.0253
+featflag4-w2   solved=True corrections=0 agent=$0.1785 agent_time=41.7s memory=$0.0511
+featflag4-w3   solved=True corrections=0 agent=$0.2034 agent_time=66.6s memory=$0.0116

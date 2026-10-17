@@ -1,0 +1,52 @@
+planted listmerge in boltons
+planted listmerge in boltons
+[boltons-listmerge-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-hs-smoke-boltons-listmerge
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): `apply_updates` must combine lists using union deduplication preserving base list order, because replacing lists previously caused an out
+planted listmerge in boltons
+  ↳ intervention 1: 2 failed, 3 passed in 0.02s
+planted listmerge in boltons
+{
+  "task_id": "boltons-listmerge-001",
+  "codebase": "boltons-listmerge",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "5 passed in 0.01s",
+  "patch_bytes": 923,
+  "tokens": {
+    "input": 28,
+    "output": 3854,
+    "reasoning": 0,
+    "cache_read": 442503,
+    "cache_write": 13949
+  },
+  "turns": 14,
+  "wall_s": 67.8,
+  "cost_usd": 0.3949,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "`apply_updates` must combine lists using union deduplication preserving base list order, because replacing lists previously caused an outage in staging. The current change replaces lists instead of merging and deduplicating them."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 8180,
+    "tokens_out": 455,
+    "end_of_turn_deliveries": 1,
+    "learned": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=28 out=3854 cache_r=442503 cache_w=13949 | wall=68s -> /tmp/sdebench/run/boltons-listmerge-001_full_hs-smoke/result.json

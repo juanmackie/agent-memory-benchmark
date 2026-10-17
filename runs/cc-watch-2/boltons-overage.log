@@ -1,0 +1,49 @@
+planted overage in boltons
+planted overage in boltons
+[boltons-overage-001] history=full model=claude-sonnet-5 — initial attempt…
+planted overage in boltons
+  ↳ intervention 1: 8 failed, 8 passed in 0.08s
+planted overage in boltons
+{
+  "task_id": "boltons-overage-001",
+  "codebase": "boltons-overage",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "16 passed in 0.02s",
+  "patch_bytes": 879,
+  "tokens": {
+    "input": 42,
+    "output": 21344,
+    "reasoning": 0,
+    "cache_read": 871420,
+    "cache_write": 31767
+  },
+  "turns": 22,
+  "wall_s": 256.4,
+  "cost_usd": 0.8991,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Prorated allowed quota must be rounded up using ceil. Then subtract a 25-unit free grace allowance before rounding remaining overage up into whole 50-unit blocks billed at plan['block_fee'] per block, rather than billing per unit."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 5124,
+    "tokens_out": 381,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=42 out=21344 cache_r=871420 cache_w=31767 | wall=256s -> /tmp/sdebench/run/boltons-overage-001_full_cc-watch-2/result.json

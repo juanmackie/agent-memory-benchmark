@@ -1,0 +1,32 @@
+[
+ {
+  "lesson": "In parse_quantity, memory suffixes (K, M, G, T) must be parsed as binary powers of 1024 case-insensitively, while disk suffixes (M, G, T) must be parsed as decimal powers of 1000 case-insensitively; parsing all suffixes uniformly as decimal or binary was rejected.",
+  "why": "Vendor API cgroup memory limits are 1024-based (preventing container OOM kills), whereas storage is billed and partitioned in decimal units.",
+  "quote": "memory K/M/G/T as 1024 powers, disk M/G/T as 1000 powers, both case-insensitive",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In parse_quantity, values with no suffix must parse as MiB for memory and GB for disk, rejecting the previous behavior of returning raw byte counts.",
+  "why": "Legacy templates assumed MiB for bare memory and GB for bare disk; returning raw bytes leaves containers and storage severely underprovisioned.",
+  "quote": "A bare memory value means MiB: that's what every legacy template meant, so 256 is 256*1024**2 bytes.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In parse_quantity, the 'K' or 'k' suffix is permitted for memory but must be rejected with a ValueError for disk, rejecting proposals to support kilobyte disk parsing.",
+  "why": "The vendor provisioning API lacks a kilobyte unit for disk, and guessing intent risks misprovisioning storage.",
+  "quote": "The vendor's provisioning API simply has no kilobyte disk unit, and silently guessing what the author meant is how you misprovision a volume.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "When parse_quantity raises a ValueError for an unknown suffix, the message must include the resource kind and the invalid suffix, but must omit the full config blob.",
+  "why": "Providing the kind and suffix aids triage, while omitting the full config blob avoids leaking sensitive configuration data into aggregated logs.",
+  "quote": "kind and suffix, but never echo the whole config blob into the exception, those messages end up in log aggregation.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "parse_quantity must only accept integer quantities while tolerating leading and trailing whitespace, rejecting fractional numbers like '1.5G'.",
+  "why": "The vendor API expects integer byte counts and existing templates were written as integers, while the YAML pipeline occasionally introduces padding.",
+  "quote": "Integers only, same as today - the vendor API takes integer byte counts and the templates were all written that way.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

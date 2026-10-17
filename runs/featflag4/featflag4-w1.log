@@ -1,0 +1,47 @@
+planted featflag in boltons
+planted featflag in boltons
+[boltons-featflag-001] history=full model=claude-sonnet-5 — initial attempt…
+planted featflag in boltons
+{
+  "task_id": "boltons-featflag-001",
+  "codebase": "boltons-featflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "12 passed in 0.02s",
+  "patch_bytes": 539,
+  "tokens": {
+    "input": 30,
+    "output": 3121,
+    "reasoning": 0,
+    "cache_read": 461904,
+    "cache_write": 10945
+  },
+  "turns": 15,
+  "wall_s": 37.6,
+  "cost_usd": 0.1674,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 4,
+    "messages": [
+      "You forgot the corp-beta override rule. Corp accounts ending in @corp.example must always be in when and only when the flag name starts with beta-, evaluated first before the percentage hash."
+    ],
+    "evidence": [
+      "575a756c-5807-41cf-893e-5045836b990e"
+    ],
+    "errors": 0,
+    "tokens_in": 34515,
+    "tokens_out": 446,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=3121 cache_r=461904 cache_w=10945 | wall=38s -> /tmp/sdebench/run/boltons-featflag-001_full_featflag4-w1/result.json

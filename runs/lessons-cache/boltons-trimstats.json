@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "In window_p95, unconditionally discard the top 2 samples from each 60-sample window and compute the nearest-rank p95 over the remaining 58; clamping, conditional dropping, 5% trimming, and dropping only 1 sample were rejected.",
+  "why": "The hypervisor injects exactly two warmup spikes into every 60-sample window, which statistical outlier clamping failed to resolve.",
+  "quote": "every window, drop the top 2, nearest-rank p95 on the remaining 58. Not top 1, not a 5% trim, not clamping.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

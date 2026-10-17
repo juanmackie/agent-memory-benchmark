@@ -1,0 +1,26 @@
+[
+ {
+  "lesson": "In append_event, each tenant's seq must be strictly consecutive (last + 1, starting from seq 1 for a new tenant) and raise SequenceGapError on gaps. Accepting gaps or having append_event attempt inline repair/backfill was rejected.",
+  "why": "Audit entries were missing during reconciliation; append_event must remain a pure guard while repairs are left to a separate backfill job.",
+  "quote": "each tenant's seq must be exactly last + 1, and a gap has to be rejected loudly at write time - raise SequenceGapError",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In append_event, an event with type == 'compaction' must advance seq by exactly 100, raising SequenceGapError on any other step. Adding a configurable tolerance knob was rejected.",
+  "why": "The archiver batch size is fixed at 100 with no partial batches, and tolerance knobs eventually get cranked into permitting unwanted gaps.",
+  "quote": "an event with type 'compaction' must advance the seq by exactly 100, because 100 is the archiver's documented batch size",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In append_event, handling duplicate seq arrivals with in-place overwrites or blanket no-ops was rejected; duplicates must return False if payload_hash matches, but raise SequenceConflictError if payload_hash differs.",
+  "why": "Overwriting or silently swallowing duplicate mismatches caused primary and replica exports to diverge unnoticed.",
+  "quote": "Never overwrite the stored event, and never silently swallow the mismatch either - swallowing is how the primary/replica divergence went undetected for a month.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "When append_event rejects a write, the log entry must contain only tenant, seq, and the reason, strictly excluding the event payload.",
+  "why": "Payloads can contain PII and the audit pipeline outputs directly to the SIEM.",
+  "quote": "Tenant, seq, and the reason only - payloads can carry PII and the audit pipeline feeds the SIEM, we are not spraying payloads into it.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

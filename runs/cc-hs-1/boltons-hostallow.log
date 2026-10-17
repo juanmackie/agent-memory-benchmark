@@ -1,0 +1,50 @@
+planted hostallow in boltons
+planted hostallow in boltons
+[boltons-hostallow-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 6, 'commits': 200} -> bank watch-cc-hs-1-boltons-hostallow
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Wildcards must not match the bare apex domain (*.example.com does not match example.com). Also, wildcards must match exactly one addition
+planted hostallow in boltons
+{
+  "task_id": "boltons-hostallow-001",
+  "codebase": "boltons-hostallow",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1254,
+  "tokens": {
+    "input": 38,
+    "output": 5778,
+    "reasoning": 0,
+    "cache_read": 631602,
+    "cache_write": 15786
+  },
+  "turns": 22,
+  "wall_s": 80.4,
+  "cost_usd": 0.3856,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Wildcards must not match the bare apex domain (*.example.com does not match example.com). Also, wildcards must match exactly one additional label (no deeper subdomains), and a single trailing dot must be stripped from both host and entries."
+    ],
+    "evidence": [
+      "lesson-2"
+    ],
+    "errors": 0,
+    "tokens_in": 4925,
+    "tokens_out": 597,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=38 out=5778 cache_r=631602 cache_w=15786 | wall=80s -> /tmp/sdebench/run/boltons-hostallow-001_full_cc-hs-1/result.json

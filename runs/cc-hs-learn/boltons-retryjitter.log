@@ -1,0 +1,47 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-retryjitter
+planted retryjitter in boltons
+  ↳ intervention 1: 1 failed, 8 passed in 0.04s
+planted retryjitter in boltons
+{
+  "task_id": "boltons-retryjitter-001",
+  "codebase": "boltons-retryjitter",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "9 passed in 0.01s",
+  "patch_bytes": 421,
+  "tokens": {
+    "input": 30,
+    "output": 2391,
+    "reasoning": 0,
+    "cache_read": 459129,
+    "cache_write": 8759
+  },
+  "turns": 15,
+  "wall_s": 48.7,
+  "cost_usd": 0.2544,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [],
+    "evidence": [],
+    "errors": 0,
+    "tokens_in": 4549,
+    "tokens_out": 344,
+    "end_of_turn_deliveries": 0,
+    "learned": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=30 out=2391 cache_r=459129 cache_w=8759 | wall=49s -> /tmp/sdebench/run/boltons-retryjitter-001_full_cc-hs-learn/result.json

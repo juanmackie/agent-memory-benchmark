@@ -1,0 +1,32 @@
+[
+ {
+  "lesson": "In overage_charge, prorate the included quota by calendar day and round UP to the next whole unit using ceil, rejecting truncation.",
+  "why": "Truncating creates rounding artifacts that unfairly bill the customer, whereas fractional units must count in the customer's favor.",
+  "quote": "The fractional unit counts in the customer's favor; truncating is how you bill someone over a rounding artifact.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In overage_charge, bill overages in 50-unit blocks rounded UP at plan['block_fee'] per block rather than billing per unit.",
+  "why": "Finance reconciles revenue in whole blocks, and per-unit billing made reconciliation impossible.",
+  "quote": "finance reconciles in whole blocks and per-unit line items made that impossible last quarter.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Do not add a waiver or threshold for small overages in overage_charge; even a single unit of overage must bill a full block.",
+  "why": "Quotas were priced without waivers, and offering free units causes revenue leakage.",
+  "quote": "any overage bills at least one block \u2014 free units are revenue leakage and the plan quotas were priced assuming none.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Keep the ValueError validation in overage_charge for any day_of_month outside the range 1..days_in_month.",
+  "why": "This parameter validation has actively prevented and caught caller bugs in practice.",
+  "quote": "keep the ValueError for a day outside 1..days_in_month, that guard has caught real caller bugs.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "When calculating billable overage, apply a monthly grace allowance of 25 units before block rounding (`billable = max(0, overage - 25)`), superseding the previous no-free-units rule, and then round up into 50-unit blocks. Proration remains rounded up with ceil, and partial blocks bill as full blocks at `plan['block_fee']`.",
+  "why": "Accidental small overruns were billing full blocks and requiring manual support credits that eroded more margin than the strict policy protected.",
+  "quote": "every account gets a grace allowance of 25 overage units per month, and it applies BEFORE the block rounding.",
+  "where": "/root/project-history/session-02.md"
+ }
+]

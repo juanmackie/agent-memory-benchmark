@@ -1,0 +1,52 @@
+planted featflag in boltons
+planted featflag in boltons
+[boltons-featflag-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 7, 'commits': 200} -> bank watch-cc-hs-1-boltons-featflag
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): User IDs ending with @corp.example must always be enrolled first if and only if flag_name starts with 'beta-'. Your change omits this ove
+planted featflag in boltons
+  ↳ intervention 1: 1 failed, 11 passed in 0.05s
+planted featflag in boltons
+{
+  "task_id": "boltons-featflag-001",
+  "codebase": "boltons-featflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "12 passed in 0.03s",
+  "patch_bytes": 539,
+  "tokens": {
+    "input": 36,
+    "output": 3724,
+    "reasoning": 0,
+    "cache_read": 568768,
+    "cache_write": 12164
+  },
+  "turns": 18,
+  "wall_s": 55.0,
+  "cost_usd": 0.4755,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 3,
+    "messages": [
+      "User IDs ending with @corp.example must always be enrolled first if and only if flag_name starts with 'beta-'. Your change omits this override."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 8829,
+    "tokens_out": 805,
+    "end_of_turn_deliveries": 1,
+    "learned": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=36 out=3724 cache_r=568768 cache_w=12164 | wall=55s -> /tmp/sdebench/run/boltons-featflag-001_full_cc-hs-1/result.json

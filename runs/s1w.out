@@ -1,0 +1,21 @@
+== boltons-budget
+s1w-w1         solved=True corrections=0 agent=$0.1772 agent_time=36.1s memory=$0.0101
+s1w-w2         solved=True corrections=0 agent=$0.167 agent_time=43.4s memory=$0.0012
+s1w-w3         solved=True corrections=1 agent=$0.5666 agent_time=147.5s memory=$0.0069
+== boltons-cachekey
+s1w-w1         solved=True corrections=0 agent=$0.2098 agent_time=76.5s memory=$0.0407
+s1w-w2         solved=True corrections=0 agent=$0.1558 agent_time=47.9s memory=$0.0025
+s1w-w3         solved=True corrections=0 agent=$0.1711 agent_time=52.6s memory=$0.0115
+== boltons-csvquote
+s1w-w1         solved=True corrections=0 agent=$0.1241 agent_time=27.3s memory=$0.0027
+s1w-w2         solved=True corrections=0 agent=$0.1606 agent_time=55.3s memory=$0.0312
+s1w-w3         solved=True corrections=0 agent=$0.1648 agent_time=47.9s memory=$0.0212
+== boltons-featflag
+s1w-w1         solved=True corrections=0 agent=$0.1383 agent_time=35.4s memory=$0.0873
+s1w-w2         solved=True corrections=0 agent=$0.1264 agent_time=34.4s memory=$0.01
+s1w-w3         solved=True corrections=0 agent=$0.1406 agent_time=45.4s memory=$0.011
+== boltons-retryjitter-amended
+s1w-w1         solved=True corrections=0 agent=$0.1035 agent_time=39.7s memory=$0.0795
+s1w-w2         solved=True corrections=0 agent=$0.1065 agent_time=29.4s memory=$0.0008
+s1w-w3         solved=True corrections=0 agent=$0.122 agent_time=27.4s memory=$0.0098
+season done

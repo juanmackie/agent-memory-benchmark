@@ -1,0 +1,47 @@
+planted listmerge in boltons
+planted listmerge in boltons
+[boltons-listmerge-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-hs-smoke3-boltons-listmerge
+planted listmerge in boltons
+  ↳ intervention 1: 2 failed, 3 passed in 0.03s
+planted listmerge in boltons
+{
+  "task_id": "boltons-listmerge-001",
+  "codebase": "boltons-listmerge",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "5 passed in 0.01s",
+  "patch_bytes": 678,
+  "tokens": {
+    "input": 30,
+    "output": 2966,
+    "reasoning": 0,
+    "cache_read": 469363,
+    "cache_write": 10920
+  },
+  "turns": 17,
+  "wall_s": 50.3,
+  "cost_usd": 0.2774,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [],
+    "evidence": [],
+    "errors": 0,
+    "tokens_in": 8113,
+    "tokens_out": 372,
+    "end_of_turn_deliveries": 0,
+    "learned": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=30 out=2966 cache_r=469363 cache_w=10920 | wall=50s -> /tmp/sdebench/run/boltons-listmerge-001_full_hs-smoke3/result.json

@@ -1,0 +1,50 @@
+planted redact in boltons
+planted redact in boltons
+[boltons-redact-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-redact
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Do not use substring containment. Sensitive keys must be matched by suffix after lowercasing and replacing non-alphanumeric runs with und
+planted redact in boltons
+{
+  "task_id": "boltons-redact-001",
+  "codebase": "boltons-redact",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "9 passed in 0.02s",
+  "patch_bytes": 1399,
+  "tokens": {
+    "input": 32,
+    "output": 3762,
+    "reasoning": 0,
+    "cache_read": 493894,
+    "cache_write": 10679
+  },
+  "turns": 16,
+  "wall_s": 61.0,
+  "cost_usd": 0.2941,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Do not use substring containment. Sensitive keys must be matched by suffix after lowercasing and replacing non-alphanumeric runs with underscores. Keys ending in card_number should retain their last 4 digits as '***1234'."
+    ],
+    "evidence": [
+      "lesson-1"
+    ],
+    "errors": 0,
+    "tokens_in": 3326,
+    "tokens_out": 604,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=32 out=3762 cache_r=493894 cache_w=10679 | wall=61s -> /tmp/sdebench/run/boltons-redact-001_full_cc-hs-1/result.json

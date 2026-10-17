@@ -1,0 +1,21 @@
+rounds=77 failed=44 passed=33
+  failed rounds: hit=30 wrong=1 miss=13
+  passed rounds: silent=31 false_alarm=2
+  gold chat in top-3: 0/77
+  watcher tokens in/out: 241801/23154
+  [miss] boltons-cachekey-001 intervention-1: 
+  [miss] boltons-dedupe-001 intervention-1: 
+  [miss] boltons-dedupe-amended-001 intervention-1: 
+  [miss] boltons-listmerge-001 initial: 
+  [false_alarm] boltons-listmerge-001 intervention-1: Configuration list merging requires full de-duplication with no repeats, preserving base list order. The current change keeps duplicate entries within base or o
+  [miss] boltons-overage-001 intervention-1: 
+  [miss] boltons-overage-amended-001 intervention-1: 
+  [miss] boltons-pluralize-001 intervention-1: 
+  [miss] boltons-retryjitter-amended-001 intervention-1: 
+  [miss] boltons-sched-001 initial: 
+  [wrong] boltons-slalog-001 intervention-1: downtime_minutes must return fractional minutes as an untouched float rather than rounding. The current change truncates downtime to whole minutes using int(spa
+  [miss] boltons-slalog-amended-001 initial: 
+  [miss] boltons-slugify-001 intervention-1: 
+  [miss] boltons-statetrans-001 initial: on_hold must release to pending or cancelled (not paid). cancelled is terminal with no outgoing transitions (cannot move to refunded).
+  [false_alarm] boltons-statetrans-001 intervention-1: When rejecting a transition, advance() must log a warning with the order id and the attempted pair (without payload fields) in addition to raising InvalidTransi
+  [miss] boltons-under2camel-001 intervention-1: 

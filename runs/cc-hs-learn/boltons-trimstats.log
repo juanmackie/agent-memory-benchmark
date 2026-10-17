@@ -1,0 +1,50 @@
+planted trimstats in boltons
+planted trimstats in boltons
+[boltons-trimstats-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-trimstats
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Ops requires dropping the top 2 samples unconditionally from each 60-sample window, then taking the nearest-rank p95 on the remaining 58 
+planted trimstats in boltons
+{
+  "task_id": "boltons-trimstats-001",
+  "codebase": "boltons-trimstats",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "9 passed in 0.01s",
+  "patch_bytes": 777,
+  "tokens": {
+    "input": 30,
+    "output": 4507,
+    "reasoning": 0,
+    "cache_read": 475629,
+    "cache_write": 11377
+  },
+  "turns": 17,
+  "wall_s": 54.8,
+  "cost_usd": 0.3125,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Ops requires dropping the top 2 samples unconditionally from each 60-sample window, then taking the nearest-rank p95 on the remaining 58 samples. The current change calculates p95 across all 60 samples without dropping the top 2."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 3548,
+    "tokens_out": 423,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=4507 cache_r=475629 cache_w=11377 | wall=55s -> /tmp/sdebench/run/boltons-trimstats-001_full_cc-hs-learn/result.json

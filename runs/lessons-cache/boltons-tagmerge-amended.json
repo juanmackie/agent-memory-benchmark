@@ -1,0 +1,20 @@
+[
+ {
+  "lesson": "In merge_tags, union sources in precedence order and deduplicate case-insensitively while preserving the casing and ordering of the first occurrence, never lowercasing the output.",
+  "why": "The Terraform provider treats casing as significant and saved searches require exact casing matches.",
+  "quote": "Never lowercase \u2014 the Terraform provider treats casing as significant and our saved searches match exact casing. Keep the casing of the first occurrence",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In merge_tags, collect all dash-prefixed entries into a global kill list to strip those tags case-insensitively from the final output, never outputting literal dash tags and silently ignoring unmatched entries.",
+  "why": "Dash entries represent deliberate deletions by ops, and unmatched removals occur speculatively and must not wedge the sync.",
+  "quote": "an entry that matches nothing is silently fine \u2014 ops writes them speculatively, erroring would wedge the sync.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In tag-merge processing, replace the rejected global kill list rule with downward-only suppression, so a tombstone only suppresses matching tags from lower-precedence sources and never deletes tags asserted by higher-precedence sources.",
+  "why": "A low-precedence legacy inventory sync emitted '-compliance:sox', erroneously deleting a CMDB-asserted compliance tag on production hosts and triggering a 2am audit alert.",
+  "quote": "A '-name' tombstone suppresses that tag, matched case-insensitively, from LOWER-precedence sources only; it never removes a tag a higher-precedence source asserted itself.",
+  "where": "/root/project-history/session-02.md"
+ }
+]

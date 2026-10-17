@@ -1,0 +1,50 @@
+planted parseflag in boltons
+planted parseflag in boltons
+[boltons-parseflag-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-parseflag
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): parse_flag must accept both 'true' and 'on' (case-sensitive) because older configs rely on 'on'. Only '1' and 'yes' were removed from tru
+planted parseflag in boltons
+{
+  "task_id": "boltons-parseflag-001",
+  "codebase": "boltons-parseflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "3 passed in 0.01s",
+  "patch_bytes": 249,
+  "tokens": {
+    "input": 30,
+    "output": 2476,
+    "reasoning": 0,
+    "cache_read": 464858,
+    "cache_write": 9354
+  },
+  "turns": 15,
+  "wall_s": 50.4,
+  "cost_usd": 0.2728,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "parse_flag must accept both 'true' and 'on' (case-sensitive) because older configs rely on 'on'. Only '1' and 'yes' were removed from truthy values."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 3408,
+    "tokens_out": 287,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=2476 cache_r=464858 cache_w=9354 | wall=50s -> /tmp/sdebench/run/boltons-parseflag-001_full_cc-hs-learn/result.json

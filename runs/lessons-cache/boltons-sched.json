@@ -1,0 +1,14 @@
+[
+ {
+  "lesson": "In next_job, the tenant that just ran must be excluded from selection if any other tenant has queued jobs, rejecting the initial proposal to only apply tenant fairness on priority ties.",
+  "why": "A tenant submitting all jobs at top priority would still starve other tenants if back-to-back execution was only restricted during priority ties.",
+  "quote": "If any other tenant has anything queued, the tenant that just ran is not eligible, full stop, whatever its priority.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In next_job, break priority ties among eligible jobs by choosing the shorter est_runtime first, resorting to earlier submitted_at only when runtimes are equal rather than using standard FIFO.",
+  "why": "Simple FIFO ordering allowed quick jobs to get stuck behind massive jobs with the same priority.",
+  "quote": "On a priority tie take the job with the shorter est_runtime first - that's what unblocks the quick jobs.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

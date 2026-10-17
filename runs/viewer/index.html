@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session Viewer</title>
+<style>
+:root {
+  --bg: #f6f5f2; --panel: #ffffff; --ink: #1d1d1b; --muted: #77756f; --line: #e3e1db;
+  --agent: #2f6fdb; --agent-soft: #e8f0fd; --watch: #b4521e; --watch-soft: #fbeee5;
+  --ok: #2e8b57; --bad: #c0392b; --harness: #5b5b8a; --harness-soft: #ecebf5;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141412; --panel: #1d1d1a; --ink: #ecebe6; --muted: #9a978f; --line: #2e2d29;
+    --agent: #7aa7f5; --agent-soft: #1b2638; --watch: #f0a06e; --watch-soft: #33231a;
+    --ok: #5fc58c; --bad: #ef7a6c; --harness: #a9a8d8; --harness-soft: #24233a;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, sans-serif; }
+.app { display: grid; grid-template-columns: 300px 1fr; height: 100vh; }
+aside { border-right: 1px solid var(--line); overflow: auto; background: var(--panel); }
+aside input { width: calc(100% - 24px); margin: 12px; padding: 8px 10px; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--bg); color: var(--ink); }
+.run { padding: 8px 14px; cursor: pointer; border-left: 3px solid transparent; }
+.run:hover { background: var(--bg); }
+.run.sel { border-left-color: var(--agent); background: var(--bg); }
+.run .n { font-family: var(--mono); font-size: 12px; word-break: break-all; }
+.run .s { color: var(--muted); font-size: 12px; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--bad);
+  margin-right: 6px; animation: pulse 1.2s infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+main { display: flex; flex-direction: column; min-width: 0; }
+header { padding: 14px 20px 10px; border-bottom: 1px solid var(--line); background: var(--panel); }
+header h1 { font-size: 16px; margin: 0 0 4px; font-family: var(--mono); }
+header .meta { color: var(--muted); font-size: 13px; }
+header details { margin-top: 6px; font-size: 13px; }
+header details pre { white-space: pre-wrap; max-height: 160px; overflow: auto; }
+.bar { display: flex; gap: 10px; align-items: center; padding: 10px 20px; border-bottom: 1px solid var(--line);
+  background: var(--panel); flex-wrap: wrap; }
+.bar button, .bar select { border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+  border-radius: 8px; padding: 6px 12px; cursor: pointer; font: inherit; }
+.bar button.on { background: var(--ink); color: var(--bg); }
+.bar input[type=range] { flex: 1; min-width: 200px; }
+.clock { font-family: var(--mono); min-width: 110px; }
+.legend { display: grid; grid-template-columns: 70px 1fr 1fr; padding: 8px 20px 0; font-weight: 600; font-size: 13px; }
+.legend .a { color: var(--agent); } .legend .w { color: var(--watch); }
+#tl { flex: 1; overflow: auto; padding: 4px 20px 80px; }
+.row { display: grid; grid-template-columns: 70px 1fr 1fr; gap: 12px; margin: 4px 0; }
+.t { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 7px; }
+.card { border-radius: 8px; padding: 6px 10px; cursor: pointer; border: 1px solid transparent; min-width: 0; }
+.card.agent { background: var(--agent-soft); grid-column: 2; }
+.card.watcher { background: var(--watch-soft); grid-column: 3; }
+.card.harness { background: var(--harness-soft); grid-column: 2 / 4; border-color: var(--harness); }
+.card.now { border-color: var(--ink); }
+.card .h { display: flex; gap: 8px; align-items: baseline; min-width: 0; }
+.card .k { font-weight: 600; white-space: nowrap; }
+.card .x { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+.card .msg { margin-top: 4px; }
+.card pre { white-space: pre-wrap; word-break: break-word; font: 12px/1.4 var(--mono); max-height: 360px;
+  overflow: auto; background: var(--panel); padding: 8px; border-radius: 6px; margin: 6px 0 0; }
+.card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-top: 8px; }
+.card.sub { margin-left: 18px; background: transparent; border: 1px dashed var(--watch); padding: 4px 10px; }
+.card.sub .k { font-weight: 500; font-size: 12px; color: var(--watch); }
+.card.say { background: var(--panel); border: 1px solid var(--agent); border-radius: 14px 14px 14px 4px; padding: 8px 12px; }
+.card.say .who { font-size: 11px; color: var(--agent); font-weight: 600; margin-bottom: 2px; }
+.card.say .txt { white-space: pre-wrap; word-break: break-word; }
+.card.watcher.spoke { border-radius: 14px 14px 4px 14px; }
+.tag { font-size: 10px; padding: 1px 6px; border-radius: 9px; margin-left: auto; white-space: nowrap;
+  border: 1px solid var(--line); color: var(--muted); }
+.tag.go { border-color: var(--watch); color: var(--watch); }
+.spoke { border-color: var(--watch) !important; }
+.spoke .k { color: var(--watch); }
+.pass { color: var(--ok); } .fail { color: var(--bad); }
+.spin { display: inline-block; width: 10px; height: 10px; border: 2px solid currentColor; border-right-color: transparent;
+  border-radius: 50%; animation: r .8s linear infinite; }
+@keyframes r { to { transform: rotate(360deg); } }
+.empty { color: var(--muted); padding: 40px; text-align: center; }
+.approx { color: var(--bad); font-size: 12px; }
+@media (max-width: 800px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: 200px 1fr; }
+  .row, .legend { grid-template-columns: 50px 1fr 1fr; gap: 6px; }
+  #tl, .bar, header, .legend { padding-left: 16px; padding-right: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <input id="q" placeholder="Filter runs (e.g. hs, retryjitter)">
+    <div id="runs"></div>
+  </aside>
+  <main>
+    <header>
+      <h1 id="title">Pick a run</h1>
+      <div class="meta" id="meta"></div>
+      <details id="bug" hidden><summary>Task given to the agent</summary><pre id="bugtext"></pre></details>
+    </header>
+    <div class="bar">
+      <button id="play">▶ Play</button>
+      <select id="speed">
+        <option value="1">1×</option><option value="4">4×</option><option value="16" selected>16×</option><option value="64">64×</option>
+      </select>
+      <button id="skip" class="on" title="Jump over quiet stretches longer than 5s">Skip idle</button>
+      <button id="live" hidden>● Follow live</button>
+      <input id="scrub" type="range" min="0" max="1000" value="0">
+      <span class="clock" id="clock">0:00 / 0:00</span>
+    </div>
+    <div class="legend"><span></span><span class="a">Claude Code</span><span class="w">Memory watcher</span></div>
+    <div id="tl"><div class="empty">Choose a run on the left.</div></div>
+  </main>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (s) => { s = Math.max(0, Math.floor(s)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+
+let runs = [], cur = null, view = null, t0 = 0, dur = 0, head = 0;
+let playing = false, follow = false, open = new Set(), lastSig = "", lastFrame = 0;
+
+async function loadRuns() {
+  runs = await (await fetch("/api/runs")).json();
+  drawRuns();
+}
+function drawRuns() {
+  const q = $("q").value.toLowerCase();
+  $("runs").innerHTML = runs.filter((r) => r.name.toLowerCase().includes(q)).map((r) => `
+    <div class="run ${r.name === cur ? "sel" : ""}" data-n="${esc(r.name)}">
+      <div class="n">${r.live ? '<span class="dot"></span>' : ""}${esc(r.name)}</div>
+      <div class="s">${r.live ? "running now" : r.solved == null ? "unfinished" : (r.solved ? "solved" : "not solved") + ` · ${r.interventions} corrections`}
+        · ${new Date(r.mtime * 1000).toLocaleString()}${r.exact ? "" : " · approx. agent times"}</div>
+    </div>`).join("");
+}
+$("runs").onclick = (e) => { const r = e.target.closest(".run"); if (r) pick(r.dataset.n); };
+$("q").oninput = drawRuns;
+
+async function fetchRun(name) {
+  const v = await (await fetch(`/api/run/${encodeURIComponent(name)}`)).json();
+  if (name !== cur) return;
+  view = v;
+  t0 = v.events.length ? v.events[0].ts : 0;
+  const last = v.events.reduce((m, e) => Math.max(m, e.end || e.ts), t0);
+  dur = v.live ? Math.max(last, Date.now() / 1000) - t0 : last - t0 + 2;
+  const m = v.meta || {};
+  $("title").textContent = v.name;
+  $("meta").innerHTML = (v.live ? "<span class='dot'></span>running now · " : "") +
+    (m.solved != null ? `${m.solved ? "<span class='pass'>solved</span>" : "<span class='fail'>not solved</span>"} · ${m.interventions} corrections · $${(m.cost_usd || 0).toFixed(2)} · ${Math.round(m.wall_s || 0)}s agent time · ` : "") +
+    `${v.events.length} events` + (v.exact ? "" : " · <span class='approx'>old run: agent step times are approximate (spread evenly per round)</span>");
+  $("bug").hidden = !v.task.bug_report; $("bugtext").textContent = v.task.bug_report || "";
+  $("live").hidden = !v.live;
+  if (!v.live) follow = false;
+  lastSig = "";
+}
+
+async function pick(name) {
+  cur = name; open.clear(); head = 0; playing = false; follow = false; view = null;
+  $("play").textContent = "▶ Play"; drawRuns();
+  await fetchRun(name);
+  if (view && view.live) { follow = true; }
+  setLiveBtn(); render(true);
+}
+
+function card(e, now) {
+  const id = events().indexOf(e), isOpen = open.has(id);
+  const running = (e.end && now < e.end - t0) || (e.kind === "tool" && e.result == null && view.exact && view.live);
+  let k = "", x = "", body = "", cls = e.lane, msg = "";
+  if (e.lane === "agent" && e.kind === "tool") {
+    let inp = {}; try { inp = JSON.parse(e.input || "{}"); } catch { inp = { raw: e.input }; }
+    k = e.tool; x = inp.command || inp.file_path || inp.pattern || inp.path || inp.arg || inp.description || e.input || "";
+    body = `<div class="lbl">Input</div><pre>${esc(JSON.stringify(inp, null, 2))}</pre>` +
+      (e.result != null ? `<div class="lbl">Result${e.error ? " (error)" : ""} · ${(e.end - e.ts).toFixed(1)}s</div><pre>${esc(e.result)}</pre>` : "");
+    if (running) k = `<span class="spin"></span> ${k}`;
+  } else if (e.lane === "agent" && e.kind === "say") {
+    const long = e.text.length > 600;
+    return `<div class="row"><div class="t">${fmt(e.ts - t0)}</div>
+      <div class="card agent say" data-i="${id}"><div class="who" style="display:flex">Claude ${tag(e)}</div>
+      <div class="txt">${esc(isOpen || !long ? e.text : e.text.slice(0, 600) + " …")}</div></div></div>`;
+  } else if (e.kind === "call") {
+    cls += " sub";
+    k = e.service === "hindsight" ? `Hindsight · ${esc(e.name)}` : e.service === "decision" ? `Jev decision · ${esc(e.name)}`
+      : `${e.name && e.name.includes("lite") ? "Writer" : "Judge"} LLM · ${esc(e.name)}`;
+    x = running ? "" : e.ms >= 1000 ? `${(e.ms / 1000).toFixed(1)}s` : `${e.ms}ms`;
+    if (running) k = `<span class="spin"></span> ${k}`;
+    if (e.role) x += ` · during ${e.role}`;
+    body = (e.bank ? `<div class="lbl">Bank</div><pre>${esc(e.bank)}</pre>` : "") +
+      (e.request ? `<div class="lbl">${e.service === "hindsight" ? "Request body" : "Prompt"}</div><pre>${esc(e.request)}</pre>` : "") +
+      (e.response ? `<div class="lbl">Response</div><pre>${esc(e.response)}</pre>` : "");
+  } else if (e.kind === "round") {
+    const r = e.role || "";
+    k = r === "initial" ? "Task sent to Claude" : r.startsWith("intervention") ? `Test feedback (${r.replace("intervention-", "#")})` : r.startsWith("watcher") ? "Watcher note sent as a new turn" : r;
+    x = e.text; body = `<pre>${esc(e.text)}</pre>`;
+  } else if (e.kind === "grade") {
+    k = `Graded: <span class="${e.passed ? "pass" : "fail"}">${e.passed ? "tests pass" : "tests fail"}</span>`; x = e.text; body = `<pre>${esc(e.text)}</pre>`;
+  } else if (e.kind === "review") {
+    const what = { task: "the task", plan: "Claude's plan", command: "a command", edit: "an edit", failure: "a failure" }[e.trigger] || "a change";
+    if (running) { k = `<span class="spin"></span> Checking ${what}`; x = ""; }
+    else if (e.speak) { k = `Speaks · on ${what}`; cls += " spoke"; msg = e.message; x = ""; }
+    else { k = `Silent · on ${what}`; x = e.judged === false ? "nothing new to judge" : "nothing to say"; }
+    if (!running) x += ` · lookup ${e.recall_ms}ms` + (e.ms ? ` · judge ${(e.ms / 1000).toFixed(1)}s` : "");
+    if (!running && e.decision && e.decision.choice) x += ` · Jev: p(no conflict)=${e.decision.none}`;
+    body = (e.speak ? `<div class="lbl">Quote · ${esc(e.where)}</div><pre>${esc(e.quote)}</pre>` : "") +
+      (e.trigger && e.trigger !== "edit" && e.trigger_text ? `<div class="lbl">What started it</div><pre>${esc(e.trigger_text)}</pre>` : "") +
+      (e.diff ? `<div class="lbl">Change it looked at</div><pre>${esc(e.diff)}</pre>` : "") +
+      ((e.memories || []).length ? `<div class="lbl">What memory returned</div>` + e.memories.map((m) => `<pre>${esc(m)}</pre>`).join("")
+        : (e.hits || []).length ? `<div class="lbl">Memory hits</div><pre>${esc(e.hits.map((h) => h[1]).join("\n"))}</pre>` : "");
+    if (running) msg = "";
+  } else if (e.kind === "delivered") {
+    k = "Note reached the agent"; x = `${e.count} message(s)`;
+  } else if (e.kind === "start") {
+    k = "Watcher started"; x = `${e.bank || "local memory"} · ${e.model || ""}`;
+  } else if (e.kind === "error") {
+    k = "Watcher error"; x = e.error; body = `<pre>${esc(e.error)}</pre>`;
+  } else { k = e.kind; x = JSON.stringify(e); }
+  return `<div class="row"><div class="t">${fmt(e.ts - t0)}</div>
+    <div class="card ${cls}" data-i="${id}">
+      <div class="h"><span class="k">${k}</span><span class="x">${esc(String(x).slice(0, 300))}</span>${tag(e)}</div>
+      ${msg ? `<div class="msg">${esc(msg)}</div>` : ""}
+      ${isOpen ? body : ""}
+    </div></div>`;
+}
+const events = () => (view ? view.events : []);
+// how the watcher treated this step: started a check, or only context for the next one
+function tag(e) {
+  if (!e.watch || e.lane === "watcher") return "";
+  if (e.watch === "context") return `<span class="tag" title="Only context for the next check: reading, searching, tests">watcher: context only</span>`;
+  return `<span class="tag go" title="This step started a watcher check">watcher: checks ${e.watch}</span>`;
+}
+
+function render(force) {
+  if (!view) return;
+  const shown = events().filter((e) => e.ts - t0 <= head);
+  const running = shown.filter((e) => e.end && head < e.end - t0).length;
+  const sig = `${shown.length}|${running}|${[...open].join(",")}`;
+  $("clock").textContent = `${fmt(head)} / ${fmt(dur)}`;
+  $("scrub").value = dur ? Math.round((head / dur) * 1000) : 0;
+  if (!force && sig === lastSig) return;
+  lastSig = sig;
+  const tl = $("tl");
+  const atBottom = tl.scrollHeight - tl.scrollTop - tl.clientHeight < 80;
+  tl.innerHTML = shown.length ? shown.map((e) => card(e, head)).join("") : '<div class="empty">Press play.</div>';
+  const cards = tl.querySelectorAll(".card"); if (cards.length) cards[cards.length - 1].classList.add("now");
+  if ((playing || follow) && atBottom) tl.scrollTop = tl.scrollHeight;
+}
+$("tl").onclick = (e) => {
+  if (getSelection().toString()) return;
+  const c = e.target.closest(".card"); if (!c) return;
+  const i = +c.dataset.i; open.has(i) ? open.delete(i) : open.add(i); render(true);
+};
+
+function tick(ts) {
+  const dt = lastFrame ? (ts - lastFrame) / 1000 : 0; lastFrame = ts;
+  if (follow && view) {
+    head = Date.now() / 1000 - t0; dur = Math.max(dur, head);
+  } else if (playing && view) {
+    head += dt * +$("speed").value;
+    if ($("skip").classList.contains("on")) {  // jump quiet stretches
+      const next = events().find((e) => e.ts - t0 > head);
+      const busy = events().some((e) => e.end && e.ts - t0 <= head && head < e.end - t0);
+      if (next && !busy && next.ts - t0 - head > 5) head = next.ts - t0 - 1;
+    }
+    if (head >= dur) { head = dur; playing = false; $("play").textContent = "▶ Play"; }
+  }
+  render(false);
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+$("play").onclick = () => {
+  if (!view) return;
+  follow = false; setLiveBtn();
+  if (head >= dur) head = 0;
+  playing = !playing; $("play").textContent = playing ? "❚❚ Pause" : "▶ Play";
+};
+$("skip").onclick = () => $("skip").classList.toggle("on");
+$("scrub").oninput = () => { follow = false; setLiveBtn(); head = (+$("scrub").value / 1000) * dur; render(true); };
+$("live").onclick = () => { follow = !follow; playing = false; $("play").textContent = "▶ Play"; setLiveBtn(); };
+function setLiveBtn() { $("live").classList.toggle("on", follow); }
+
+setInterval(() => { if (cur && view && view.live) fetchRun(cur); }, 1500);
+setInterval(loadRuns, 5000);
+loadRuns();
+</script>
+</body>
+</html>

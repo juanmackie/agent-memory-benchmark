@@ -1,0 +1,6 @@
+one-p1         solved=True corrections=1 agent=$0.4166 agent_time=77.4s memory=$0.0658
+one-w1         solved=True corrections=0 agent=$0.133 agent_time=36.7s memory=$0.0015
+one-p2         solved=True corrections=0 agent=$0.1715 agent_time=58.7s memory=$0.0636
+one-w2         solved=True corrections=0 agent=$0.163 agent_time=49.0s memory=$0.0017
+one-p3         solved=True corrections=1 agent=$0.3902 agent_time=74.5s memory=$0.0725
+one-w3         solved=True corrections=0 agent=$0.1015 agent_time=31.4s memory=$0.0003

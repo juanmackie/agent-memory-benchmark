@@ -1,0 +1,37 @@
+planted csvquote in boltons
+planted csvquote in boltons
+[boltons-csvquote-001] history=full model=google/gemini-3.5-flash — initial attempt…
+planted csvquote in boltons
+  ↳ intervention 1: 7 failed, 1 passed in 1.45s
+planted csvquote in boltons
+{
+  "task_id": "boltons-csvquote-001",
+  "codebase": "boltons-csvquote",
+  "variant": "base",
+  "history": "full",
+  "agent": "opencode",
+  "model": "google/gemini-3.5-flash",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "8 passed in 0.15s",
+  "patch_bytes": 1052,
+  "tokens": {
+    "input": 88545,
+    "output": 1209,
+    "reasoning": 12953,
+    "cache_read": 279142,
+    "cache_write": 0
+  },
+  "turns": 22,
+  "wall_s": 644.2,
+  "cost_usd": 0.3021,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=88545 out=1209 cache_r=279142 cache_w=0 | wall=644s -> /tmp/sdebench/run/boltons-csvquote-001_full_vanilla-oc/result.json

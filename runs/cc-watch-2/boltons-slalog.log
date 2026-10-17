@@ -1,0 +1,48 @@
+planted slalog in boltons
+planted slalog in boltons
+[boltons-slalog-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Merged outages under 60 seconds count for zero (evaluated before maintenance). Maintenance only reduces downtime if announced_at is at le
+planted slalog in boltons
+{
+  "task_id": "boltons-slalog-001",
+  "codebase": "boltons-slalog",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "16 passed in 0.02s",
+  "patch_bytes": 1441,
+  "tokens": {
+    "input": 30,
+    "output": 5572,
+    "reasoning": 0,
+    "cache_read": 480131,
+    "cache_write": 14386
+  },
+  "turns": 15,
+  "wall_s": 61.5,
+  "cost_usd": 0.3174,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Merged outages under 60 seconds count for zero (evaluated before maintenance). Maintenance only reduces downtime if announced_at is at least 24 hours before window start. The change merges windows but misses both addendum rules."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 7633,
+    "tokens_out": 354,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=5572 cache_r=480131 cache_w=14386 | wall=61s -> /tmp/sdebench/run/boltons-slalog-001_full_cc-watch-2/result.json

@@ -1,0 +1,49 @@
+planted dedupe in boltons
+planted dedupe in boltons
+[boltons-dedupe-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-dedupe
+planted dedupe in boltons
+{
+  "task_id": "boltons-dedupe-001",
+  "codebase": "boltons-dedupe",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "11 passed in 0.02s",
+  "patch_bytes": 1368,
+  "tokens": {
+    "input": 30,
+    "output": 7313,
+    "reasoning": 0,
+    "cache_read": 476805,
+    "cache_write": 14448
+  },
+  "turns": 15,
+  "wall_s": 89.2,
+  "cost_usd": 0.2263,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Duplicate key must be the lowercased email plus the calendar day of updated. The current change keys only on email."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 4055,
+    "tokens_out": 299,
+    "end_of_turn_deliveries": 0,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=7313 cache_r=476805 cache_w=14448 | wall=89s -> /tmp/sdebench/run/boltons-dedupe-001_full_cc-hs-learn/result.json

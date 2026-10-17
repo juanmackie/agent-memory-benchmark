@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "Set default MAX_ATTEMPTS in retryx/retry.py to 7. Initial values of 10 and 5 were rejected because 10 caused 429 rate limit errors and 5 unnecessarily left retries on the table.",
+  "why": "Empirical measurements showed 7 attempts (12.7s cumulative delay) fit just under the upstream rate-limit reset window, whereas an 8th attempt (25.5s) exceeds the window and gets blocked.",
+  "quote": "Seven. Eight trips it.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

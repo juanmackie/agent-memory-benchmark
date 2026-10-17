@@ -1,0 +1,37 @@
+planted redact in boltons
+planted redact in boltons
+[boltons-redact-001] history=full model=claude-sonnet-5 — initial attempt…
+planted redact in boltons
+  ↳ intervention 1: 3 failed, 6 passed in 0.06s
+planted redact in boltons
+{
+  "task_id": "boltons-redact-001",
+  "codebase": "boltons-redact",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "9 passed in 0.02s",
+  "patch_bytes": 1470,
+  "tokens": {
+    "input": 34,
+    "output": 4963,
+    "reasoning": 0,
+    "cache_read": 535374,
+    "cache_write": 12335
+  },
+  "turns": 18,
+  "wall_s": 62.5,
+  "cost_usd": 0.3371,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=34 out=4963 cache_r=535374 cache_w=12335 | wall=62s -> /tmp/sdebench/run/boltons-redact-001_full_cc-plain-1/result.json

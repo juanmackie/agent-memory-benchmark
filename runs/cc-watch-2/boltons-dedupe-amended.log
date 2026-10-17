@@ -1,0 +1,49 @@
+planted dedupe in boltons
+planted dedupe in boltons
+[boltons-dedupe-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted dedupe in boltons
+  ↳ intervention 1: 6 failed, 5 passed in 0.03s
+planted dedupe in boltons
+{
+  "task_id": "boltons-dedupe-amended-001",
+  "codebase": "boltons-dedupe-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "11 passed in 0.02s",
+  "patch_bytes": 1201,
+  "tokens": {
+    "input": 44,
+    "output": 13262,
+    "reasoning": 0,
+    "cache_read": 737908,
+    "cache_write": 22276
+  },
+  "turns": 22,
+  "wall_s": 168.0,
+  "cost_usd": 0.5855,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "The collision rule supersedes keep-latest: key on (lowercased email, same calendar day). On collision, the record with more non-empty fields wins; on a tie, keep the primary/CRM-side record. The current change keys only on email and resolves collisions by updated timestamp."
+    ],
+    "evidence": [
+      "chat:2"
+    ],
+    "errors": 0,
+    "tokens_in": 2629,
+    "tokens_out": 367,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=44 out=13262 cache_r=737908 cache_w=22276 | wall=168s -> /tmp/sdebench/run/boltons-dedupe-amended-001_full_cc-watch-2/result.json

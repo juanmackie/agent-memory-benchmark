@@ -1,0 +1,37 @@
+planted budget in boltons
+planted budget in boltons
+[boltons-budget-001] history=full model=claude-sonnet-5 — initial attempt…
+planted budget in boltons
+  ↳ intervention 1: 1 failed, 3 passed in 0.10s
+planted budget in boltons
+{
+  "task_id": "boltons-budget-001",
+  "codebase": "boltons-budget",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "4 passed in 0.21s",
+  "patch_bytes": 234,
+  "tokens": {
+    "input": 34,
+    "output": 3391,
+    "reasoning": 0,
+    "cache_read": 540801,
+    "cache_write": 11510
+  },
+  "turns": 17,
+  "wall_s": 89.3,
+  "cost_usd": 0.3271,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=34 out=3391 cache_r=540801 cache_w=11510 | wall=89s -> /tmp/sdebench/run/boltons-budget-001_full_cc-plain-1/result.json

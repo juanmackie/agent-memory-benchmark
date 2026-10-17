@@ -1,0 +1,49 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+  ↳ intervention 1: 6 failed, 8 passed in 0.03s
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-amended-001",
+  "codebase": "boltons-unitparse-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1271,
+  "tokens": {
+    "input": 40,
+    "output": 7658,
+    "reasoning": 0,
+    "cache_read": 648441,
+    "cache_write": 16148
+  },
+  "turns": 20,
+  "wall_s": 111.1,
+  "cost_usd": 0.4462,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat recorded that binary across the board is rejected: unit parsing must depend on kind. Memory uses binary suffixes (K, M, G, T) and bare numbers mean MiB. Disk uses decimal suffixes (M, G, T only; K raises ValueError) and bare numbers mean GB."
+    ],
+    "evidence": [
+      "chat:boltons-unitparse-amended#1"
+    ],
+    "errors": 0,
+    "tokens_in": 4812,
+    "tokens_out": 480,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=7658 cache_r=648441 cache_w=16148 | wall=111s -> /tmp/sdebench/run/boltons-unitparse-amended-001_full_cc-watch-1/result.json

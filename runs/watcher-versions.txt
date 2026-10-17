@@ -1,0 +1,4 @@
+2026-10-16 19:30:49 v3: heads-up at task start (per-paragraph search, all rules, literals), judge low thinking, capped sources, PostToolUse-only delivery
+2026-10-16 21:26:02 v4: SPEAK_AT 0.3 (0.3-0.9 -> judge), heads-up does not block later notes on same memory, commits cited by message
+2026-10-17 01:38:54 v5 (FROZEN for final pass): task-start search adds code-name sentences, keeps top 10 across queries
+2026-10-17 02:11:29 harness-only fix: claude_events skips string messages (drainplan final-w3 crash)

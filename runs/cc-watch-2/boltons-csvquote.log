@@ -1,0 +1,45 @@
+planted csvquote in boltons
+planted csvquote in boltons
+[boltons-csvquote-001] history=full model=claude-sonnet-5 — initial attempt…
+planted csvquote in boltons
+  ↳ intervention 1: 5 failed, 3 passed in 0.03s
+planted csvquote in boltons
+{
+  "task_id": "boltons-csvquote-001",
+  "codebase": "boltons-csvquote",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "8 passed in 0.03s",
+  "patch_bytes": 1162,
+  "tokens": {
+    "input": 36,
+    "output": 7725,
+    "reasoning": 0,
+    "cache_read": 568239,
+    "cache_write": 15000
+  },
+  "turns": 19,
+  "wall_s": 104.4,
+  "cost_usd": 0.3899,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [],
+    "evidence": [],
+    "errors": 0,
+    "tokens_in": 4603,
+    "tokens_out": 236,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=36 out=7725 cache_r=568239 cache_w=15000 | wall=104s -> /tmp/sdebench/run/boltons-csvquote-001_full_cc-watch-2/result.json

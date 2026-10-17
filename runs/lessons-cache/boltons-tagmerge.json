@@ -1,0 +1,32 @@
+[
+ {
+  "lesson": "In merge_tags, deduplicate tags case-insensitively while preserving the original casing of the highest-precedence source; lowercasing all tags in the output was rejected.",
+  "why": "Downstream systems like the Terraform provider and saved searches require exact, case-sensitive tag matching.",
+  "quote": "the Terraform provider treats tag casing as significant downstream and half our saved searches match exact casing.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In merge_tags, order the output list by first occurrence while iterating sources in precedence order and preserving each source's internal order.",
+  "why": "The downstream reconciler compares diffs against this output and requires a deterministic order.",
+  "quote": "the reconciler diffs the output, so it has to be deterministic.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the merge worker, log dropped duplicate tags only at debug level with a single summary line and counts per run, rejecting per-tag logging.",
+  "why": "The worker processes 40,000 resources per run, and per-tag logging would breach log quotas.",
+  "quote": "the worker handles 40k resources a run and we already blew the log quota once this quarter.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In merge_tags, dash-prefixed tombstones (e.g., '-name') must never appear in the output and must only suppress matching tags in lower-precedence sources; a global kill list was rejected.",
+  "why": "Applying tombstones globally would permit low-precedence or legacy sources to delete tags asserted by higher-precedence sources of truth.",
+  "quote": "A global kill list lets the junkiest source delete the source of truth's tags.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "For the merge worker deployment, do not use a feature flag; stage the rollout to the internal organization's sync for one full cycle before rolling out everywhere.",
+  "why": "Feature flags are known to become stale and rot within the merge worker codebase.",
+  "quote": "No flag - flags rot in that worker.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

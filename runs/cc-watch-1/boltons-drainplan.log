@@ -1,0 +1,50 @@
+planted drainplan in boltons
+planted drainplan in boltons
+[boltons-drainplan-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Memory watcher (from this project's past chats/commits; check it against the code): Past chat boltons-drainplan#0 specifies requeued and dropped jobs must preserve their original queue order (no sor
+planted drainplan in boltons
+  ↳ intervention 1: 5 failed, 12 passed in 0.87s
+planted drainplan in boltons
+{
+  "task_id": "boltons-drainplan-001",
+  "codebase": "boltons-drainplan",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "17 passed in 0.46s",
+  "patch_bytes": 1158,
+  "tokens": {
+    "input": 38,
+    "output": 11562,
+    "reasoning": 0,
+    "cache_read": 676212,
+    "cache_write": 20141
+  },
+  "turns": 21,
+  "wall_s": 145.4,
+  "cost_usd": 0.7264,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat boltons-drainplan#0 specifies requeued and dropped jobs must preserve their original queue order (no sorting by id). Eligible idempotent queued jobs in run_now must be ordered by deadline ascending (ties by id), and running jobs must use id as a tie-breaker on equal remaining estimates."
+    ],
+    "evidence": [
+      "chat:boltons-drainplan#0"
+    ],
+    "errors": 0,
+    "tokens_in": 7666,
+    "tokens_out": 401,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=38 out=11562 cache_r=676212 cache_w=20141 | wall=145s -> /tmp/sdebench/run/boltons-drainplan-001_full_cc-watch-1/result.json

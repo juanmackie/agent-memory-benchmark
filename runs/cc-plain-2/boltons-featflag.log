@@ -1,0 +1,37 @@
+planted featflag in boltons
+planted featflag in boltons
+[boltons-featflag-001] history=full model=claude-sonnet-5 — initial attempt…
+planted featflag in boltons
+  ↳ intervention 1: 1 failed, 11 passed in 0.03s
+planted featflag in boltons
+{
+  "task_id": "boltons-featflag-001",
+  "codebase": "boltons-featflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "12 passed in 0.02s",
+  "patch_bytes": 764,
+  "tokens": {
+    "input": 40,
+    "output": 6782,
+    "reasoning": 0,
+    "cache_read": 637463,
+    "cache_write": 15568
+  },
+  "turns": 20,
+  "wall_s": 115.3,
+  "cost_usd": 0.3809,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=6782 cache_r=637463 cache_w=15568 | wall=115s -> /tmp/sdebench/run/boltons-featflag-001_full_cc-plain-2/result.json

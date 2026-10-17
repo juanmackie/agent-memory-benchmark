@@ -1,0 +1,20 @@
+[
+ {
+  "lesson": "In the redact function, never mask email keys even though they were initially proposed as sensitive.",
+  "why": "Customer support relies on looking up customers by email to answer tickets.",
+  "quote": "First, do NOT mask email \u2014 support answers tickets by looking customers up by email",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In redact, match sensitive keys by suffix after lowercasing and replacing non-alphanumeric sequences with underscores, rather than matching on substring containment.",
+  "why": "Substring containment is too broad, and normalization ensures formats like X-Api-Key match the api_key suffix correctly.",
+  "quote": "Second, 'contains' is too broad; match on how the key ends.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In redact, keys ending in card_number must be masked as '***' followed by the last 4 digits instead of a full replacement with '***'.",
+  "why": "Customer support requires the trailing 4 digits to reconcile chargeback disputes.",
+  "quote": "support reconciles chargeback disputes by the tail digits, so a full mask breaks them.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

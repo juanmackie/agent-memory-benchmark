@@ -1,0 +1,38 @@
+[
+ {
+  "lesson": "In cache_key in keys.py, drop only gclid, fbclid, msclkid, and utm_ parameters except utm_content, rejecting blanket tracking-param heuristics or dropping all utm_ params.",
+  "why": "utm_content routes A/B feature variants, so dropping it would cause the CDN to serve the wrong variant to experiment cohorts.",
+  "quote": "utm_content stays in the key: that's a standing agreement with marketing-eng, because utm_content routes which A/B feature experience the page renders.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In keys.py, record dropped parameters using a counter tagged by parameter name instead of per-request log lines.",
+  "why": "Edge request volume is too high and per-request logging would overwhelm the log collector.",
+  "quote": "at edge volumes per-request logging would drown the collector; a counter tagged by param name is plenty, and only for the dropped ones.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In cache_key in keys.py, apply a stable sort by parameter name only, rejecting the proposal to sort values for repeated parameter names.",
+  "why": "Origin endpoints sometimes treat the order of repeated parameter values as semantically meaningful requests.",
+  "quote": "Some origin endpoints treat repeated-param order as meaningful, so tag=b&tag=a and tag=a&tag=b are legitimately different requests.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In cache_key in keys.py, completely drop any parameter with an empty value, overriding the retention exception even for utm_content.",
+  "why": "Empty-valued parameters are ignored by origin handlers and merely fragment the cache.",
+  "quote": "Drop them entirely - an empty-valued param never reaches the origin's handler logic, it just fragments the cache.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In cache_key in keys.py, lowercase only the scheme and host while preserving the path's case and trailing slashes, rejecting full URL lowercasing and slash stripping.",
+  "why": "The origin object storage is case-sensitive, and stripping trailing slashes previously caused directory index endpoints to collide with file endpoints.",
+  "quote": "Path case preserved, trailing slash preserved, exactly as given.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In cache_key in keys.py, omit the trailing '?' character when all query parameters are dropped.",
+  "why": "URLs with only tracking parameters must map to the same cache key as URLs with no query string to preserve cache hit rates.",
+  "quote": "if nothing survives the filter, the key is just scheme://host plus the path, no dangling question mark.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

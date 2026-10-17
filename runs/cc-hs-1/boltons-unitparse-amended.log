@@ -1,0 +1,50 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-unitparse-amended
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Bare numbers without a unit must always default to mebibytes (MiB). The change only updates _UNITS to binary multipliers, leaving bare nu
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-amended-001",
+  "codebase": "boltons-unitparse-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1305,
+  "tokens": {
+    "input": 40,
+    "output": 7226,
+    "reasoning": 0,
+    "cache_read": 662549,
+    "cache_write": 16324
+  },
+  "turns": 20,
+  "wall_s": 83.1,
+  "cost_usd": 0.4325,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Bare numbers without a unit must always default to mebibytes (MiB). The change only updates _UNITS to binary multipliers, leaving bare numbers to return raw bytes."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 3435,
+    "tokens_out": 469,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=40 out=7226 cache_r=662549 cache_w=16324 | wall=83s -> /tmp/sdebench/run/boltons-unitparse-amended-001_full_cc-hs-1/result.json

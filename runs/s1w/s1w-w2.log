@@ -1,0 +1,47 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted retryjitter in boltons
+{
+  "task_id": "boltons-retryjitter-amended-001",
+  "codebase": "boltons-retryjitter-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "9 passed in 0.02s",
+  "patch_bytes": 421,
+  "tokens": {
+    "input": 20,
+    "output": 1611,
+    "reasoning": 0,
+    "cache_read": 299563,
+    "cache_write": 7606
+  },
+  "turns": 11,
+  "wall_s": 29.4,
+  "cost_usd": 0.1065,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Before you change the retry policy: retry any 5xx plus exactly 429 and 408 from the 4xx range, fail fast on everything else in 4xx, allow at most 4 attempts total, and cap the exponential backoff at 30 seconds."
+    ],
+    "evidence": [
+      "c49a5083-1b46-4437-b79e-59802e5cb4c4"
+    ],
+    "errors": 0,
+    "tokens_in": 1378,
+    "tokens_out": 110,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=20 out=1611 cache_r=299563 cache_w=7606 | wall=29s -> /tmp/sdebench/run/boltons-retryjitter-amended-001_full_s1w-w2/result.json

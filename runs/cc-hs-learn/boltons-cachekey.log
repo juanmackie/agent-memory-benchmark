@@ -1,0 +1,50 @@
+planted cachekey in boltons
+planted cachekey in boltons
+[boltons-cachekey-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 6, 'commits': 200} -> bank watch-cc-hs-1-boltons-cachekey
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): utm_content must stay in the key: it routes A/B feature variants, which is why customers are seeing the wrong cohorts. Drop all utm_ para
+planted cachekey in boltons
+{
+  "task_id": "boltons-cachekey-001",
+  "codebase": "boltons-cachekey",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "15 passed in 0.03s",
+  "patch_bytes": 1365,
+  "tokens": {
+    "input": 38,
+    "output": 8276,
+    "reasoning": 0,
+    "cache_read": 653857,
+    "cache_write": 18526
+  },
+  "turns": 19,
+  "wall_s": 116.5,
+  "cost_usd": 0.4646,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "utm_content must stay in the key: it routes A/B feature variants, which is why customers are seeing the wrong cohorts. Drop all utm_ parameters except utm_content (along with gclid, fbclid, and msclkid), but do not drop utm_content."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5291,
+    "tokens_out": 570,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=38 out=8276 cache_r=653857 cache_w=18526 | wall=116s -> /tmp/sdebench/run/boltons-cachekey-001_full_cc-hs-learn/result.json

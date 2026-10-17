@@ -1,0 +1,50 @@
+planted mimemap in boltons
+planted mimemap in boltons
+[boltons-mimemap-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Memory watcher (from this project's past chats/commits; check it against the code): Past chat boltons-mimemap#0 specifies: .svg must be exactly 'image/svg+xml; charset=utf-8', .js is 'text/javascrip
+planted mimemap in boltons
+  ↳ intervention 1: 4 failed, 10 passed in 0.18s
+planted mimemap in boltons
+{
+  "task_id": "boltons-mimemap-001",
+  "codebase": "boltons-mimemap",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.03s",
+  "patch_bytes": 909,
+  "tokens": {
+    "input": 48,
+    "output": 6131,
+    "reasoning": 0,
+    "cache_read": 791662,
+    "cache_write": 15936
+  },
+  "turns": 24,
+  "wall_s": 88.0,
+  "cost_usd": 0.6629,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat boltons-mimemap#0 specifies: .svg must be exactly 'image/svg+xml; charset=utf-8', .js is 'text/javascript', both .yaml and .yml must map to 'application/x-yaml', and dotfiles with no other dot (.env) have no extension while files like .config.yaml map by their extension."
+    ],
+    "evidence": [
+      "chat:boltons-mimemap#0"
+    ],
+    "errors": 0,
+    "tokens_in": 5171,
+    "tokens_out": 540,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=48 out=6131 cache_r=791662 cache_w=15936 | wall=88s -> /tmp/sdebench/run/boltons-mimemap-001_full_cc-watch-1/result.json

@@ -1,0 +1,37 @@
+planted hostallow in boltons
+planted hostallow in boltons
+[boltons-hostallow-001] history=full model=claude-sonnet-5 — initial attempt…
+planted hostallow in boltons
+  ↳ intervention 1: 4 failed, 10 passed in 0.02s
+planted hostallow in boltons
+{
+  "task_id": "boltons-hostallow-001",
+  "codebase": "boltons-hostallow",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.03s",
+  "patch_bytes": 1120,
+  "tokens": {
+    "input": 28,
+    "output": 5300,
+    "reasoning": 0,
+    "cache_read": 432730,
+    "cache_write": 11921
+  },
+  "turns": 14,
+  "wall_s": 68.2,
+  "cost_usd": 0.2995,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=28 out=5300 cache_r=432730 cache_w=11921 | wall=68s -> /tmp/sdebench/run/boltons-hostallow-001_full_cc-plain-2/result.json

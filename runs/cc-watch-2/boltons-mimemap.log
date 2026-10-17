@@ -1,0 +1,50 @@
+planted mimemap in boltons
+planted mimemap in boltons
+[boltons-mimemap-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Pin .svg to exactly 'image/svg+xml; charset=utf-8', .js to 'text/javascript', and map both .yaml and .yml to 'application/x-yaml'. Also e
+planted mimemap in boltons
+  ↳ intervention 1: 4 failed, 10 passed in 0.04s
+planted mimemap in boltons
+{
+  "task_id": "boltons-mimemap-001",
+  "codebase": "boltons-mimemap",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 909,
+  "tokens": {
+    "input": 40,
+    "output": 8035,
+    "reasoning": 0,
+    "cache_read": 668007,
+    "cache_write": 17830
+  },
+  "turns": 20,
+  "wall_s": 133.4,
+  "cost_usd": 0.6277,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Pin .svg to exactly 'image/svg+xml; charset=utf-8', .js to 'text/javascript', and map both .yaml and .yml to 'application/x-yaml'. Also ensure dotfiles with no other dot (e.g. .env) and trailing dots map to 'application/octet-stream'."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 4999,
+    "tokens_out": 473,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=8035 cache_r=668007 cache_w=17830 | wall=133s -> /tmp/sdebench/run/boltons-mimemap-001_full_cc-watch-2/result.json

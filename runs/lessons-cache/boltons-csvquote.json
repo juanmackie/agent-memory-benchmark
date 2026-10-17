@@ -1,0 +1,20 @@
+[
+ {
+  "lesson": "In the ERP export, digit-only fields with leading zeros must be formatted as Excel-style formulas (=\"...\"). Standard CSV quoting was tried and rejected because the ERP still strips leading zeros.",
+  "why": "The ERP importer coerces standard quoted digit strings into numbers, and formula syntax is the only representation it imports byte-for-byte.",
+  "quote": "A digit-only value with a leading zero has to be written as =\"00042\" \u2014 that's the only thing its parser imports byte-for-byte.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Do not wrap all export fields in formulas; apply minimal CSV quoting to all other fields, quoting only on commas, quotes, or newlines and doubling embedded quotes.",
+  "why": "The ERP formula workaround is only required for leading-zero digit strings, whereas standard fields should adhere to standard minimal CSV.",
+  "quote": "Everything else is normal CSV with minimal quoting: quote a field only if it contains a comma, a quote, or a newline, and double any embedded quotes.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "The CSV export must terminate rows using CRLF (\\r\\n) line endings instead of bare LF (\\n).",
+  "why": "The ERP parser rejects files formatted with bare newline characters.",
+  "quote": "And rows must end with \\r\\n \u2014 the ERP parser rejects bare \\n line endings.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

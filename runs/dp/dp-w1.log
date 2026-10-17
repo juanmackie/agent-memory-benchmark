@@ -1,0 +1,47 @@
+planted drainplan in boltons
+planted drainplan in boltons
+[boltons-drainplan-001] history=full model=claude-sonnet-5 — initial attempt…
+planted drainplan in boltons
+{
+  "task_id": "boltons-drainplan-001",
+  "codebase": "boltons-drainplan",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "17 passed in 0.04s",
+  "patch_bytes": 1126,
+  "tokens": {
+    "input": 26,
+    "output": 2838,
+    "reasoning": 0,
+    "cache_read": 417702,
+    "cache_write": 11336
+  },
+  "turns": 13,
+  "wall_s": 41.8,
+  "cost_usd": 0.1573,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 3,
+    "messages": [
+      "Before you change workerctl/drain.py: drain_order(jobs, now, window) returns a three-tuple: (run_now, requeue, dropped). In-flight jobs (state 'running') lead run_now, ordered by remaining estimate ascending (ties by id). Queued jobs requeue in their original queue order - no re-sorting - except queued jobs with idempotent true and deadline inside inclusive window now <= deadline <= now + window, which run now after in-flight jobs, ordered by deadline ascending (ties by id). Queued jobs with deadline < now are dropped entirely in original order."
+    ],
+    "evidence": [
+      "a7fba715-63ad-4eca-ab46-e57af4b8dd4c"
+    ],
+    "errors": 0,
+    "tokens_in": 27798,
+    "tokens_out": 485,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=2838 cache_r=417702 cache_w=11336 | wall=42s -> /tmp/sdebench/run/boltons-drainplan-001_full_dp-w1/result.json

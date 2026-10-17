@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "In under2camel, only uppercase the exact acronyms HTTP, API, SKU, and GDPR, leaving all other abbreviations like db, sql, and url title-cased.",
+  "why": "The project style guide restricts uppercase acronyms to a specific set including domain terms and deliberately excludes standard tech terms like db, sql, and url.",
+  "quote": "HTTP and API yes, but also SKU and GDPR (our domain ones). And we deliberately do NOT uppercase db, sql, or url",
+  "where": "/root/project-history/session-01.md"
+ }
+]

@@ -1,0 +1,38 @@
+[
+ {
+  "lesson": "In drain_order in workerctl, in-flight jobs must lead run_now sorted by remaining estimate ascending with job id breaking ties, rejecting the previous id-only sort.",
+  "why": "Ordering in-flight jobs shortest first frees up workers as quickly as possible to bound rolling restart duration while maintaining determinism.",
+  "quote": "order the in-flight list by remaining estimate ascending, shortest first, so workers free up as fast as possible.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In drain_order in workerctl, queued jobs that return to the queue must preserve their original queue order, rejecting any re-sorting by id or deadline.",
+  "why": "Queue order is a fairness commitment to tenants, and reordering jobs during restarts previously caused tenant-facing issues.",
+  "quote": "No re-sorting at all - requeued jobs keep their ORIGINAL queue order. The queue order is a fairness promise we make to tenants;",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In drain_order in workerctl, queued jobs run during drain (placed in run_now after in-flight jobs, ordered by deadline ascending then id) only if marked idempotent: true and deadline is within now <= deadline <= now + window, rejecting running all idempotent jobs.",
+  "why": "Running all idempotent jobs would prematurely execute work due far in the future, while jobs due inside the drain window would otherwise miss deadlines waiting for restarts.",
+  "quote": "Deadline in window AND idempotent - both conditions, not either.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In drain_order in workerctl, queued jobs with deadline strictly before now must not be run or requeued, but instead returned in a dropped list in original order.",
+  "why": "Requeuing expired jobs resurrects stale work, and recording them in a dedicated dropped list enables the reaper to log and page rather than dropping silently.",
+  "quote": "A queued job whose deadline is already exceeded, deadline strictly before now, gets dropped entirely: not run, not requeued, even if it's marked idempotent",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In drain_order in workerctl, drain logging must emit only one summary line at debug level reporting the three list sizes, rejecting per-job log lines.",
+  "why": "Emitting per-job lines when draining large pools with hundreds of jobs would flood the log collector.",
+  "quote": "One summary line per drain with the three list sizes, debug level - a big pool drains hundreds of jobs",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "The rollout of changes to drain_order in workerctl must be staged pool by pool without using a feature flag.",
+  "why": "Using a feature flag would produce multiple concurrent drain behaviors in production, making restarts impossible to reason about.",
+  "quote": "No feature flag - drain code with a flag means two drain behaviours in the wild and nobody can reason about a restart.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

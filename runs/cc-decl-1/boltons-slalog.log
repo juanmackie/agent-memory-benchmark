@@ -1,0 +1,37 @@
+planted slalog in boltons
+planted slalog in boltons
+[boltons-slalog-001] history=full model=claude-sonnet-5 — initial attempt…
+planted slalog in boltons
+  ↳ intervention 1: 3 failed, 13 passed in 0.04s
+planted slalog in boltons
+{
+  "task_id": "boltons-slalog-001",
+  "codebase": "boltons-slalog",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "16 passed in 0.02s",
+  "patch_bytes": 1672,
+  "tokens": {
+    "input": 34,
+    "output": 11464,
+    "reasoning": 0,
+    "cache_read": 579480,
+    "cache_write": 21268
+  },
+  "turns": 17,
+  "wall_s": 122.3,
+  "cost_usd": 0.451,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=34 out=11464 cache_r=579480 cache_w=21268 | wall=122s -> /tmp/sdebench/run/boltons-slalog-001_full_cc-decl-1/result.json

@@ -1,0 +1,50 @@
+planted overage in boltons
+planted overage in boltons
+[boltons-overage-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 6, 'commits': 200} -> bank watch-cc-hs-1-boltons-overage
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Prorated quota must be rounded up with ceil, not kept as a float. Subtract a 25-unit free grace allowance from the overage, then bill the
+planted overage in boltons
+{
+  "task_id": "boltons-overage-001",
+  "codebase": "boltons-overage",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "16 passed in 0.02s",
+  "patch_bytes": 881,
+  "tokens": {
+    "input": 42,
+    "output": 12196,
+    "reasoning": 0,
+    "cache_read": 737581,
+    "cache_write": 21359
+  },
+  "turns": 22,
+  "wall_s": 165.8,
+  "cost_usd": 0.6053,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Prorated quota must be rounded up with ceil, not kept as a float. Subtract a 25-unit free grace allowance from the overage, then bill the remainder in whole 50-unit blocks rounded up at plan['block_fee'] per block, rather than per unit."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5220,
+    "tokens_out": 541,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=42 out=12196 cache_r=737581 cache_w=21359 | wall=166s -> /tmp/sdebench/run/boltons-overage-001_full_cc-hs-learn/result.json

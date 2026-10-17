@@ -1,0 +1,38 @@
+[
+ {
+  "lesson": "In egressgate's is_allowed, both the incoming host and allowlist entries must be converted to lowercase and stripped of a single trailing dot before evaluation.",
+  "why": "DNS names are case-insensitive and canonical rooted FQDNs represent the exact same host; case differences caused twin-service discrepancies and unstripped dots broke valid hosts.",
+  "quote": "Strip the single trailing dot before matching - host.example.com. names exactly the same host as host.example.com",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In egressgate's is_allowed, wildcard entries like *.example.com must match exactly one additional non-empty, dot-free label; multi-level matching at any depth was explicitly rejected.",
+  "why": "A past subdomain-takeover incident mandated that owners of deeper subdomain levels must not automatically inherit parent wildcard approvals.",
+  "quote": "security decided a wildcard covers EXACTLY ONE additional label: *.example.com matches a.example.com and nothing deeper",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In egressgate's is_allowed, wildcards must not match bare apex domains, and exact entries must not match subdomains. Treating a wildcard as covering its apex was rejected.",
+  "why": "Apex domains represent a distinct trust decision requiring an explicit entry under a strict 'one entry, one scope' model.",
+  "quote": "The apex is a different trust decision - *.example.com does NOT match bare example.com",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In egressgate's is_allowed, dotted-quad IPv4 literals must match exact IP entries only, rejecting any wildcard evaluation.",
+  "why": "Wildcards are strictly a DNS concept, and allowing wildcard evaluation on IP addresses could allow configuration typos to mistakenly approve internal IPs.",
+  "quote": "If the host parses as an IPv4 literal, it's exact match or nothing - no wildcard ever applies.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In egressgate, log denied connection attempts at warn level rate-limited to at most once per minute per (service, host) pair, rather than logging every denial.",
+  "why": "Full-rate denial logging overwhelmed and melted the collector service during a prior incident drill.",
+  "quote": "log a given (service, host) denial at most once a minute, warn level; full-rate denial logging melted the collector",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Deploy updates to egressgate via a staged rollout using shadow mode for a day before enforcement, rejecting direct deployment to production.",
+  "why": "Shadow mode gives security time to triage denials and catch legitimate services relying on the previous suffix-matching bug.",
+  "quote": "Staged - shadow mode first: log what WOULD be denied for a day, security triages the list, then enforce.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

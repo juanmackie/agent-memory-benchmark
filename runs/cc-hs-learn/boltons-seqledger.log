@@ -1,0 +1,50 @@
+planted seqledger in boltons
+planted seqledger in boltons
+[boltons-seqledger-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 4, 'commits': 200} -> bank watch-cc-hs-1-boltons-seqledger
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): A brand-new tenant must start at seq 1, compaction events must advance seq by exactly 100, and matching redeliveries must return False. T
+planted seqledger in boltons
+{
+  "task_id": "boltons-seqledger-001",
+  "codebase": "boltons-seqledger",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "15 passed in 0.02s",
+  "patch_bytes": 1126,
+  "tokens": {
+    "input": 38,
+    "output": 5765,
+    "reasoning": 0,
+    "cache_read": 618165,
+    "cache_write": 14911
+  },
+  "turns": 19,
+  "wall_s": 93.2,
+  "cost_usd": 0.3933,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "A brand-new tenant must start at seq 1, compaction events must advance seq by exactly 100, and matching redeliveries must return False. The current change accepts any initial seq on empty trails, omits compaction handling, and returns True on duplicate matches."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5392,
+    "tokens_out": 545,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=38 out=5765 cache_r=618165 cache_w=14911 | wall=93s -> /tmp/sdebench/run/boltons-seqledger-001_full_cc-hs-learn/result.json

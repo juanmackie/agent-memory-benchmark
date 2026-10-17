@@ -1,0 +1,50 @@
+planted parseflag in boltons
+planted parseflag in boltons
+[boltons-parseflag-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-parseflag
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): The truthy set must be exactly 'true' and 'on', case-sensitive. The current change only accepts 'true' and continues to use case-insensit
+planted parseflag in boltons
+{
+  "task_id": "boltons-parseflag-001",
+  "codebase": "boltons-parseflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "3 passed in 0.01s",
+  "patch_bytes": 249,
+  "tokens": {
+    "input": 24,
+    "output": 2118,
+    "reasoning": 0,
+    "cache_read": 363751,
+    "cache_write": 8204
+  },
+  "turns": 14,
+  "wall_s": 41.0,
+  "cost_usd": 0.2152,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "The truthy set must be exactly 'true' and 'on', case-sensitive. The current change only accepts 'true' and continues to use case-insensitive matching."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 4292,
+    "tokens_out": 305,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=24 out=2118 cache_r=363751 cache_w=8204 | wall=41s -> /tmp/sdebench/run/boltons-parseflag-001_full_cc-hs-1/result.json

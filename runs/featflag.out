@@ -1,0 +1,7 @@
+built banks/boltons-featflag.zip setup=$2.8236 (2162s)
+featflag-p1    solved=True corrections=0 agent=$0.2671 agent_time=104.5s memory=$0.0717
+featflag-w1    solved=True corrections=0 agent=$0.1656 agent_time=49.6s memory=$0.0022
+featflag-p2    solved=True corrections=1 agent=$0.6463 agent_time=131.4s memory=$0.1097
+featflag-w2    solved=False corrections=3 agent=$1.1845 agent_time=172.9s memory=$0.0065
+featflag-p3    solved=True corrections=1 agent=$0.6825 agent_time=121.7s memory=$0.0502
+featflag-w3    solved=True corrections=0 agent=$0.1577 agent_time=59.1s memory=$0.0059

@@ -1,0 +1,50 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'lessons': 4, 'commits': 200} -> bank watch-cc-hs-1-boltons-retryjitter-amended
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Retryable status codes from the 4xx range must include 408 as well as 429. The current change only allows 429, causing 408 to fail fast. 
+planted retryjitter in boltons
+{
+  "task_id": "boltons-retryjitter-amended-001",
+  "codebase": "boltons-retryjitter-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "9 passed in 0.02s",
+  "patch_bytes": 594,
+  "tokens": {
+    "input": 28,
+    "output": 2580,
+    "reasoning": 0,
+    "cache_read": 427295,
+    "cache_write": 8738
+  },
+  "turns": 14,
+  "wall_s": 50.2,
+  "cost_usd": 0.2535,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Retryable status codes from the 4xx range must include 408 as well as 429. The current change only allows 429, causing 408 to fail fast."
+    ],
+    "evidence": [
+      "lesson-2"
+    ],
+    "errors": 0,
+    "tokens_in": 2734,
+    "tokens_out": 554,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=28 out=2580 cache_r=427295 cache_w=8738 | wall=50s -> /tmp/sdebench/run/boltons-retryjitter-amended-001_full_cc-hs-1/result.json

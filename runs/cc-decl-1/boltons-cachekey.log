@@ -1,0 +1,39 @@
+planted cachekey in boltons
+planted cachekey in boltons
+[boltons-cachekey-001] history=full model=claude-sonnet-5 — initial attempt…
+planted cachekey in boltons
+  ↳ intervention 1: 3 failed, 12 passed in 0.04s
+planted cachekey in boltons
+  ↳ intervention 2: 2 failed, 13 passed in 0.02s
+planted cachekey in boltons
+{
+  "task_id": "boltons-cachekey-001",
+  "codebase": "boltons-cachekey",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 2,
+  "capped": false,
+  "final_pytest": "15 passed in 0.02s",
+  "patch_bytes": 1408,
+  "tokens": {
+    "input": 46,
+    "output": 11216,
+    "reasoning": 0,
+    "cache_read": 813355,
+    "cache_write": 22284
+  },
+  "turns": 23,
+  "wall_s": 139.6,
+  "cost_usd": 0.8671,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=2 | tokens in=46 out=11216 cache_r=813355 cache_w=22284 | wall=140s -> /tmp/sdebench/run/boltons-cachekey-001_full_cc-decl-1/result.json

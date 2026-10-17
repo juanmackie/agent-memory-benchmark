@@ -1,0 +1,50 @@
+planted overage in boltons
+planted overage in boltons
+[boltons-overage-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Memory watcher (from this project's past chats/commits; check it against the code): Past chat boltons-overage#0 specifies the metering policy: prorated allowance must round UP (ceil); the first 25 o
+planted overage in boltons
+  ↳ intervention 1: 8 failed, 8 passed in 0.14s
+planted overage in boltons
+{
+  "task_id": "boltons-overage-amended-001",
+  "codebase": "boltons-overage-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "16 passed in 0.03s",
+  "patch_bytes": 871,
+  "tokens": {
+    "input": 44,
+    "output": 12086,
+    "reasoning": 0,
+    "cache_read": 786989,
+    "cache_write": 23663
+  },
+  "turns": 22,
+  "wall_s": 171.9,
+  "cost_usd": 0.7796,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat boltons-overage#0 specifies the metering policy: prorated allowance must round UP (ceil); the first 25 overage units are free grace applied before block rounding; and the remainder bills in 50-unit blocks rounded UP times plan['block_fee'], never per-unit."
+    ],
+    "evidence": [
+      "chat:boltons-overage#0"
+    ],
+    "errors": 0,
+    "tokens_in": 5831,
+    "tokens_out": 370,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=44 out=12086 cache_r=786989 cache_w=23663 | wall=172s -> /tmp/sdebench/run/boltons-overage-amended-001_full_cc-watch-1/result.json

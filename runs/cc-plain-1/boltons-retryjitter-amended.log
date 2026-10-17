@@ -1,0 +1,39 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted retryjitter in boltons
+  ↳ intervention 1: 1 failed, 8 passed in 0.03s
+planted retryjitter in boltons
+  ↳ intervention 2: 1 failed, 8 passed in 0.03s
+planted retryjitter in boltons
+{
+  "task_id": "boltons-retryjitter-amended-001",
+  "codebase": "boltons-retryjitter-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 2,
+  "capped": false,
+  "final_pytest": "9 passed in 0.02s",
+  "patch_bytes": 421,
+  "tokens": {
+    "input": 34,
+    "output": 2547,
+    "reasoning": 0,
+    "cache_read": 516290,
+    "cache_write": 8460
+  },
+  "turns": 17,
+  "wall_s": 57.7,
+  "cost_usd": 0.393,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=2 | tokens in=34 out=2547 cache_r=516290 cache_w=8460 | wall=58s -> /tmp/sdebench/run/boltons-retryjitter-amended-001_full_cc-plain-1/result.json

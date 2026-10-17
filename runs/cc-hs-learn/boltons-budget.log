@@ -1,0 +1,49 @@
+planted budget in boltons
+planted budget in boltons
+[boltons-budget-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-budget
+planted budget in boltons
+{
+  "task_id": "boltons-budget-001",
+  "codebase": "boltons-budget",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "4 passed in 0.01s",
+  "patch_bytes": 234,
+  "tokens": {
+    "input": 40,
+    "output": 5977,
+    "reasoning": 0,
+    "cache_read": 696931,
+    "cache_write": 19678
+  },
+  "turns": 21,
+  "wall_s": 86.4,
+  "cost_usd": 0.2779,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "MAX_ATTEMPTS should be 7, not 5. Setting it to 5 was previously rejected for leaving retries on the table; measurements showed 7 attempts fit within the upstream rate-limit reset window."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5893,
+    "tokens_out": 426,
+    "end_of_turn_deliveries": 0,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=40 out=5977 cache_r=696931 cache_w=19678 | wall=86s -> /tmp/sdebench/run/boltons-budget-001_full_cc-hs-learn/result.json

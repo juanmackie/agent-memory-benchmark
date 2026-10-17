@@ -1,0 +1,37 @@
+planted statetrans in boltons
+planted statetrans in boltons
+[boltons-statetrans-001] history=full model=claude-sonnet-5 — initial attempt…
+planted statetrans in boltons
+  ↳ intervention 1: 4 failed, 8 passed in 0.07s
+planted statetrans in boltons
+{
+  "task_id": "boltons-statetrans-001",
+  "codebase": "boltons-statetrans",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "12 passed in 0.01s",
+  "patch_bytes": 1505,
+  "tokens": {
+    "input": 40,
+    "output": 11723,
+    "reasoning": 0,
+    "cache_read": 724034,
+    "cache_write": 21196
+  },
+  "turns": 22,
+  "wall_s": 151.3,
+  "cost_usd": 0.594,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=11723 cache_r=724034 cache_w=21196 | wall=151s -> /tmp/sdebench/run/boltons-statetrans-001_full_cc-plain-1/result.json

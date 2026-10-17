@@ -1,0 +1,20 @@
+[
+ {
+  "lesson": "In parse_quantity, all suffixes must use binary multipliers for both memory and disk sizes, and bare numbers without a unit must always default to mebibytes (MiB).",
+  "why": "A previous parser interpreted bare numbers as bytes, causing pods to be OOM-killed on startup, and using a single binary multiplier table ensures consistency across both memory and disk configurations.",
+  "quote": "parse_quantity uses binary multipliers for every suffix on both memory and disk, case-insensitive, and a bare number always means MiB.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Disk quantities must parse suffixes as decimal (M = 1000\u00b2, G = 1000\u00b3, T = 1000\u2074) with bare numbers defaulting to decimal gigabytes, while memory maintains binary suffixes and a bare-MiB default.",
+  "why": "The storage vendor bills in decimal gigabytes rather than binary units, which was causing the provisioner to over-allocate disk space.",
+  "quote": "Bare disk numbers mean decimal gigabytes now, since that's the vendor's billing unit. Memory keeps binary suffixes and the bare-MiB default.",
+  "where": "/root/project-history/session-02.md"
+ },
+ {
+  "lesson": "A 'K' suffix specified on a disk quantity must be rejected as an invalid configuration error (raising an exception), whereas 'K' remains valid for memory quantities.",
+  "why": "The vendor API lacks a kilobyte unit, so the system should fail explicitly instead of guessing.",
+  "quote": "Reject it \u2014 a K suffix on a disk quantity is a config error, raise instead of guessing. K stays valid for memory.",
+  "where": "/root/project-history/session-02.md"
+ }
+]

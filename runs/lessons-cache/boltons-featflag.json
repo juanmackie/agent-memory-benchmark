@@ -1,0 +1,44 @@
+[
+ {
+  "lesson": "In flagcore's bucket(), the hash input must strictly be user_id + \":\" + flag_name encoded as UTF-8 bytes before running crc32.",
+  "why": "Analytics recomputes this exact CRC32 string to attribute events, so the bytes must match as an interface contract, and simple concatenation without a separator causes collisions.",
+  "quote": "The hash input is pinned: user_id + \":\" + flag_name, colon separator, exactly that string. Analytics recomputes the same crc32 on their side",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In flagcore's bucket(), use a counter metric by (flag, in/out) alongside a debug endpoint instead of logging every bucketing decision.",
+  "why": "The bucket() function runs on every request, so full logging would overwhelm and crash the log collector.",
+  "quote": "Sampled metric, not logs - bucket() runs on every request and full logging would melt the collector",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In flagcore's bucket(), compare the bucket value against percent using strict less-than (bucket < percent), rejecting less-than-or-equal (<=).",
+  "why": "Using <= causes bucket 0 (approx. 1% of traffic) to remain enrolled even when percent is set to 0, preventing experiments from ever being truly disabled.",
+  "quote": "Strict less-than, and this one matters more than it looks: bucket < percent. With buckets 0..99, percent=0 must enroll NOBODY",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In flagcore's bucket(), corp accounts (ending in @corp.example) must only be force-enrolled if the flag name begins with the prefix beta-.",
+  "why": "A blanket corporate override allows internal flags to unintentionally leak to external or shared demo accounts.",
+  "quote": "Corp accounts - user ids ending @corp.example - are always in ONLY when the flag name starts with beta-.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "The corp-beta override check in flagcore's bucket() must be evaluated first before any percent or hashing logic.",
+  "why": "Evaluating it first allows teams to create a beta flag at 0% rollout for internal dogfooding before rolling out to general users.",
+  "quote": "The corp-beta override is absolute and evaluated first - a beta- flag at 0% still shows for every corp account",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Deploy the hash input update in flagcore as a single cutover with no legacy dual-hash path.",
+  "why": "Maintaining a legacy hash path would preserve cross-flag cohort correlation bugs for existing flags indefinitely.",
+  "quote": "No dual-hash - we take the one-time churn. Running experiments restart their measurement window after the deploy",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Do not clamp or re-validate the percent value inside flagcore's bucket().",
+  "why": "Percent values are already validated (0..100) at write time by the flag store, and clamping inside bucket() would obscure upstream store bugs.",
+  "quote": "the flag store validates percent at write time, so assume 0..100 and don't clamp - a clamp would hide store bugs.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

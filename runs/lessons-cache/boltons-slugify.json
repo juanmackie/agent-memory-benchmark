@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "In boltons/strutils.py, slugify must expand '&' to 'and', '$' to 'usd', and '%' to 'pct' before punctuation splitting, rejecting expansions to 'dollar' or 'percent'.",
+  "why": "Stripping punctuation caused pages with symbols to drop from search rankings, and using 'usd' and 'pct' aligns with standardized analytics tags rather than natural English words.",
+  "quote": "Not 'dollar' or 'percent' \u2014 we standardized on our analytics tags. '$' becomes 'usd' and '%' becomes 'pct'.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

@@ -1,0 +1,49 @@
+built boltons-under2camel @ 979fa9b6
+built boltons-under2camel @ 979fa9b6
+[boltons-under2camel-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-under2camel
+built boltons-under2camel @ 979fa9b6
+{
+  "task_id": "boltons-under2camel-001",
+  "codebase": "boltons-under2camel",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "20 passed in 0.06s",
+  "patch_bytes": 1152,
+  "tokens": {
+    "input": 38,
+    "output": 4453,
+    "reasoning": 0,
+    "cache_read": 604991,
+    "cache_write": 12058
+  },
+  "turns": 19,
+  "wall_s": 64.7,
+  "cost_usd": 0.2138,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "The style guide's acronym set for under2camel is strictly {'HTTP', 'API', 'SKU', 'GDPR'}. Other acronyms like SQL, URL, and DB must remain title-cased."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5414,
+    "tokens_out": 489,
+    "end_of_turn_deliveries": 0,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=38 out=4453 cache_r=604991 cache_w=12058 | wall=65s -> /tmp/sdebench/run/boltons-under2camel-001_full_cc-hs-1/result.json

@@ -1,0 +1,50 @@
+planted seqledger in boltons
+planted seqledger in boltons
+[boltons-seqledger-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 4, 'commits': 200} -> bank watch-cc-hs-1-boltons-seqledger
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Matching-hash redeliveries must return False, not True. Also, an empty trail must start at seq 1, and events with type 'compaction' must 
+planted seqledger in boltons
+{
+  "task_id": "boltons-seqledger-001",
+  "codebase": "boltons-seqledger",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "15 passed in 0.03s",
+  "patch_bytes": 1274,
+  "tokens": {
+    "input": 32,
+    "output": 6631,
+    "reasoning": 0,
+    "cache_read": 526944,
+    "cache_write": 16584
+  },
+  "turns": 16,
+  "wall_s": 95.4,
+  "cost_usd": 0.385,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Matching-hash redeliveries must return False, not True. Also, an empty trail must start at seq 1, and events with type 'compaction' must advance seq by exactly 100 rather than 1."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5051,
+    "tokens_out": 687,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=32 out=6631 cache_r=526944 cache_w=16584 | wall=95s -> /tmp/sdebench/run/boltons-seqledger-001_full_cc-hs-1/result.json

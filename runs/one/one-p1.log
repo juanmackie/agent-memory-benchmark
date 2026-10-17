@@ -1,0 +1,100 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-amended-001] history=hscoding model=claude-sonnet-5 — initial attempt…
+planted retryjitter in boltons
+  ↳ intervention 1: 1 failed, 8 passed in 0.02s
+planted retryjitter in boltons
+  [memory] reflect diagnostics: [{'ts': '2026-10-16T15:03:32.440Z', 'harness': 'claude-code', 'event': 'session_start', 'bank': 'one-one-p1', 'pages': 5, 'ms': 40}, {'ts': '2026-10-16T15:03:52.681Z', 'harness': 'claude-code', 'event': 'reflect_failed', 'ms': 20012, 'bank': 'one-one-p1', 'timeoutMs': 20000, 'error': 'reflect timed out after 20000ms: This operation was aborted (20)', 'query': 'You are a maintainer of the `boltons-retryjitter-amended` Python project. A regr'}, {'ts': '2026-10-16T15:03:52.755Z', 'harness': 'claude-code', 'event': 'reflect_fallback_pages', 'ms': 74, 'count': 5}, {'ts': '2026-10-16T15:03:52.768Z', 'harness': 'claude-code', 'event': 'pages_ok', 'ms': 13, 'count': 5}, {'ts': '2026-10-16T15:04:29.224Z', 'harness': 'claude-code', 'event': 'retain_disabled', 'bank': 'one-one-p1', 'session': '852abcbf-76fd-42b9-b85e-3651533db138'}, {'ts': '2026-10-16T15:04:31.098Z', 'harness': 'claude-code', 'event': 'session_start', 'bank': 'one-one-p1', 'pages': 5, 'ms': 30}, {'ts': '2026-10-16T15:04:31.415Z', 'harness': 'claude-code', 'event': 'pages_ok', 'ms': 36, 'count': 5}, {'ts': '2026-10-16T15:04:49.303Z', 'harness': 'claude-code', 'event': 'retain_disabled', 'bank': 'one-one-p1', 'session': '852abcbf-76fd-42b9-b85e-3651533db138'}]  ⚠️ MEMORY ARM RAN WITHOUT INJECTED MEMORY
+{
+  "task_id": "boltons-retryjitter-amended-001",
+  "codebase": "boltons-retryjitter-amended",
+  "variant": "base",
+  "history": "hscoding",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "9 passed in 0.02s",
+  "patch_bytes": 421,
+  "tokens": {
+    "input": 36,
+    "output": 2516,
+    "reasoning": 0,
+    "cache_read": 651295,
+    "cache_write": 21690
+  },
+  "turns": 19,
+  "wall_s": 77.4,
+  "cost_usd": 0.4166,
+  "memory_diag": [
+    {
+      "ts": "2026-10-16T15:03:32.440Z",
+      "harness": "claude-code",
+      "event": "session_start",
+      "bank": "one-one-p1",
+      "pages": 5,
+      "ms": 40
+    },
+    {
+      "ts": "2026-10-16T15:03:52.681Z",
+      "harness": "claude-code",
+      "event": "reflect_failed",
+      "ms": 20012,
+      "bank": "one-one-p1",
+      "timeoutMs": 20000,
+      "error": "reflect timed out after 20000ms: This operation was aborted (20)",
+      "query": "You are a maintainer of the `boltons-retryjitter-amended` Python project. A regr"
+    },
+    {
+      "ts": "2026-10-16T15:03:52.755Z",
+      "harness": "claude-code",
+      "event": "reflect_fallback_pages",
+      "ms": 74,
+      "count": 5
+    },
+    {
+      "ts": "2026-10-16T15:03:52.768Z",
+      "harness": "claude-code",
+      "event": "pages_ok",
+      "ms": 13,
+      "count": 5
+    },
+    {
+      "ts": "2026-10-16T15:04:29.224Z",
+      "harness": "claude-code",
+      "event": "retain_disabled",
+      "bank": "one-one-p1",
+      "session": "852abcbf-76fd-42b9-b85e-3651533db138"
+    },
+    {
+      "ts": "2026-10-16T15:04:31.098Z",
+      "harness": "claude-code",
+      "event": "session_start",
+      "bank": "one-one-p1",
+      "pages": 5,
+      "ms": 30
+    },
+    {
+      "ts": "2026-10-16T15:04:31.415Z",
+      "harness": "claude-code",
+      "event": "pages_ok",
+      "ms": 36,
+      "count": 5
+    },
+    {
+      "ts": "2026-10-16T15:04:49.303Z",
+      "harness": "claude-code",
+      "event": "retain_disabled",
+      "bank": "one-one-p1",
+      "session": "852abcbf-76fd-42b9-b85e-3651533db138"
+    }
+  ],
+  "memory_usage": null,
+  "credited": false,
+  "credited_reply": false,
+  "hindsight_calls": 0,
+  "watcher": null
+}
+
+RESULT history=hscoding: solved=True interventions=1 | tokens in=36 out=2516 cache_r=651295 cache_w=21690 | wall=77s -> /tmp/sdebench/run/boltons-retryjitter-amended-001_hscoding_one-p1/result.json

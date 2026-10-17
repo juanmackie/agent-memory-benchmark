@@ -1,0 +1,29 @@
+planted cachekey in boltons
+planted cachekey in boltons
+[boltons-cachekey-001] history=full model=google/gemini-3.5-flash — initial attempt…
+Traceback (most recent call last):
+  File "/Users/nicoloboschi/dev/amb-watcher/sdebench/harness/run.py", line 1108, in <module>
+    main()
+    ~~~~^^
+  File "/Users/nicoloboschi/dev/amb-watcher/sdebench/harness/run.py", line 1017, in main
+    run_round(init_prompt, "initial", resume=False)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/dev/amb-watcher/sdebench/harness/run.py", line 987, in run_round
+    acc(run_agent(cid, args.model, args.timeout, message, resume=resume, agent=args.agent), role, message)
+        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/dev/amb-watcher/sdebench/harness/run.py", line 617, in run_agent
+    proc = subprocess.run(cmd, timeout=timeout, capture_output=True, text=True)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['docker', 'exec', '-w', '/work', 'f99faa024abac104f67e99979f001ee85c3b7d6e0f574ce3cf67e8c2b9e73471', 'opencode', 'run', '--format', 'json', '-m', 'google/gemini-3.5-flash', "You are a maintainer of the `boltons-cachekey` Python project. A regression was reported:\n\nSince the ad campaign launched, the edge cache hit-rate has cratered and the CDN bill nearly doubled - origin egress is spiking on pages that should be cached. Separately, two customers report seeing someone else's experiment variant on pages our analytics says belong to the other cohort. A failing repro is at tests/test_regression.py. Fix cache_key so equivalent requests share a cache entry, without breaking existing behaviour.\n\nFix the bug in the source code. Do NOT modify any test files — the graders supply their own.\nWork efficiently: find the root cause, make the smallest change that fixes it, run the failing test to confirm it passes (and existing behaviour still works), then stop — avoid unnecessary exploration.\nSave your changes to disk before finishing.\n"]' timed out after 900 seconds

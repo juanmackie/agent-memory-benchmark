@@ -1,0 +1,37 @@
+planted tagmerge in boltons
+planted tagmerge in boltons
+[boltons-tagmerge-001] history=full model=claude-sonnet-5 — initial attempt…
+planted tagmerge in boltons
+  ↳ intervention 1: 5 failed, 9 passed in 0.05s
+planted tagmerge in boltons
+{
+  "task_id": "boltons-tagmerge-001",
+  "codebase": "boltons-tagmerge",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.03s",
+  "patch_bytes": 1240,
+  "tokens": {
+    "input": 32,
+    "output": 12934,
+    "reasoning": 0,
+    "cache_read": 521170,
+    "cache_write": 20223
+  },
+  "turns": 18,
+  "wall_s": 153.2,
+  "cost_usd": 0.4441,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=32 out=12934 cache_r=521170 cache_w=20223 | wall=153s -> /tmp/sdebench/run/boltons-tagmerge-001_full_cc-plain-1/result.json

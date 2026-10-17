@@ -1,0 +1,38 @@
+[
+ {
+  "lesson": "In advance(), enforce the complete lifecycle transition map where paid orders can only move to shipped or on_hold, rejecting direct transitions from paid to cancelled.",
+  "why": "A charged order must be placed on hold first so the charge can settle before cancellation.",
+  "quote": "a charged order can NEVER move straight to cancelled; it has to be put on_hold first so the charge settles before anyone cancels.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "When advance() blocks an invalid move, it must raise InvalidTransition and emit a warning log containing only the order id and attempted pair, omitting all payload fields.",
+  "why": "Support relies on the log for triaging, but payload fields must be excluded because they contain sensitive customer data.",
+  "quote": "Raise InvalidTransition and also log at warning with the order id and the attempted pair - support triages from that log. No payload fields",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In advance(), refunded can strictly only be reached from returned; direct transitions from shipped to refunded are rejected, requiring carrier-lost parcels to be marked returned first.",
+  "why": "Direct shipped-to-refunded shortcuts caused duplicate refunds when concurrent refund flows were triggered off shipments and returns.",
+  "quote": "No direct shipped->refunded, ever - that shortcut is exactly how the double refund happened: one path refunding via the return flow",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In advance(), on_hold orders must only transition to pending or cancelled (not back to paid), while cancelled and refunded are terminal states.",
+  "why": "Orders were getting stuck on hold because prior logic viewed exiting on_hold as moving backwards.",
+  "quote": "on_hold releases back to pending, or goes to cancelled. That's the stuck-order complaint, incidentally",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "advance() must refuse unknown or legacy states not present in the transition map by raising InvalidTransition instead of attempting in-place repairs.",
+  "why": "advance() acts strictly as a state guard rather than a migration tool, and ancient row cleanup is managed separately by the data team.",
+  "quote": "advance() is a guard, not a migration; the data team owns cleaning up ancient rows and there's a separate backfill for that.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In advance(), compare both the stored state and incoming target state case-insensitively, and always persist the target status in lowercase canonical form.",
+  "why": "Legacy database rows contain mixed-case statuses, and persisting canonical lowercase values ensures the table converges over time.",
+  "quote": "Compare BOTH sides case-insensitively: the current state and the target. And whatever advance() stores must be the lowercase canonical form",
+  "where": "/root/project-history/session-01.md"
+ }
+]

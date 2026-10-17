@@ -1,0 +1,48 @@
+planted hostallow in boltons
+planted hostallow in boltons
+[boltons-hostallow-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Wildcards must cover exactly one additional label (`*.example.com` matches `a.example.com` but not `a.b.example.com`). Matching via `host
+planted hostallow in boltons
+{
+  "task_id": "boltons-hostallow-001",
+  "codebase": "boltons-hostallow",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1250,
+  "tokens": {
+    "input": 26,
+    "output": 5697,
+    "reasoning": 0,
+    "cache_read": 410542,
+    "cache_write": 13700
+  },
+  "turns": 16,
+  "wall_s": 74.1,
+  "cost_usd": 0.2916,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Wildcards must cover exactly one additional label (`*.example.com` matches `a.example.com` but not `a.b.example.com`). Matching via `host.endswith(suffix)` permits multi-level subdomains. Also normalize by stripping a single trailing dot, and ensure wildcards never match IPv4 literals."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 5018,
+    "tokens_out": 427,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=5697 cache_r=410542 cache_w=13700 | wall=74s -> /tmp/sdebench/run/boltons-hostallow-001_full_cc-watch-2/result.json

@@ -1,0 +1,49 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'observations': 1} -> bank obs-follow2-boltons-retryjitter-amended
+planted retryjitter in boltons
+{
+  "task_id": "boltons-retryjitter-amended-001",
+  "codebase": "boltons-retryjitter-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "9 passed in 0.04s",
+  "patch_bytes": 394,
+  "tokens": {
+    "input": 26,
+    "output": 2265,
+    "reasoning": 0,
+    "cache_read": 397898,
+    "cache_write": 8797
+  },
+  "turns": 14,
+  "wall_s": 46.4,
+  "cost_usd": 0.1375,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 7,
+    "messages": [
+      "The project rule states that HTTP 408 and 429 should be retried alongside 5xx errors, but the coding agent's change restricts retries exclusively to status codes 500 and above, dropping 408 and 429."
+    ],
+    "evidence": [
+      "e96e9302-47a8-406d-b122-de9e0079c435"
+    ],
+    "errors": 0,
+    "tokens_in": 2441,
+    "tokens_out": 232,
+    "end_of_turn_deliveries": 0,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=2265 cache_r=397898 cache_w=8797 | wall=46s -> /tmp/sdebench/run/boltons-retryjitter-amended-001_full_follow-2/result.json

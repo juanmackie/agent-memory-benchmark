@@ -1,0 +1,39 @@
+built boltons-under2camel @ 979fa9b6
+built boltons-under2camel @ 979fa9b6
+[boltons-under2camel-001] history=full model=claude-sonnet-5 — initial attempt…
+built boltons-under2camel @ 979fa9b6
+  ↳ intervention 1: 2 failed, 18 passed in 0.06s
+built boltons-under2camel @ 979fa9b6
+  ↳ intervention 2: 1 failed, 19 passed in 0.05s
+built boltons-under2camel @ 979fa9b6
+{
+  "task_id": "boltons-under2camel-001",
+  "codebase": "boltons-under2camel",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 2,
+  "capped": false,
+  "final_pytest": "20 passed in 0.08s",
+  "patch_bytes": 1292,
+  "tokens": {
+    "input": 48,
+    "output": 14029,
+    "reasoning": 0,
+    "cache_read": 850602,
+    "cache_write": 23805
+  },
+  "turns": 24,
+  "wall_s": 191.6,
+  "cost_usd": 0.8153,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=2 | tokens in=48 out=14029 cache_r=850602 cache_w=23805 | wall=192s -> /tmp/sdebench/run/boltons-under2camel-001_full_cc-plain-1/result.json

@@ -1,0 +1,37 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+  ↳ intervention 1: 6 failed, 8 passed in 0.03s
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-amended-001",
+  "codebase": "boltons-unitparse-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1460,
+  "tokens": {
+    "input": 40,
+    "output": 7251,
+    "reasoning": 0,
+    "cache_read": 675910,
+    "cache_write": 17304
+  },
+  "turns": 20,
+  "wall_s": 95.4,
+  "cost_usd": 0.4438,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=7251 cache_r=675910 cache_w=17304 | wall=95s -> /tmp/sdebench/run/boltons-unitparse-amended-001_full_cc-decl-1/result.json

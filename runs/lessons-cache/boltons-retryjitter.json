@@ -1,0 +1,20 @@
+[
+ {
+  "lesson": "Configure the HTTP client retry policy to retry all 5xx status codes plus only 429 and 408 from 4xx, rejecting the proposal to retry only 5xx errors.",
+  "why": "Retrying 401 caused account lockouts, while 429 allows recovery from burst rate-limits and 408 handles edge request timeouts.",
+  "quote": "There are exactly two 4xx codes we MUST keep retrying: 429, because the upstream rate-limits in bursts and backs off fine, and 408",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Cap total HTTP client attempts to 4, rejecting unlimited retry attempts.",
+  "why": "Failures extending beyond 4 attempts require human intervention rather than continuing to hammer services.",
+  "quote": "cap the whole thing at 4 attempts total. Past that we page a human instead.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Set the backoff ceiling to 30 seconds instead of the previous 60 seconds.",
+  "why": "The gateway load balancer drops idle connections at 32 seconds, causing retries sleeping longer than 30 seconds to resume on a dead connection.",
+  "quote": "The gateway load balancer kills idle connections at 32s, so any sleep past 30 just resumes onto a dead connection.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

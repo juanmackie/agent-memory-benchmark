@@ -1,0 +1,50 @@
+planted cachekey in boltons
+planted cachekey in boltons
+[boltons-cachekey-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Memory watcher (from this project's past chats/commits; check it against the code): Past chat recorded that utm_content must remain in the cache key because it routes A/B cohorts (unless its value i
+planted cachekey in boltons
+  ↳ intervention 1: 3 failed, 12 passed in 0.14s
+planted cachekey in boltons
+{
+  "task_id": "boltons-cachekey-001",
+  "codebase": "boltons-cachekey",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "15 passed in 0.07s",
+  "patch_bytes": 1492,
+  "tokens": {
+    "input": 40,
+    "output": 9832,
+    "reasoning": 0,
+    "cache_read": 689551,
+    "cache_write": 19542
+  },
+  "turns": 20,
+  "wall_s": 183.4,
+  "cost_usd": 0.6905,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat recorded that utm_content must remain in the cache key because it routes A/B cohorts (unless its value is empty). Only other utm_* and strictly gclid, fbclid, and msclkid should be dropped. Also, sort params stably by key only, and drop empty-valued params."
+    ],
+    "evidence": [
+      "chat:boltons-cachekey#0"
+    ],
+    "errors": 0,
+    "tokens_in": 5416,
+    "tokens_out": 412,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=9832 cache_r=689551 cache_w=19542 | wall=183s -> /tmp/sdebench/run/boltons-cachekey-001_full_cc-watch-1/result.json

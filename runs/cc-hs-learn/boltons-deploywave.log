@@ -1,0 +1,50 @@
+planted deploywave in boltons
+planted deploywave in boltons
+[boltons-deploywave-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 5, 'commits': 200} -> bank watch-cc-hs-1-boltons-deploywave
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Within each wave, sort by tier ascending (tier 0 first) with service name solely as a tiebreaker. The current change sorts waves purely a
+planted deploywave in boltons
+{
+  "task_id": "boltons-deploywave-001",
+  "codebase": "boltons-deploywave",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "13 passed in 0.02s",
+  "patch_bytes": 996,
+  "tokens": {
+    "input": 44,
+    "output": 9234,
+    "reasoning": 0,
+    "cache_read": 738436,
+    "cache_write": 19513
+  },
+  "turns": 22,
+  "wall_s": 105.2,
+  "cost_usd": 0.5034,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Within each wave, sort by tier ascending (tier 0 first) with service name solely as a tiebreaker. The current change sorts waves purely alphabetically by name. Also, services marked canary must form wave 0 at the very front, ordered by name."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 4273,
+    "tokens_out": 479,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=44 out=9234 cache_r=738436 cache_w=19513 | wall=105s -> /tmp/sdebench/run/boltons-deploywave-001_full_cc-hs-learn/result.json

@@ -1,0 +1,48 @@
+planted cachekey in boltons
+planted cachekey in boltons
+[boltons-cachekey-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Do not drop utm_content; it routes A/B test variants and must stay in the cache key. Also, drop any param with an empty value, drop only 
+planted cachekey in boltons
+{
+  "task_id": "boltons-cachekey-001",
+  "codebase": "boltons-cachekey",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "15 passed in 0.02s",
+  "patch_bytes": 1306,
+  "tokens": {
+    "input": 36,
+    "output": 6757,
+    "reasoning": 0,
+    "cache_read": 568242,
+    "cache_write": 13667
+  },
+  "turns": 18,
+  "wall_s": 96.4,
+  "cost_usd": 0.3988,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Do not drop utm_content; it routes A/B test variants and must stay in the cache key. Also, drop any param with an empty value, drop only gclid, fbclid, msclkid plus other utm_* params, and sort stably by param name only."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 5347,
+    "tokens_out": 413,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=36 out=6757 cache_r=568242 cache_w=13667 | wall=96s -> /tmp/sdebench/run/boltons-cachekey-001_full_cc-watch-2/result.json

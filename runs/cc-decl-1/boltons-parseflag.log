@@ -1,0 +1,39 @@
+planted parseflag in boltons
+planted parseflag in boltons
+[boltons-parseflag-001] history=full model=claude-sonnet-5 — initial attempt…
+planted parseflag in boltons
+  ↳ intervention 1: 1 failed, 2 passed in 0.02s
+planted parseflag in boltons
+  ↳ intervention 2: 1 failed, 2 passed in 0.04s
+planted parseflag in boltons
+{
+  "task_id": "boltons-parseflag-001",
+  "codebase": "boltons-parseflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 2,
+  "capped": false,
+  "final_pytest": "3 passed in 0.01s",
+  "patch_bytes": 249,
+  "tokens": {
+    "input": 34,
+    "output": 3297,
+    "reasoning": 0,
+    "cache_read": 534087,
+    "cache_write": 10326
+  },
+  "turns": 17,
+  "wall_s": 56.8,
+  "cost_usd": 0.4307,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=2 | tokens in=34 out=3297 cache_r=534087 cache_w=10326 | wall=57s -> /tmp/sdebench/run/boltons-parseflag-001_full_cc-decl-1/result.json

@@ -1,0 +1,50 @@
+planted overage in boltons
+planted overage in boltons
+[boltons-overage-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 6, 'commits': 200} -> bank watch-cc-hs-1-boltons-overage
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): The metering policy requires prorating quota with ceil, subtracting a 25-unit grace allowance from overage, and billing in 50-unit blocks
+planted overage in boltons
+{
+  "task_id": "boltons-overage-001",
+  "codebase": "boltons-overage",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "16 passed in 0.02s",
+  "patch_bytes": 1161,
+  "tokens": {
+    "input": 48,
+    "output": 18782,
+    "reasoning": 0,
+    "cache_read": 996219,
+    "cache_write": 29071
+  },
+  "turns": 24,
+  "wall_s": 239.4,
+  "cost_usd": 0.8034,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "The metering policy requires prorating quota with ceil, subtracting a 25-unit grace allowance from overage, and billing in 50-unit blocks rounded up. Your change does unrounded float proration, omits grace, and continues per-unit billing."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5092,
+    "tokens_out": 662,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=48 out=18782 cache_r=996219 cache_w=29071 | wall=239s -> /tmp/sdebench/run/boltons-overage-001_full_cc-hs-1/result.json

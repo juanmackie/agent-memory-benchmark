@@ -1,0 +1,47 @@
+planted hostallow in boltons
+planted hostallow in boltons
+[boltons-hostallow-001] history=full model=claude-sonnet-5 — initial attempt…
+planted hostallow in boltons
+{
+  "task_id": "boltons-hostallow-001",
+  "codebase": "boltons-hostallow",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.06s",
+  "patch_bytes": 1170,
+  "tokens": {
+    "input": 34,
+    "output": 7049,
+    "reasoning": 0,
+    "cache_read": 548366,
+    "cache_write": 15096
+  },
+  "turns": 18,
+  "wall_s": 112.8,
+  "cost_usd": 0.2406,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 3,
+    "messages": [
+      "Past chat boltons-hostallow#0 specifies: strip a single trailing dot before matching; wildcards (*.example.com) must match exactly one additional label (non-empty and dot-free, so a.b.example.com is rejected); and wildcards must never match IPv4 literals."
+    ],
+    "evidence": [
+      "chat:boltons-hostallow#0"
+    ],
+    "errors": 0,
+    "tokens_in": 7868,
+    "tokens_out": 508,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=34 out=7049 cache_r=548366 cache_w=15096 | wall=113s -> /tmp/sdebench/run/boltons-hostallow-001_full_cc-watch-1/result.json

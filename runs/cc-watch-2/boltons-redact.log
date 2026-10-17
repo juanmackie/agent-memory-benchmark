@@ -1,0 +1,47 @@
+planted redact in boltons
+planted redact in boltons
+[boltons-redact-001] history=full model=claude-sonnet-5 — initial attempt…
+planted redact in boltons
+{
+  "task_id": "boltons-redact-001",
+  "codebase": "boltons-redact",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "9 passed in 0.02s",
+  "patch_bytes": 1282,
+  "tokens": {
+    "input": 30,
+    "output": 6897,
+    "reasoning": 0,
+    "cache_read": 466704,
+    "cache_write": 13529
+  },
+  "turns": 16,
+  "wall_s": 88.3,
+  "cost_usd": 0.2165,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Normalize keys (lowercase, non-alphanumerics to underscore) and suffix-match against password, token, api_key, ssn, and card_number rather than checking if key contains 'key' or 'secret'. Also, card_number must preserve the last 4 digits formatted as '***' plus last4."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 4175,
+    "tokens_out": 453,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=6897 cache_r=466704 cache_w=13529 | wall=88s -> /tmp/sdebench/run/boltons-redact-001_full_cc-watch-2/result.json

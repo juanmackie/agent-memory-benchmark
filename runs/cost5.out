@@ -1,0 +1,61 @@
+boltons-retryjitter-amended  plugin   solved=True corrections=0 agent=$0.1763 memory setup=$4.3033 (1970s) session=$0.0855
+boltons-retryjitter-amended  watcher  solved=True corrections=1 agent=$0.3311 memory setup=$0.0239 (248s) session=$0.0856
+Traceback (most recent call last):
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/urllib/request.py", line 1348, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/http/client.py", line 996, in send
+    self.connect()
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/http/client.py", line 962, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/socket.py", line 863, in create_connection
+    raise exceptions[0]
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/socket.py", line 848, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nicoloboschi/dev/amb-watcher/runs/cost_compare.py", line 231, in <module>
+    main()
+  File "/Users/nicoloboschi/dev/amb-watcher/runs/cost_compare.py", line 204, in main
+    not_enqueued = plugin_ingest(task, task_json, bank, e, out / f"{cb}-deepen.log")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/dev/amb-watcher/runs/cost_compare.py", line 171, in plugin_ingest
+    wait_idle(bank)
+  File "/Users/nicoloboschi/dev/amb-watcher/runs/cost_compare.py", line 75, in wait_idle
+    busy = sum(len(api("GET", f"{bank}/operations?status={s}&limit=1").get("operations") or [])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/dev/amb-watcher/runs/cost_compare.py", line 75, in <genexpr>
+    busy = sum(len(api("GET", f"{bank}/operations?status={s}&limit=1").get("operations") or [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/dev/amb-watcher/runs/cost_compare.py", line 67, in api
+    with urllib.request.urlopen(req, timeout=60) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/urllib/request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nicoloboschi/.pyenv/versions/3.11.10/lib/python3.11/urllib/request.py", line 1351, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 61] Connection refused>

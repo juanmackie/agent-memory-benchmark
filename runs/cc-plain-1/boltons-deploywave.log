@@ -1,0 +1,37 @@
+planted deploywave in boltons
+planted deploywave in boltons
+[boltons-deploywave-001] history=full model=claude-sonnet-5 — initial attempt…
+planted deploywave in boltons
+  ↳ intervention 1: 5 failed, 8 passed in 0.05s
+planted deploywave in boltons
+{
+  "task_id": "boltons-deploywave-001",
+  "codebase": "boltons-deploywave",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "13 passed in 0.03s",
+  "patch_bytes": 1862,
+  "tokens": {
+    "input": 40,
+    "output": 13491,
+    "reasoning": 0,
+    "cache_read": 673685,
+    "cache_write": 21850
+  },
+  "turns": 20,
+  "wall_s": 166.1,
+  "cost_usd": 0.5389,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=13491 cache_r=673685 cache_w=21850 | wall=166s -> /tmp/sdebench/run/boltons-deploywave-001_full_cc-plain-1/result.json

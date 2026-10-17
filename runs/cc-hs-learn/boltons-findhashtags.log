@@ -1,0 +1,50 @@
+built boltons-findhashtags @ 979fa9b6
+built boltons-findhashtags @ 979fa9b6
+[boltons-findhashtags-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-findhashtags
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Pure-digit hashtags should be dropped unless they are 4-digit years (1900-2099). The current change filters out all digits indiscriminate
+built boltons-findhashtags @ 979fa9b6
+{
+  "task_id": "boltons-findhashtags-001",
+  "codebase": "boltons-findhashtags",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "19 passed in 0.06s",
+  "patch_bytes": 541,
+  "tokens": {
+    "input": 30,
+    "output": 2577,
+    "reasoning": 0,
+    "cache_read": 472377,
+    "cache_write": 10009
+  },
+  "turns": 15,
+  "wall_s": 50.2,
+  "cost_usd": 0.2817,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Pure-digit hashtags should be dropped unless they are 4-digit years (1900-2099). The current change filters out all digits indiscriminately, which incorrectly removes year tags like #2024."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 4121,
+    "tokens_out": 487,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=2577 cache_r=472377 cache_w=10009 | wall=50s -> /tmp/sdebench/run/boltons-findhashtags-001_full_cc-hs-learn/result.json

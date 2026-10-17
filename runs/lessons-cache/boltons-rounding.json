@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "In `pay/rounding.py`, the `round_cents` function must use `ROUND_HALF_DOWN` instead of `ROUND_HALF_UP` or banker's rounding (`ROUND_HALF_EVEN`).",
+  "why": "The legacy billing ledger consistently rounds exact half-cent values down toward zero, whereas commercial rounding caused invoice discrepancies and banker's rounding drifted.",
+  "quote": "definitive rule for `round_cents` in this project is `ROUND_HALF_DOWN` to ensure perfect reconciliation with the legacy ledger",
+  "where": "/root/project-history/session-01.md"
+ }
+]

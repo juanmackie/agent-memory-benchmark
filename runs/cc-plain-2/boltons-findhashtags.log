@@ -1,0 +1,37 @@
+built boltons-findhashtags @ 979fa9b6
+built boltons-findhashtags @ 979fa9b6
+[boltons-findhashtags-001] history=full model=claude-sonnet-5 — initial attempt…
+built boltons-findhashtags @ 979fa9b6
+  ↳ intervention 1: 1 failed, 18 passed in 0.07s
+built boltons-findhashtags @ 979fa9b6
+{
+  "task_id": "boltons-findhashtags-001",
+  "codebase": "boltons-findhashtags",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "19 passed in 0.05s",
+  "patch_bytes": 522,
+  "tokens": {
+    "input": 28,
+    "output": 2241,
+    "reasoning": 0,
+    "cache_read": 423684,
+    "cache_write": 8587
+  },
+  "turns": 14,
+  "wall_s": 46.6,
+  "cost_usd": 0.2415,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=28 out=2241 cache_r=423684 cache_w=8587 | wall=47s -> /tmp/sdebench/run/boltons-findhashtags-001_full_cc-plain-2/result.json

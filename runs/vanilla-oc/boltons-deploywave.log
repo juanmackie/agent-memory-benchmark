@@ -1,0 +1,37 @@
+planted deploywave in boltons
+planted deploywave in boltons
+[boltons-deploywave-001] history=full model=google/gemini-3.5-flash — initial attempt…
+planted deploywave in boltons
+  ↳ intervention 1: 5 failed, 8 passed in 0.12s
+planted deploywave in boltons
+{
+  "task_id": "boltons-deploywave-001",
+  "codebase": "boltons-deploywave",
+  "variant": "base",
+  "history": "full",
+  "agent": "opencode",
+  "model": "google/gemini-3.5-flash",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "13 passed in 0.47s",
+  "patch_bytes": 1563,
+  "tokens": {
+    "input": 138060,
+    "output": 2428,
+    "reasoning": 11177,
+    "cache_read": 975209,
+    "cache_write": 0
+  },
+  "turns": 36,
+  "wall_s": 850.0,
+  "cost_usd": 0.4758,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=138060 out=2428 cache_r=975209 cache_w=0 | wall=850s -> /tmp/sdebench/run/boltons-deploywave-001_full_vanilla-oc/result.json

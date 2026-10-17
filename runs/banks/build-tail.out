@@ -1,0 +1,13 @@
+boltons-unitparse-amended: built in 2569s
+boltons-unitparse: built in 2482s
+boltons-under2camel: built in 2433s
+boltons-trimstats: built in 2969s
+  ! build-boltons-tagmerge-amended still busy after 1800s
+boltons-tagmerge-amended: built in 3943s
+boltons-tagmerge: built in 2310s
+boltons-statetrans: built in 2159s
+boltons-slugify: built in 2609s
+boltons-slalog-amended: built in 2837s
+  ! build-boltons-slalog still busy after 1800s
+boltons-slalog: built in 3905s
+boltons-seqledger: built in 2240s

@@ -1,0 +1,54 @@
+planted parseflag in boltons
+planted parseflag in boltons
+[boltons-parseflag-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): The truthy set must be exactly 'true' and 'on' (case-sensitive), as older configs rely on 'on'. The change currently only accepts 'true'.
+planted parseflag in boltons
+  ↳ intervention 1: 1 failed, 2 passed in 0.02s
+planted parseflag in boltons
+  ↳ intervention 2: 1 failed, 2 passed in 0.02s
+planted parseflag in boltons
+  ↳ intervention 3: 1 failed, 2 passed in 0.03s
+planted parseflag in boltons
+{
+  "task_id": "boltons-parseflag-001",
+  "codebase": "boltons-parseflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": false,
+  "interventions": 3,
+  "capped": true,
+  "final_pytest": "1 failed, 2 passed in 0.02s",
+  "patch_bytes": 241,
+  "tokens": {
+    "input": 30,
+    "output": 4475,
+    "reasoning": 0,
+    "cache_read": 466657,
+    "cache_write": 11410
+  },
+  "turns": 17,
+  "wall_s": 85.8,
+  "cost_usd": 0.6899,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 1,
+    "messages": [
+      "The truthy set must be exactly 'true' and 'on' (case-sensitive), as older configs rely on 'on'. The change currently only accepts 'true'."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 1568,
+    "tokens_out": 157,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=False interventions=3 | tokens in=30 out=4475 cache_r=466657 cache_w=11410 | wall=86s -> /tmp/sdebench/run/boltons-parseflag-001_full_cc-watch-2/result.json

@@ -1,0 +1,20 @@
+[
+ {
+  "lesson": "In merge_records, identify duplicate contacts by matching the lowercased email and the calendar day of the updated timestamp, rather than requiring an exact timestamp match.",
+  "why": "Exact timestamp matching was causing the CRM contact list to retain duplicates of the same person across sync runs.",
+  "quote": "The key is right - same email ignoring case, same day, that's one contact.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "When duplicate contacts clash in merge_records, keep the record with the highest count of non-empty fields, rejecting the keep-latest approach.",
+  "why": "Sync jobs strip fields, making newer records emptier and causing phone numbers and company data to be lost when latest wins.",
+  "quote": "Count the non-empty fields and keep whichever record has more - most-filled wins, no matter which side it came from or which is newer.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In merge_records, resolve tied field counts by keeping the primary CRM record, and maintain a stable output order of primary records first followed by new incoming records.",
+  "why": "The existing CRM record is the source of truth when completeness is equal, and contact list ordering needs to remain stable.",
+  "quote": "Then keep the one from primary - the CRM is the source of truth. And keep the order stable",
+  "where": "/root/project-history/session-01.md"
+ }
+]

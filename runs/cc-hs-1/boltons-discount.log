@@ -1,0 +1,50 @@
+planted discount in boltons
+planted discount in boltons
+[boltons-discount-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 2, 'commits': 200} -> bank watch-cc-hs-1-boltons-discount
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): All percentage discounts must be applied before fixed discounts regardless of submission order. The current change processes discounts in
+planted discount in boltons
+{
+  "task_id": "boltons-discount-001",
+  "codebase": "boltons-discount",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "4 passed in 0.02s",
+  "patch_bytes": 615,
+  "tokens": {
+    "input": 28,
+    "output": 2703,
+    "reasoning": 0,
+    "cache_read": 436165,
+    "cache_write": 10248
+  },
+  "turns": 15,
+  "wall_s": 49.0,
+  "cost_usd": 0.2696,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "All percentage discounts must be applied before fixed discounts regardless of submission order. The current change processes discounts in input order, applying fixed discounts first if they appear first in the list."
+    ],
+    "evidence": [
+      "lesson-1"
+    ],
+    "errors": 0,
+    "tokens_in": 2669,
+    "tokens_out": 378,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=28 out=2703 cache_r=436165 cache_w=10248 | wall=49s -> /tmp/sdebench/run/boltons-discount-001_full_cc-hs-1/result.json

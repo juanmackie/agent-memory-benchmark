@@ -1,0 +1,50 @@
+planted rounding in boltons
+planted rounding in boltons
+[boltons-rounding-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 1, 'commits': 200} -> bank watch-cc-hs-1-boltons-rounding
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): `round_cents` in `pay/rounding.py` must use `ROUND_HALF_DOWN`, not `ROUND_HALF_EVEN`. Banker's rounding was already tried and caused drif
+planted rounding in boltons
+{
+  "task_id": "boltons-rounding-001",
+  "codebase": "boltons-rounding",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "4 passed in 0.03s",
+  "patch_bytes": 491,
+  "tokens": {
+    "input": 30,
+    "output": 3147,
+    "reasoning": 0,
+    "cache_read": 474597,
+    "cache_write": 11989
+  },
+  "turns": 16,
+  "wall_s": 55.9,
+  "cost_usd": 0.2595,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "`round_cents` in `pay/rounding.py` must use `ROUND_HALF_DOWN`, not `ROUND_HALF_EVEN`. Banker's rounding was already tried and caused drift; the legacy ledger consistently rounds exact half-cents down."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 6415,
+    "tokens_out": 422,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=3147 cache_r=474597 cache_w=11989 | wall=56s -> /tmp/sdebench/run/boltons-rounding-001_full_cc-hs-learn/result.json

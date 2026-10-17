@@ -1,0 +1,49 @@
+planted rounding in boltons
+planted rounding in boltons
+[boltons-rounding-001] history=full model=claude-sonnet-5 — initial attempt…
+planted rounding in boltons
+  ↳ intervention 1: 1 failed, 3 passed in 0.02s
+planted rounding in boltons
+{
+  "task_id": "boltons-rounding-001",
+  "codebase": "boltons-rounding",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "4 passed in 0.02s",
+  "patch_bytes": 491,
+  "tokens": {
+    "input": 40,
+    "output": 4687,
+    "reasoning": 0,
+    "cache_read": 666961,
+    "cache_write": 18147
+  },
+  "turns": 22,
+  "wall_s": 60.9,
+  "cost_usd": 0.4667,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat recorded that banker's rounding (ROUND_HALF_EVEN) was tried and rejected because it still drifted. The legacy ledger requires exact half-cents to always round down towards zero, using ROUND_HALF_DOWN."
+    ],
+    "evidence": [
+      "chat:boltons-rounding#0"
+    ],
+    "errors": 0,
+    "tokens_in": 7911,
+    "tokens_out": 284,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=4687 cache_r=666961 cache_w=18147 | wall=61s -> /tmp/sdebench/run/boltons-rounding-001_full_cc-watch-1/result.json

@@ -1,0 +1,49 @@
+planted featflag in boltons
+planted featflag in boltons
+[boltons-featflag-001] history=full model=claude-sonnet-5 — initial attempt…
+planted featflag in boltons
+  ↳ intervention 1: 1 failed, 11 passed in 0.28s
+planted featflag in boltons
+{
+  "task_id": "boltons-featflag-001",
+  "codebase": "boltons-featflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "12 passed in 0.50s",
+  "patch_bytes": 539,
+  "tokens": {
+    "input": 38,
+    "output": 5901,
+    "reasoning": 0,
+    "cache_read": 601302,
+    "cache_write": 12958
+  },
+  "turns": 19,
+  "wall_s": 109.5,
+  "cost_usd": 0.3599,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat recorded that bucket() must first check an override before hashing: user IDs ending in '@corp.example' are always enrolled (return True) if and only if flag_name starts with 'beta-'. The current change misses this check."
+    ],
+    "evidence": [
+      "chat:boltons-featflag#0"
+    ],
+    "errors": 0,
+    "tokens_in": 5001,
+    "tokens_out": 352,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=38 out=5901 cache_r=601302 cache_w=12958 | wall=109s -> /tmp/sdebench/run/boltons-featflag-001_full_cc-watch-1/result.json

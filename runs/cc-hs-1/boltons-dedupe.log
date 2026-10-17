@@ -1,0 +1,50 @@
+planted dedupe in boltons
+planted dedupe in boltons
+[boltons-dedupe-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 3, 'commits': 200} -> bank watch-cc-hs-1-boltons-dedupe
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): Duplicate key must include both lowercased email and calendar day of updated. On clash, keep the record with the most non-empty fields (e
+planted dedupe in boltons
+{
+  "task_id": "boltons-dedupe-001",
+  "codebase": "boltons-dedupe",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "11 passed in 0.05s",
+  "patch_bytes": 805,
+  "tokens": {
+    "input": 30,
+    "output": 5975,
+    "reasoning": 0,
+    "cache_read": 481074,
+    "cache_write": 14147
+  },
+  "turns": 16,
+  "wall_s": 81.4,
+  "cost_usd": 0.3354,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Duplicate key must include both lowercased email and calendar day of updated. On clash, keep the record with the most non-empty fields (empty strings do not count); on a tie, keep the primary record. The current change only keys on email and unconditionally overwrites with incoming."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5495,
+    "tokens_out": 409,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=5975 cache_r=481074 cache_w=14147 | wall=81s -> /tmp/sdebench/run/boltons-dedupe-001_full_cc-hs-1/result.json

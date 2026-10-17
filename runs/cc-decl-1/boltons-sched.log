@@ -1,0 +1,37 @@
+planted sched in boltons
+planted sched in boltons
+[boltons-sched-001] history=full model=claude-sonnet-5 — initial attempt…
+planted sched in boltons
+  ↳ intervention 1: 3 failed, 8 passed in 0.02s
+planted sched in boltons
+{
+  "task_id": "boltons-sched-001",
+  "codebase": "boltons-sched",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "11 passed in 0.02s",
+  "patch_bytes": 522,
+  "tokens": {
+    "input": 32,
+    "output": 3609,
+    "reasoning": 0,
+    "cache_read": 499097,
+    "cache_write": 11579
+  },
+  "turns": 16,
+  "wall_s": 67.4,
+  "cost_usd": 0.3081,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=32 out=3609 cache_r=499097 cache_w=11579 | wall=67s -> /tmp/sdebench/run/boltons-sched-001_full_cc-decl-1/result.json

@@ -1,0 +1,56 @@
+planted retryjitter in boltons
+planted retryjitter in boltons
+[boltons-retryjitter-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 2, 'lessons': 4, 'commits': 200} -> bank watch-cc-hs-1-boltons-retryjitter-amended
+planted retryjitter in boltons
+  ↳ intervention 1: 1 failed, 8 passed in 0.06s
+planted retryjitter in boltons
+  ↳ intervention 2: 1 failed, 8 passed in 0.06s
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): should_retry must allow 5xx and 429 only. Do not retry 408; all 4xx errors other than 429 must be treated as permanent failures. Source: 
+planted retryjitter in boltons
+  ↳ intervention 3: 1 failed, 8 passed in 0.05s
+planted retryjitter in boltons
+{
+  "task_id": "boltons-retryjitter-amended-001",
+  "codebase": "boltons-retryjitter-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": false,
+  "interventions": 3,
+  "capped": true,
+  "final_pytest": "1 failed, 8 passed in 0.02s",
+  "patch_bytes": 414,
+  "tokens": {
+    "input": 42,
+    "output": 5057,
+    "reasoning": 0,
+    "cache_read": 680288,
+    "cache_write": 13181
+  },
+  "turns": 21,
+  "wall_s": 73.0,
+  "cost_usd": 0.8844,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 4,
+    "messages": [
+      "should_retry must allow 5xx and 429 only. Do not retry 408; all 4xx errors other than 429 must be treated as permanent failures."
+    ],
+    "evidence": [
+      "lesson-0"
+    ],
+    "errors": 0,
+    "tokens_in": 10719,
+    "tokens_out": 570,
+    "end_of_turn_deliveries": 1,
+    "learned": 1
+  }
+}
+
+RESULT history=full: solved=False interventions=3 | tokens in=42 out=5057 cache_r=680288 cache_w=13181 | wall=73s -> /tmp/sdebench/run/boltons-retryjitter-amended-001_full_cc-hs-learn/result.json

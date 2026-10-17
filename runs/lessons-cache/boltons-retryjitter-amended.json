@@ -1,0 +1,26 @@
+[
+ {
+  "lesson": "In should_retry, allow retries only for 5xx status codes and 429; all other 4xx errors must be treated as permanent failures and not retried.",
+  "why": "Retrying 401s previously locked user accounts, while 429 must remain retryable because the upstream service rate-limits in bursts and would otherwise cause dropped work.",
+  "quote": "should_retry allows 5xx and 429 only, at most 4 attempts, backoff sleeps capped at 60 seconds.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Configure the retry policy to allow a maximum of four total attempts with exponential backoff sleeps capped at 60 seconds.",
+  "why": "It defines the bounded retry limits agreed upon to handle transient failures without unbounded delays.",
+  "quote": "Four attempts total, and cap the exponential backoff at 60 seconds.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the retry policy, retryable status codes must include any 5xx response plus specifically 429 and 408 from the 4xx range, while all other 4xx codes fail fast.",
+  "why": "The upstream edge times out slow requests with 408s that succeed on a second attempt.",
+  "quote": "408 joins the retryable set: any 5xx, plus exactly 429 and 408 from the 4xx range. Everything else in 4xx still fails fast.",
+  "where": "/root/project-history/session-02.md"
+ },
+ {
+  "lesson": "The retry backoff ceiling must be capped at 30 seconds, superseding the rejected 60-second ceiling.",
+  "why": "The gateway load balancer kills idle connections at 32 seconds, which terminated backoff waits under the old 60-second cap.",
+  "quote": "backoff now caps at 30 seconds (under the LB's 32s idle kill), superseding the old 60-second cap.",
+  "where": "/root/project-history/session-02.md"
+ }
+]

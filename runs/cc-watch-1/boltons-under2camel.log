@@ -1,0 +1,50 @@
+built boltons-under2camel @ 979fa9b6
+built boltons-under2camel @ 979fa9b6
+[boltons-under2camel-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Memory watcher (from this project's past chats/commits; check it against the code): Past chat specifies the acronym set must be exactly {'HTTP', 'API', 'SKU', 'GDPR'}. Domain acronyms SKU and GDPR m
+built boltons-under2camel @ 979fa9b6
+  ↳ intervention 1: 2 failed, 18 passed in 0.05s
+built boltons-under2camel @ 979fa9b6
+{
+  "task_id": "boltons-under2camel-001",
+  "codebase": "boltons-under2camel",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "20 passed in 0.04s",
+  "patch_bytes": 1166,
+  "tokens": {
+    "input": 40,
+    "output": 7578,
+    "reasoning": 0,
+    "cache_read": 878573,
+    "cache_write": 29695
+  },
+  "turns": 21,
+  "wall_s": 113.0,
+  "cost_usd": 0.7589,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat specifies the acronym set must be exactly {'HTTP', 'API', 'SKU', 'GDPR'}. Domain acronyms SKU and GDPR must be included, while SQL and URL are deliberately not uppercased."
+    ],
+    "evidence": [
+      "chat:boltons-under2camel#0"
+    ],
+    "errors": 0,
+    "tokens_in": 5130,
+    "tokens_out": 320,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=40 out=7578 cache_r=878573 cache_w=29695 | wall=113s -> /tmp/sdebench/run/boltons-under2camel-001_full_cc-watch-1/result.json

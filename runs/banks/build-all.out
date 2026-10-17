@@ -1,0 +1,31 @@
+boltons-budget: built in 2670s
+boltons-cachekey: built in 2473s
+boltons-csvquote: built in 2002s
+boltons-dedupe: built in 2399s
+boltons-dedupe-amended: built in 2434s
+boltons-deploywave: built in 1946s
+boltons-discount: built in 2148s
+boltons-drainplan: built in 2082s
+boltons-findhashtags: built in 2095s
+boltons-hostallow: built in 2444s
+boltons-listmerge: built in 2271s
+boltons-mimemap: built in 2055s
+boltons-overage: built in 2944s
+boltons-overage-amended: built in 2765s
+boltons-parseflag: built in 2871s
+boltons-pluralize: built in 2747s
+boltons-redact: built in 2727s
+boltons-retryjitter: built in 2587s
+boltons-rounding: built in 2153s
+boltons-sched: built in 3814s
+boltons-seqledger: already built
+boltons-slalog: built in 2534s
+boltons-slalog-amended: already built
+boltons-slugify: already built
+boltons-statetrans: already built
+boltons-tagmerge: already built
+boltons-tagmerge-amended: already built
+boltons-trimstats: already built
+boltons-under2camel: already built
+boltons-unitparse: already built
+boltons-unitparse-amended: already built

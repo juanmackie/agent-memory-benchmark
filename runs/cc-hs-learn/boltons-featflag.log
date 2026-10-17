@@ -1,0 +1,50 @@
+planted featflag in boltons
+planted featflag in boltons
+[boltons-featflag-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 7, 'commits': 200} -> bank watch-cc-hs-1-boltons-featflag
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): bucket() must evaluate an override first: user IDs ending in @corp.example must always return True when flag_name starts with beta-, rega
+planted featflag in boltons
+{
+  "task_id": "boltons-featflag-001",
+  "codebase": "boltons-featflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "12 passed in 0.02s",
+  "patch_bytes": 539,
+  "tokens": {
+    "input": 38,
+    "output": 3923,
+    "reasoning": 0,
+    "cache_read": 608375,
+    "cache_write": 12315
+  },
+  "turns": 19,
+  "wall_s": 66.6,
+  "cost_usd": 0.3154,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "bucket() must evaluate an override first: user IDs ending in @corp.example must always return True when flag_name starts with beta-, regardless of percentage. The current change omits this override."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5170,
+    "tokens_out": 577,
+    "end_of_turn_deliveries": 1,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=38 out=3923 cache_r=608375 cache_w=12315 | wall=67s -> /tmp/sdebench/run/boltons-featflag-001_full_cc-hs-learn/result.json

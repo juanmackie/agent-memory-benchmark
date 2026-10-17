@@ -1,0 +1,14 @@
+[
+ {
+  "lesson": "In merge_records, duplicate contacts must be keyed on the lowercased email and calendar day of the update, keeping the record with the latest updated timestamp when collisions occur.",
+  "why": "Matching on the raw (email, updated) pair causes duplicate entries when emails have different casing or multiple syncs happen on the same day.",
+  "quote": "merge_records keys on (email lowercased, same calendar day) and resolves collisions by keeping the record with the latest updated timestamp.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the record merge rule, replace the rejected keep-latest recency logic by resolving collisions in favor of the record with more non-empty fields, defaulting to the CRM-side record on ties.",
+  "why": "The nightly sync job was sending stripped-down records whose newer timestamps caused keep-latest to overwrite richer existing names and phone numbers.",
+  "quote": "on collision the most-filled record wins; on a filled-count tie the primary/CRM-side record is kept.",
+  "where": "/root/project-history/session-02.md"
+ }
+]

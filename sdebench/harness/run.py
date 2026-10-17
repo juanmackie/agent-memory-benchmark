@@ -12,7 +12,7 @@ Usage:
 Metrics reported: solved (binary), interventions, turns, wall, tokens, cost (from PRICES;
 claude-code self-reports).
 """
-import argparse, json, os, re, shutil, subprocess, time
+import argparse, json, os, re, shutil, subprocess, sys, threading, time
 from pathlib import Path
 
 HARNESS = Path(__file__).resolve().parent
@@ -226,7 +226,8 @@ def inject_context(bug_report: str, commits: list) -> str:
 def capture_git_history(task: dict) -> list:
     """The task repo's engineered git history (commits + diffs) — the 'source documents'
     the full/hindsight arms have access to and the squashed arm does not. Newest first."""
-    src = Path("/tmp/sdebench/hist") / task["repo"]
+    # per-process: two arms running the same task at once raced on a shared dir (rmtree vs build)
+    src = Path("/tmp/sdebench/hist") / f"{task['repo']}-{os.getpid()}"
     if src.exists():
         shutil.rmtree(src)
     sh("python", str(_codebase_dir(task) / task["build"]), str(src))
@@ -237,6 +238,7 @@ def capture_git_history(task: dict) -> list:
         body = sh("git", "-C", str(src), "show", "-s", "--format=%b", sha, cap=True).stdout.strip()
         diff = "\n".join(sh("git", "-C", str(src), "show", "--format=", sha, cap=True).stdout.splitlines()[:150])
         out.append({"sha": sha[:8], "subject": subject, "body": body, "diff": diff})
+    shutil.rmtree(src, ignore_errors=True)
     return out
 
 
@@ -327,10 +329,10 @@ def _mem_docker_env(env: dict) -> list[str]:
     return denv
 
 
-def start_agent_container(workdir: Path, env: dict, agent: str = "opencode") -> str:
+def start_agent_container(workdir: Path, env: dict, agent: str = "opencode", extra_mounts: tuple = ()) -> str:
     """Start ONE long-lived agent container per task (session store INSIDE it so `-c`/`--continue`
     resumes across the intervention loop cheaply). Grading stays in sdebench-base. Returns the id."""
-    mounts = ["-v", f"{workdir}:/work"]
+    mounts = ["-v", f"{workdir}:/work", *extra_mounts]
     if _PLUGIN_DIR:  # the plugin (opencode plugin / codex + claude hooks) — memory arms
         mounts += ["-v", f"{_PLUGIN_DIR}:/opt/hindsight-coding-agents:ro"]
     if agent == "claude-code" and not (env.get("CLAUDE_CODE_OAUTH_TOKEN") or env.get("ANTHROPIC_API_KEY")):
@@ -572,8 +574,23 @@ def _parse_pi(stdout: str, elapsed: float) -> dict:
     return {"elapsed": elapsed, "tokens": tok, "turns": turns, "trajectory": traj}
 
 
+def log_events(path: Path | None, **kw) -> None:
+    """Timeline for the session viewer: one stamped line per thing that happened."""
+    if path:
+        with path.open("a") as f:
+            f.write(json.dumps({"ts": time.time(), **kw}) + "\n")
+
+
+def _claude_event(path: Path | None, role: str, e: dict) -> None:
+    """One stream-json event as stamped steps (the watcher's own reading of a Claude message)."""
+    import watcher as W
+    for step in W.claude_events(e):
+        log_events(path, role=role, **json.loads(_redact(json.dumps(step))))
+
+
 def run_agent(cid: str, model: str, timeout: int, message: str, resume: bool = False,
-              agent: str = "opencode", system_append: str | None = None) -> dict:
+              agent: str = "opencode", system_append: str | None = None,
+              events: Path | None = None, role: str = "") -> dict:
     # One turn: exec the agent into the already-running per-task container (session store lives inside,
     # so `-c`/`--continue` resumes the same session across the intervention loop).
     if agent == "claude-code":
@@ -588,8 +605,24 @@ def run_agent(cid: str, model: str, timeout: int, message: str, resume: bool = F
             cmd.append("--continue")
         cmd.append(message)
         t0 = time.perf_counter()
-        proc = subprocess.run(cmd, timeout=timeout, capture_output=True, text=True)
-        return _parse_claude(proc.stdout, time.perf_counter() - t0)
+        # streamed, not buffered: every event is stamped when it happens (the session viewer's timeline)
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+        killer = threading.Timer(timeout, proc.kill)
+        killer.start()
+        lines = []
+        try:
+            for line in proc.stdout:
+                lines.append(line)
+                try:
+                    _claude_event(events, role, json.loads(line))
+                except ValueError:
+                    pass
+            proc.wait()
+        finally:
+            killer.cancel()
+        if proc.returncode == -9:
+            raise subprocess.TimeoutExpired(cmd, timeout)
+        return _parse_claude("".join(lines), time.perf_counter() - t0)
     if agent == "pi":
         cmd = ["docker", "exec", "-w", "/work", cid, "pi", "-p", "--mode", "json", "--model", model]
         if resume:
@@ -809,6 +842,93 @@ def build_feedback(grade_result: dict) -> str:
             "Fix the source so these pass. Do NOT modify any test file.")
 
 
+# ---- proactive memory watcher (experiment, --watcher) ---------------------------------------
+# A separate process on the host watches the agent's working tree (mounted from here) and drops
+# short messages into .git/watcher-inbox.jsonl. They reach the agent two ways: mid-turn through a
+# tiny per-agent hook (claude PostToolUse / opencode plugin), and at the end of a turn through the
+# harness itself (watcher_flush -> one extra resumed turn), which works for any agent.
+WATCHER_DIR = SDEBENCH / "watcher"
+sys.path.insert(0, str(WATCHER_DIR))
+from deliver import render as watcher_render, take_new as watcher_take_new  # noqa: E402
+
+
+def drain_watcher_calls(events: Path, role: str) -> None:
+    """Hindsight requests the harness made for the watcher (ingest, learn) onto the session timeline."""
+    import watcher as W
+    for c in W.CALLS:
+        log_events(events, src="watcher", kind="call", role=role, **c)
+    W.CALLS.clear()
+
+
+def start_watcher(repo: Path, task_path: str, log: Path, bank: str | None = None,
+                  feed: Path | None = None) -> subprocess.Popen:
+    """feed: follow the agent's steps as they happen; without one, poll the repo's git diff."""
+    env = {**os.environ, **({"WATCHER_BANK": bank} if bank else {})}
+    log.unlink(missing_ok=True)  # a rerun of the same run id starts a fresh timeline
+    mode = ["follow", "--feed", str(feed)] if feed else ["watch"]
+    return subprocess.Popen([sys.executable, str(WATCHER_DIR / "watcher.py"), *mode, "--repo", str(repo),
+                             "--task", task_path, "--log", str(log)], env=env,
+                            stdout=subprocess.DEVNULL, stderr=open(log.with_suffix(".err"), "w"))
+
+
+WATCHER_DECLARATION = """
+## My memory watcher
+I run a memory watcher next to you. It knows this project's past sessions and the decisions my team
+made in them, and while you work it posts notes starting with "🧠 Note from this project's memory".
+Those notes are my requirements, even when the bug report does not mention them: a fix that
+contradicts a past decision is a wrong fix. Each note quotes its source and says where to read it.
+Check the quote; if it is really there, apply the note as part of the task. Only push back if the
+source does not say what the note claims.
+"""
+
+
+def install_watcher_delivery(cid: str, agent: str) -> None:
+    if agent == "claude-code":
+        merge = ("import json\n"
+                 "p = '/root/.claude/settings.json'\n"
+                 "try: s = json.load(open(p))\n"
+                 "except Exception: s = {}\n"
+                 "hook = {'hooks': [{'type': 'command', 'command': 'python3 /opt/watcher/deliver.py', 'timeout': 10}]}\n"
+                 "s.setdefault('hooks', {}).setdefault('PostToolUse', []).append(hook)\n"
+                 "for ev in ('Stop', 'UserPromptSubmit'):\n"
+                 "    s['hooks'].setdefault(ev, []).append(hook)\n"
+                 "json.dump(s, open(p, 'w'))\n")
+        subprocess.run(["docker", "exec", "-i", cid, "python3", "-"], input=merge, capture_output=True, text=True, check=True)
+        # Declare the channel, as an install would: an undeclared "memory note" reads as a prompt
+        # injection (claude said so, verbatim) and it then distrusted the grader's feedback too.
+        # User-level, outside /work, so it never touches the graded diff. It does not say where the
+        # history lives, so it does not nudge the agent to go read it on its own.
+        subprocess.run(["docker", "exec", "-i", cid, "sh", "-c", "cat >> /root/.claude/CLAUDE.md"],
+                       input=WATCHER_DECLARATION, capture_output=True, text=True, check=True)
+    elif agent == "opencode":
+        js = ("const fs=require('fs');const p='/root/.config/opencode/opencode.json';"
+              "const c=JSON.parse(fs.readFileSync(p,'utf8'));"
+              "c.plugin=[...(c.plugin||[]).filter(x=>fs.existsSync(x)),'/opt/watcher/opencode-plugin'];"
+              "fs.writeFileSync(p,JSON.stringify(c));")
+        subprocess.run(["docker", "exec", cid, "node", "-e", js], capture_output=True, text=True, check=True)
+    # other agents: end-of-turn delivery only (watcher_flush)
+
+
+def watcher_flush(repo: Path, wait_s: float = 120) -> list:
+    """End of an agent turn: let the watcher see the last edit (one poll + its settle window),
+    wait out a review in flight, then take whatever it has not delivered yet."""
+    time.sleep(7)
+    t0 = time.time()
+    while (repo / ".git/watcher-busy").exists() and time.time() - t0 < wait_s:
+        time.sleep(1)
+    return watcher_take_new(repo)
+
+
+def watcher_summary(log: Path) -> dict:
+    ev = [json.loads(l) for l in log.read_text().splitlines()] if log.exists() else []
+    rv = [e for e in ev if e.get("event") == "review"]
+    return {"reviews": len(rv), "messages": [e["message"] for e in rv if e.get("speak")],
+            "evidence": [e["evidence"] for e in rv if e.get("speak")],
+            "errors": sum(e.get("event") == "error" for e in ev),
+            "tokens_in": sum(e.get("tokens_in", 0) for e in rv), "tokens_out": sum(e.get("tokens_out", 0) for e in rv),
+            "events": ev}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--task", required=True, help="path to a task.json (sdebench/datasets/boltons-*/tasks/main/task.json)")
@@ -819,6 +939,16 @@ def main():
     ap.add_argument("--run-id", default="r1")
     ap.add_argument("--max-interventions", type=int, default=5,
                     help="cap on feedback rounds before giving up (drift guard)")
+    ap.add_argument("--watcher", action="store_true",
+                    help="run the proactive memory watcher beside the agent (sdebench/watcher)")
+    ap.add_argument("--watcher-follow", action="store_true",
+                    help="the watcher follows the agent's steps (task, plans, commands, edits, failures) "
+                         "instead of polling the git diff")
+    ap.add_argument("--declaration-only", action="store_true",
+                    help="ablation: install the watcher's CLAUDE.md declaration but run no watcher")
+    ap.add_argument("--watcher-memory", choices=["local", "hindsight"], default="local",
+                    help="watcher memory: local BM25 over the chats, or a Hindsight bank (chats + lessons "
+                         "+ commits, ingested per run; lessons learned are retained back after grading)")
     ap.add_argument("--external-memory", default=None,
                     help="file with retrieved memories to inject into the prompt (provided arm; "
                          "how generic AMB providers deliver memory)")
@@ -833,6 +963,7 @@ def main():
     if work.exists():
         shutil.rmtree(work)
     work.mkdir(parents=True)
+    events = work / "events.jsonl"  # session viewer timeline (the watcher writes its own watcher.jsonl)
     repo = work / "repo"
     memory_bank = None
     mem_index = None
@@ -916,7 +1047,46 @@ def main():
     print(f"[{task['task_id']}] history={args.history} model={args.model} — initial attempt…", flush=True)
     init_prompt = PROMPT.format(repo=task["repo"], bug_report=task["bug_report"], instruction=VARIANTS[os.environ.get("SDE_VARIANT", "base")])
     env = load_env(memory_bank, mem_index, conv_log)   # container env (memory config the plugin reads)
-    cid = start_agent_container(repo, env, args.agent)  # ONE container for the whole task (initial + interventions)
+    watcher_bank = None
+    if args.watcher and args.watcher_memory == "hindsight":
+        import hsmemory
+        # same prefix across runs = same bank = later runs start from what earlier ones learned
+        watcher_bank = os.environ.get("WATCHER_SHARED_BANK")  # another product's bank, used as is
+        if not watcher_bank:
+            watcher_bank = os.environ.get("WATCHER_BANK_PREFIX", f"watch-{args.run_id}") + f"-{task['codebase']}"
+            print(f"  [watcher] ingested {hsmemory.ingest(watcher_bank, task, repo)} -> bank {watcher_bank}", flush=True)
+            drain_watcher_calls(events, "ingest")
+    watcher = start_watcher(repo, args.task, work / "watcher.jsonl", watcher_bank,
+                            events if args.watcher_follow else None) if args.watcher else None
+    cid = start_agent_container(repo, env, args.agent,  # ONE container for the whole task (initial + interventions)
+                                ("-v", f"{WATCHER_DIR}:/opt/watcher:ro") if watcher else ())
+    if watcher:
+        install_watcher_delivery(cid, args.agent)
+    elif args.declaration_only and args.agent == "claude-code":
+        subprocess.run(["docker", "exec", "-i", cid, "sh", "-c", "cat >> /root/.claude/CLAUDE.md"],
+                       input=WATCHER_DECLARATION, capture_output=True, text=True, check=True)
+    watcher_turns = 0
+
+    def run_round(message: str, role: str, resume: bool) -> None:
+        """One agent turn; then, with the watcher on, anything it still has to say is delivered
+        before grading (at most 2 extra turns, logged as watcher-N so they never count as corrections)."""
+        nonlocal watcher_turns
+        log_events(events, src="harness", kind="round", role=role, text=_redact(message)[:4000])
+        acc(run_agent(cid, args.model, args.timeout, message, resume=resume, agent=args.agent,
+                      events=events, role=role), role, message)
+        # follow mode: the agent never waits for the watcher; its hooks hand over whatever is ready
+        for _ in range(2 if watcher and not args.watcher_follow else 0):
+            msgs = watcher_flush(repo)
+            if not msgs:
+                return
+            watcher_turns += 1
+            note = watcher_render(msgs)
+            print(f"  ↳ watcher turn {watcher_turns}: {note[:200]}", flush=True)
+            role = f"watcher-{watcher_turns}"
+            log_events(events, src="harness", kind="round", role=role, text=note)
+            acc(run_agent(cid, args.model, args.timeout, note, resume=True, agent=args.agent,
+                          events=events, role=role), role, note)
+
     # claude has no plugin: reflect ONCE on the symptom here and inject via --append-system-prompt on every
     # turn (trusted channel). opencode uses its plugin instead, so no harness reflect for it.
     # claude-code memory delivery is the PLUGIN's UserPromptSubmit hook (wired at container start),
@@ -937,7 +1107,7 @@ def main():
                 seed_sessions(cid, task["conversations"], args.model)
             else:
                 seed_transcript_files(cid, task["conversations"])
-        acc(run_agent(cid, args.model, args.timeout, init_prompt, agent=args.agent), "initial", init_prompt)
+        run_round(init_prompt, "initial", resume=False)
 
         # Feedback loop: grade -> if failing, tell the agent the NEW problem (not the fix) and resume.
         # Metric = number of human-like interventions needed (capped); cost = sum across all rounds.
@@ -949,6 +1119,8 @@ def main():
             trace[-1]["patch"] = patch
             trace[-1]["grade_pytest"] = g["pytest"]
             trace[-1]["grade_passed"] = g["resolved"]
+            log_events(events, src="harness", kind="grade", role=trace[-1]["role"], passed=g["resolved"],
+                       text=str(g["pytest"]))
             if g["resolved"] or interventions >= args.max_interventions:
                 break
             interventions += 1
@@ -956,7 +1128,7 @@ def main():
             # that as an adversarial loop and refuses); the pytest output also differs as the code changes.
             fb = f"[Feedback #{interventions}] " + build_feedback(g)
             print(f"  ↳ intervention {interventions}: {g['pytest']}", flush=True)
-            acc(run_agent(cid, args.model, args.timeout, fb, resume=True, agent=args.agent), f"intervention-{interventions}", fb)
+            run_round(fb, f"intervention-{interventions}", resume=True)
         # memory observability: the plugin records every reflect outcome to /tmp inside the container.
         # A memory arm whose reflect silently failed is NOT a memory run — record and shout.
         mem_diag = None
@@ -981,6 +1153,8 @@ def main():
             mem_usage = list(_turns.values()) or None
     finally:
         stop_agent_container(cid)
+        if watcher:
+            watcher.terminate()
 
     solved = g["resolved"]
     # claude reports its own cost per call (summed in totals); opencode/gemini we price from tokens.
@@ -1006,10 +1180,22 @@ def main():
                               for rnd in trace for s_ in rnd.get("trajectory") or [] if s_.get("k") == "say")
                           if memory_bank else None,
         "hindsight_calls": sum(len(u.get("calls") or []) for u in (mem_usage or [])) if memory_bank else None,
+        # proactive watcher: what it said, and how many extra turns its end-of-turn delivery cost
+        "watcher": ({**{k: v for k, v in watcher_summary(work / "watcher.jsonl").items() if k != "events"},
+                     "end_of_turn_deliveries": watcher_turns} if watcher else None),
     }
+    # the bank keeps what this session revealed (not a shared bank: the other arm must see the same memory)
+    if watcher_bank and not os.environ.get("WATCHER_SHARED_BANK"):
+        try:
+            result["watcher"]["learned"] = hsmemory.learn(watcher_bank, task, {
+                **result, "final_patch": patch, "trace": trace, "run_id": args.run_id})
+            drain_watcher_calls(events, "learn")
+        except Exception as e:
+            result["watcher"]["learned"] = f"error: {e!r}"[:300]
     (work / "result.json").write_text(json.dumps(result, indent=2))
     (work / "trace.json").write_text(json.dumps(
-        {**result, "bug_report": task["bug_report"], "final_patch": patch, "git_history": git_history, "trace": trace}, indent=2))
+        {**result, "bug_report": task["bug_report"], "final_patch": patch, "git_history": git_history, "trace": trace,
+         "watcher_log": watcher_summary(work / "watcher.jsonl")["events"] if watcher else None}, indent=2))
     # each workdir holds a full host-repo clone (+ a second pristine copy for grading) — sweeps ran
     # the disk to 100% and took the docker daemon down. Keep result/trace, drop the repo copies.
     shutil.rmtree(repo, ignore_errors=True)

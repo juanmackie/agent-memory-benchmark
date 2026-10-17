@@ -1,0 +1,56 @@
+[
+ {
+  "lesson": "In assetserve's content_type lookup, use a deterministic in-code pinned table instead of calling Python's mimetypes.guess_type or relying on OS registries.",
+  "why": "mimetypes reads platform-specific OS registries, causing inconsistent MIME resolution across different machines and environments.",
+  "quote": "mimetypes reads the OS registry, which is exactly why the symptom is 'some users': the answer differs per machine and per platform.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the content_type table, map .csv strictly to text/csv, rejecting application/vnd.ms-excel.",
+  "why": "Serving application/vnd.ms-excel mangles Excel's import path for analytics CSV exports.",
+  "quote": "application/vnd.ms-excel is a Windows-registry fossil, and it's what mangles the Excel import path for the analytics exports.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Telemetry for unknown file extensions in assetserve must use a counter metric rather than per-request logging.",
+  "why": "High-volume asset traffic serving millions of files daily would overwhelm the log collector if unknown extensions triggered log lines.",
+  "quote": "the asset host serves millions of files a day and per-request logging for unknowns would drown the collector",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Extension matching in content_type must be case-insensitive by lowercasing the file extension before matching against lowercase table keys.",
+  "why": "Real-world uploads and legacy shares frequently arrive with uppercase or mixed-case extensions such as .JPG, .CSV, and .Html.",
+  "quote": "Camera uploads arrive as .JPG, the analytics exporter emits .CSV, and the old Windows share is full of .Html. Lowercase the extension",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Map .svg to exactly 'image/svg+xml; charset=utf-8' with the charset suffix included, rejecting bare image/svg+xml.",
+  "why": "Serving SVG markup without an explicit charset was identified as an XSS vulnerability during a penetration test.",
+  "quote": "it came out of the XSS pentest finding - svg is markup, and serving it without an explicit charset was part of the reported attack surface.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Map .js to text/javascript instead of application/javascript in the content_type table.",
+  "why": "text/javascript aligns with the modern WHATWG registry standard.",
+  "quote": ".js is text/javascript per the WHATWG registry, not application/javascript.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Map both .yaml and .yml extensions to application/x-yaml in the content_type table.",
+  "why": "Configuration templates use both file extension spellings across different pipelines.",
+  "quote": "Half the config templates use the short form; a table that only knows one spelling is how we get another 'works on my pipeline' ticket.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Set the fallback MIME type for unmapped or unknown extensions in content_type to application/octet-stream, rejecting text/plain.",
+  "why": "A text/plain fallback causes browsers to display sensitive leaked build artifacts inline instead of forcing a download.",
+  "quote": "the text/plain fallback is why the browser displayed that leaked build artifact inline instead of forcing a download.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In content_type filename parsing, treat single-dot files (.env), extensionless names, and trailing-dot names as having no extension (falling back to application/octet-stream), while multi-dot files (.config.yaml) resolve by their final extension.",
+  "why": "This distinction ensures sensitive standalone dotfiles fall back to octet-stream for safety, while configuration files with true extensions map appropriately.",
+  "quote": "a dotfile with NO other dot - .env, .gitignore - has no extension at all, so octet-stream. A dot-leading name WITH a real extension",
+  "where": "/root/project-history/session-01.md"
+ }
+]

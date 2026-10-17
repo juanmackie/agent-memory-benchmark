@@ -1,0 +1,32 @@
+[
+ {
+  "lesson": "In `plan_waves`, each service must deploy in the wave after its deepest dependency, sorting within each wave by `tier` ascending (tier 0 first) and using alphabetical service name solely as a tiebreaker. Pure alphabetical ordering within waves was rejected.",
+  "why": "Ordering purely alphabetically resulted in non-deterministic or suboptimal rollouts, whereas tier ascending ensures the most critical services (tier 0) roll first within their wave.",
+  "quote": "Inside a wave it's tier ascending - tier 0 rolls first - and name A-Z only as the tiebreak, so the plan stays deterministic.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In `plan_waves`, any dependency that cannot be resolved among the services currently being deployed must be ignored during leveling.",
+  "why": "External or shared infrastructure dependencies are already running and must not gate the release waves.",
+  "quote": "Ignore any dep the planner can't resolve among the services it's leveling - that's external infra, it's already running, it gates nothing.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Services with `canary: true` must bypass dependency leveling entirely and be placed into wave 0 ordered by name; moving canaries to the front within their leveled wave was rejected.",
+  "why": "Canaries are meant to validate the release before anything else deploys, assuming their dependencies are already live from the previous release.",
+  "quote": "Canaries don't participate in the leveling at all: they form their own wave at the very front, wave 0, before everything else",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "When a release contains no canary services, `plan_waves` must not emit an empty leading wave 0.",
+  "why": "Dashboards key waves by content rather than by index, so index padding is unnecessary.",
+  "quote": "No empty leading wave - with no canaries the first leveled wave is simply first. The dashboard keys waves by content, not by index",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "`plan_waves` must remain a pure function that returns lists of service names rather than full service dictionaries.",
+  "why": "Downstream tooling parses the output directly and expects lists of names, while formatting and dry-run capabilities already live in the deploy driver.",
+  "quote": "Names only, as today - three tools parse that output and none of them want dicts.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

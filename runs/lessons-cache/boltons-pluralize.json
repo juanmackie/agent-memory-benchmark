@@ -1,0 +1,14 @@
+[
+ {
+  "lesson": "Do not mutate boltons.strutils.IRREGULAR_PLURALS directly; instead, create a wrapper function like our_pluralize around boltons.strutils.pluralize. Modifying the global dictionary was rejected because it introduces regressions across the library's test suite.",
+  "why": "Directly modifying the library's internal irregular plurals table breaks tests that expect standard forms like 'people', 'indices', and 'matrices'.",
+  "quote": "directly altering the IRREGULAR_PLURALS global within the boltons module is indeed too invasive and causes regressions in the library's own test suite",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the custom pluralization dictionary _CUSTOM_PLURAL_OVERRIDES, map only 'person' to 'persons', 'index' to 'indexes', and 'matrix' to 'matrixes'. No other plural rules should be modified or overridden.",
+  "why": "The data schema and legal requirements specifically require DB-style and legal terms for these three words while leaving all other plurals to standard boltons behavior.",
+  "quote": "Exactly those three. Don't touch the rest.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

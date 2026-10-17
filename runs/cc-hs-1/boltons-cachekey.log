@@ -1,0 +1,53 @@
+planted cachekey in boltons
+planted cachekey in boltons
+[boltons-cachekey-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 6, 'commits': 200} -> bank watch-cc-hs-1-boltons-cachekey
+  ↳ watcher turn 1: 🧠 Note from this project's memory (past sessions and commits): The drop set must be only gclid, fbclid, msclkid, and utm_ params except utm_content. Keep non-empty utm_content in the key because it ro
+  ↳ watcher turn 2: 🧠 Note from this project's memory (past sessions and commits): The cache key must not contain URL fragments; the key is scheme://host + path + the re-encoded query. Passing parts.fragment into urlunsp
+planted cachekey in boltons
+{
+  "task_id": "boltons-cachekey-001",
+  "codebase": "boltons-cachekey",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "15 passed in 0.03s",
+  "patch_bytes": 1327,
+  "tokens": {
+    "input": 42,
+    "output": 7675,
+    "reasoning": 0,
+    "cache_read": 726014,
+    "cache_write": 17799
+  },
+  "turns": 21,
+  "wall_s": 119.3,
+  "cost_usd": 0.6423,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "The drop set must be only gclid, fbclid, msclkid, and utm_ params except utm_content. Keep non-empty utm_content in the key because it routes A/B feature variants. Do not drop utm_content or include extra parameters like gclsrc or dclid.",
+      "The cache key must not contain URL fragments; the key is scheme://host + path + the re-encoded query. Passing parts.fragment into urlunsplit includes fragments in the key instead of omitting them (pass an empty string instead)."
+    ],
+    "evidence": [
+      "lesson-0",
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 6206,
+    "tokens_out": 726,
+    "end_of_turn_deliveries": 2,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=42 out=7675 cache_r=726014 cache_w=17799 | wall=119s -> /tmp/sdebench/run/boltons-cachekey-001_full_cc-hs-1/result.json

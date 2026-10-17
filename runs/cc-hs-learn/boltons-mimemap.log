@@ -1,0 +1,49 @@
+planted mimemap in boltons
+planted mimemap in boltons
+[boltons-mimemap-001] history=full model=claude-sonnet-5 — initial attempt…
+  [watcher] ingested {'chats': 1, 'lessons': 9, 'commits': 200} -> bank watch-cc-hs-1-boltons-mimemap
+planted mimemap in boltons
+{
+  "task_id": "boltons-mimemap-001",
+  "codebase": "boltons-mimemap",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.03s",
+  "patch_bytes": 1127,
+  "tokens": {
+    "input": 38,
+    "output": 5920,
+    "reasoning": 0,
+    "cache_read": 624323,
+    "cache_write": 14850
+  },
+  "turns": 19,
+  "wall_s": 65.4,
+  "cost_usd": 0.2435,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "The fallback for unlisted extensions must be application/octet-stream, never text/plain. Also, .svg must be exactly 'image/svg+xml; charset=utf-8', .js must be text/javascript, and both .yaml and .yml must be application/x-yaml."
+    ],
+    "evidence": [
+      "chat-0"
+    ],
+    "errors": 0,
+    "tokens_in": 5742,
+    "tokens_out": 562,
+    "end_of_turn_deliveries": 0,
+    "learned": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=38 out=5920 cache_r=624323 cache_w=14850 | wall=65s -> /tmp/sdebench/run/boltons-mimemap-001_full_cc-hs-learn/result.json

@@ -1,0 +1,50 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+  ↳ watcher turn 1: 🧠 Memory watcher (from this project's past chats/commits; check it against the code): Past chat rejected uniform binary units: memory uses binary powers (1024) with bare numbers as MiB, while disk mus
+planted unitparse in boltons
+  ↳ intervention 1: 6 failed, 8 passed in 0.02s
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 1,
+  "capped": false,
+  "final_pytest": "14 passed in 0.03s",
+  "patch_bytes": 1315,
+  "tokens": {
+    "input": 38,
+    "output": 7533,
+    "reasoning": 0,
+    "cache_read": 615301,
+    "cache_write": 16103
+  },
+  "turns": 20,
+  "wall_s": 95.4,
+  "cost_usd": 0.5432,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Past chat rejected uniform binary units: memory uses binary powers (1024) with bare numbers as MiB, while disk must use decimal powers (1000 for M, G, T; K raises ValueError) with bare numbers as GB. Suffix handling must be kind-dependent."
+    ],
+    "evidence": [
+      "chat:boltons-unitparse-amended#1"
+    ],
+    "errors": 0,
+    "tokens_in": 4835,
+    "tokens_out": 515,
+    "end_of_turn_deliveries": 1
+  }
+}
+
+RESULT history=full: solved=True interventions=1 | tokens in=38 out=7533 cache_r=615301 cache_w=16103 | wall=95s -> /tmp/sdebench/run/boltons-unitparse-001_full_cc-watch-1/result.json

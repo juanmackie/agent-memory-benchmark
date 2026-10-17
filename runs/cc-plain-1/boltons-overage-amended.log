@@ -1,0 +1,39 @@
+planted overage in boltons
+planted overage in boltons
+[boltons-overage-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted overage in boltons
+  ↳ intervention 1: 8 failed, 8 passed in 0.05s
+planted overage in boltons
+  ↳ intervention 2: 2 failed, 14 passed in 0.05s
+planted overage in boltons
+{
+  "task_id": "boltons-overage-amended-001",
+  "codebase": "boltons-overage-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 2,
+  "capped": false,
+  "final_pytest": "16 passed in 0.02s",
+  "patch_bytes": 1271,
+  "tokens": {
+    "input": 42,
+    "output": 33548,
+    "reasoning": 0,
+    "cache_read": 879538,
+    "cache_write": 43425
+  },
+  "turns": 23,
+  "wall_s": 408.1,
+  "cost_usd": 1.4158,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": null
+}
+
+RESULT history=full: solved=True interventions=2 | tokens in=42 out=33548 cache_r=879538 cache_w=43425 | wall=408s -> /tmp/sdebench/run/boltons-overage-amended-001_full_cc-plain-1/result.json

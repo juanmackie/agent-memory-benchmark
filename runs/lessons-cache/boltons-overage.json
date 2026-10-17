@@ -1,0 +1,38 @@
+[
+ {
+  "lesson": "In overage_charge, prorate the included quota by calendar day using ceil to round up to the next whole unit, rejecting int() truncation.",
+  "why": "Truncating down creates rounding artifacts that unfairly charge customers who are under quota, causing billing escalations.",
+  "quote": "Round UP to the next whole unit, ceil, always",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In meterbill, emit one debug-level summary log with counts per invoice run instead of logging each computed charge individually.",
+  "why": "The metering worker runs across every subscription nightly, and logging each charge tripped log-volume alerts twice in a quarter.",
+  "quote": "One debug-level summary per invoice run with counts, not one line per charge",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In overage_charge, bill overage in 50-unit blocks rounded up to the nearest full block multiplied by plan['block_fee'], rejecting per-unit billing.",
+  "why": "Finance reconciles accounts in whole blocks, and per-unit charges made invoice reconciliation impossible.",
+  "quote": "Overage bills in blocks of 50 units, rounded UP to a whole block: a partial block bills as a full block.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In overage_charge, subtract the 25-unit free grace allowance from overage before rounding into 50-unit blocks, rejecting waivers or applying grace after block rounding.",
+  "why": "Applying grace after rounding produces incorrect block counts (e.g., billing two blocks instead of one for 60 overage units), which requires manual support credits.",
+  "quote": "the first 25 overage units in a month are free, and the allowance is applied BEFORE the block rounding.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "Do not put overage_charge changes behind a billing feature flag; rollout directly via staging internal tenants first.",
+  "why": "Billing feature flags rarely get cleaned up, leaving confusion over which formula generated a historical invoice.",
+  "quote": "No flag - billing flags never get cleaned up and then nobody knows which formula produced an invoice.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In overage_charge, retain the ValueError exception when day_of_month is not within 1..days_in_month.",
+  "why": "The input validation guard has actively caught real caller bugs in production.",
+  "quote": "keep the ValueError for a day outside 1..days_in_month, that guard has caught real caller bugs.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

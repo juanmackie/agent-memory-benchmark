@@ -1,0 +1,8 @@
+[
+ {
+  "lesson": "In confmerge/merge.py, _deep_merge_dict must combine list values using union_lists_dedup_base_order rather than replacing them or naively appending them with extend(). Merging must perform a de-duplicated union that preserves the order of items from the base list first.",
+  "why": "List replacement wiped out essential base middleware like auth, while naive appending lacked idempotency and caused duplicate items to accumulate on every configuration reload.",
+  "quote": "Base. No repeats.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

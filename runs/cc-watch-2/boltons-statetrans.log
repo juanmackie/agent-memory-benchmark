@@ -1,0 +1,47 @@
+planted statetrans in boltons
+planted statetrans in boltons
+[boltons-statetrans-001] history=full model=claude-sonnet-5 — initial attempt…
+planted statetrans in boltons
+{
+  "task_id": "boltons-statetrans-001",
+  "codebase": "boltons-statetrans",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "12 passed in 0.01s",
+  "patch_bytes": 1546,
+  "tokens": {
+    "input": 30,
+    "output": 6656,
+    "reasoning": 0,
+    "cache_read": 506740,
+    "cache_write": 16105
+  },
+  "turns": 15,
+  "wall_s": 95.2,
+  "cost_usd": 0.2324,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 2,
+    "messages": [
+      "Refunded is reachable only from returned; shipped goes only to returned, paid goes only to shipped or on_hold, and on_hold goes only to pending or cancelled. Also, compare both current and target states case-insensitively and store the lowercase canonical state."
+    ],
+    "evidence": [
+      "chat:1"
+    ],
+    "errors": 0,
+    "tokens_in": 4805,
+    "tokens_out": 436,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=30 out=6656 cache_r=506740 cache_w=16105 | wall=95s -> /tmp/sdebench/run/boltons-statetrans-001_full_cc-watch-2/result.json

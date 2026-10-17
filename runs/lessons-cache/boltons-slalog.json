@@ -1,0 +1,38 @@
+[
+ {
+  "lesson": "In downtime_minutes, merge both overlapping and touching incident windows where an alert starts exactly when another ends before summing minutes.",
+  "why": "Summing alerts independently double- or triple-counts minutes during concurrent alerts for the same outage.",
+  "quote": "make sure touching windows merge too - an alert that starts exactly when another ends is the same outage, counted once.",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In the report job, log at DEBUG level using only one summary line per tenant per run with the merged window count, rejecting per-decision logging.",
+  "why": "The job iterates over every tenant nightly and previously exceeded log quotas when logging excessively.",
+  "quote": "Debug level, and one summary line per tenant per run with the merged window count - not per decision",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In downtime_minutes, apply the 60-second blip exclusion to merged outage windows instead of dropping raw pre-merge incidents, counting outages of 60 seconds or greater in full.",
+  "why": "Dropping pre-merge incidents misclassifies real chained outages, such as two 40-second alerts forming an 80-second outage.",
+  "quote": "The threshold applies AFTER merging, to the merged window: if the merged outage is under 60 seconds it's a monitoring blip",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In downtime_minutes, evaluate whether a merged window is a blip before performing any maintenance subtraction.",
+  "why": "A merged outage exceeding the threshold is a legitimate outage even if scheduled maintenance later accounts for most of its duration.",
+  "quote": "Blip check first, on the merged window as measured - a 90-second merged outage is not a blip",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In downtime_minutes, subtract maintenance only if announced_at is at least 24 hours prior to the window start, subtracting solely the intersection clamped at zero and rejecting blanket maintenance subtraction.",
+  "why": "Under SLA addendum terms, short-notice maintenance cannot penalize customer uptime credits, and all maintenance records reliably contain announced_at.",
+  "quote": "Maintenance reduces downtime only when it was properly announced: at least 24 hours between announced_at and the window start",
+  "where": "/root/project-history/session-01.md"
+ },
+ {
+  "lesson": "In downtime_minutes, return fractional downtime minutes untouched as a float, rejecting any rounding to whole numbers.",
+  "why": "Downstream billing handles rounding when issuing credit memos, and applying multiple layers of rounding causes calculation discrepancies.",
+  "quote": "Keep fractional - billing does the rounding downstream at credit-memo time, and two layers of rounding is how the last dispute started.",
+  "where": "/root/project-history/session-01.md"
+ }
+]

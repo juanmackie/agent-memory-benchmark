@@ -1,0 +1,53 @@
+planted featflag in boltons
+planted featflag in boltons
+[boltons-featflag-001] history=full model=claude-sonnet-5 — initial attempt…
+planted featflag in boltons
+  ↳ intervention 1: 1 failed, 11 passed in 0.04s
+planted featflag in boltons
+  ↳ intervention 2: 1 failed, 11 passed in 0.03s
+planted featflag in boltons
+  ↳ intervention 3: 1 failed, 11 passed in 0.03s
+planted featflag in boltons
+{
+  "task_id": "boltons-featflag-001",
+  "codebase": "boltons-featflag",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 3,
+  "capped": false,
+  "final_pytest": "12 passed in 0.02s",
+  "patch_bytes": 539,
+  "tokens": {
+    "input": 36,
+    "output": 7600,
+    "reasoning": 0,
+    "cache_read": 656408,
+    "cache_write": 20594
+  },
+  "turns": 21,
+  "wall_s": 122.2,
+  "cost_usd": 0.7816,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 14,
+    "messages": [
+      "You rejected the corp-beta override, but user IDs ending in @corp.example must always be in when the flag name starts with beta-."
+    ],
+    "evidence": [
+      "446c5110-5c19-49e7-a444-e0930ec3a7f0"
+    ],
+    "errors": 0,
+    "tokens_in": 16417,
+    "tokens_out": 262,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=3 | tokens in=36 out=7600 cache_r=656408 cache_w=20594 | wall=122s -> /tmp/sdebench/run/boltons-featflag-001_full_featflag2-w1/result.json
