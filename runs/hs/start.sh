@@ -13,7 +13,7 @@ export HINDSIGHT_API_LLM_MODEL=gemini-3.8-flash
 export HINDSIGHT_API_REFLECT_DECISION_MODEL_PROVIDER=typesafe
 # reflect answers with low thinking, as v5's judge did (default thinking took 6-20s per answer)
 # flash-lite answers without thinking by default; a thinking_level makes it think (1.7k tokens, 14s)
-[ "${WATCHER_REFLECT_MODEL:-gemini-3.8-flash}" = gemini-3.5-flash-lite ] || export HINDSIGHT_API_REFLECT_LLM_EXTRA_BODY='{"thinking_config": {"thinking_level": "low"}}'
+[ "${WATCHER_REFLECT_MODEL:-gemini-3.8-flash}" = gemini-3.5-flash-lite ] || export HINDSIGHT_API_REFLECT_LLM_EXTRA_BODY="{\"thinking_config\": {\"thinking_level\": \"${WATCHER_THINKING:-low}\"}}"
 export HINDSIGHT_API_REFLECT_PROMPT_CACHE_ENABLED=false
 export HINDSIGHT_API_REFLECT_LLM_MODEL=${WATCHER_REFLECT_MODEL:-gemini-3.8-flash}
 export HINDSIGHT_API_REFLECT_DECISION_MODEL_API_KEY=$(grep '^JEV_KEY=' ~/nicolo-secrets.env | cut -d= -f2- | tr -d '"')

@@ -1,0 +1,120 @@
+== boltons-budget 20:57
+pair3-8899-w1  solved=True corrections=0 agent=$0.1271 agent_time=30.7s memory=$0.0012
+pair3-8899-r1  solved=True corrections=0 agent=$0.1544 agent_time=40.5s memory=$0.0035
+pair3-8899-w2  solved=True corrections=0 agent=$0.1509 agent_time=36.7s memory=$0.0013
+pair3-8899-r2  solved=True corrections=0 agent=$0.2502 agent_time=100.4s memory=$0.0065
+pair3-8899-w3  solved=True corrections=0 agent=$0.1499 agent_time=29.3s memory=$0.0012
+pair3-8899-r3  solved=True corrections=0 agent=$0.1755 agent_time=47.5s memory=$0.0075
+== boltons-csvquote 21:03
+pair3-8899-w1  solved=True corrections=0 agent=$0.1642 agent_time=47.3s memory=$0.0317
+pair3-8899-r1  solved=True corrections=0 agent=$0.1588 agent_time=46.4s memory=$0.0043
+pair3-8899-w2  solved=True corrections=0 agent=$0.1224 agent_time=33.8s memory=$0.0121
+pair3-8899-r2  solved=True corrections=0 agent=$0.1149 agent_time=38.8s memory=$0.0124
+pair3-8899-w3  solved=True corrections=0 agent=$0.151 agent_time=34.0s memory=$0.0216
+pair3-8899-r3  solved=True corrections=0 agent=$0.1982 agent_time=60.2s memory=$0.0183
+== boltons-dedupe-amended 21:09
+pair3-8899-w1  solved=True corrections=0 agent=$0.1478 agent_time=41.3s memory=$0.0188
+pair3-8899-r1  solved=True corrections=0 agent=$0.1856 agent_time=52.7s memory=$0.0085
+pair3-8899-w2  solved=True corrections=0 agent=$0.1464 agent_time=47.3s memory=$0.0009
+pair3-8899-r2  solved=True corrections=0 agent=$0.2075 agent_time=77.1s memory=$0.0022
+pair3-8899-w3  solved=True corrections=0 agent=$0.1678 agent_time=57.1s memory=$0.0201
+pair3-8899-r3  solved=True corrections=0 agent=$0.1719 agent_time=52.1s memory=$0.0069
+== boltons-discount 21:16
+pair3-8899-w1  solved=True corrections=0 agent=$0.1439 agent_time=36.0s memory=$0.0202
+pair3-8899-r1  solved=True corrections=0 agent=$0.1003 agent_time=27.6s memory=$0.0119
+pair3-8899-w2  solved=True corrections=0 agent=$0.0872 agent_time=22.1s memory=$0.0026
+pair3-8899-r2  solved=True corrections=0 agent=$0.1108 agent_time=29.1s memory=$0.0149
+pair3-8899-w3  solved=True corrections=0 agent=$0.0941 agent_time=22.3s memory=$0.0026
+pair3-8899-r3  solved=True corrections=0 agent=$0.1014 agent_time=24.2s memory=$0.0036
+== boltons-featflag 21:21
+pair3-8899-w1  solved=True corrections=0 agent=$0.1599 agent_time=45.4s memory=$0.0291
+pair3-8899-r1  solved=True corrections=0 agent=$0.1602 agent_time=43.8s memory=$0.0078
+pair3-8899-w2  solved=True corrections=1 agent=$0.3354 agent_time=56.2s memory=$0.0302
+pair3-8899-r2  solved=False corrections=3 agent=$1.0992 agent_time=136.4s memory=$0.0454
+pair3-8899-w3  solved=True corrections=0 agent=$0.1875 agent_time=62.3s memory=$0.0206
+pair3-8899-r3  solved=True corrections=0 agent=$0.1764 agent_time=46.0s memory=$0.0147
+== boltons-hostallow 21:29
+pair3-8899-w1  solved=True corrections=0 agent=$0.1357 agent_time=41.1s memory=$0.0012
+pair3-8899-r1  solved=True corrections=0 agent=$0.1671 agent_time=47.5s memory=$0.0031
+pair3-8899-w2  solved=True corrections=0 agent=$0.1334 agent_time=45.9s memory=$0.0103
+pair3-8899-r2  solved=True corrections=0 agent=$0.1829 agent_time=53.7s memory=$0.0098
+pair3-8899-w3  solved=True corrections=0 agent=$0.181 agent_time=63.0s memory=$0.0189
+pair3-8899-r3  solved=True corrections=0 agent=$0.1352 agent_time=39.9s memory=$0.0062
+== boltons-mimemap 21:36
+pair3-8899-w1  solved=True corrections=0 agent=$0.2074 agent_time=64.0s memory=$0.0127
+pair3-8899-r1  solved=True corrections=0 agent=$0.1367 agent_time=37.9s memory=$0.0041
+pair3-8899-w2  solved=True corrections=0 agent=$0.1937 agent_time=70.6s memory=$0.0122
+pair3-8899-r2  solved=True corrections=0 agent=$0.1892 agent_time=60.7s memory=$0.0086
+pair3-8899-w3  solved=True corrections=0 agent=$0.1803 agent_time=59.7s memory=$0.0035
+pair3-8899-r3  solved=True corrections=0 agent=$0.1763 agent_time=51.3s memory=$0.0205
+== boltons-overage-amended 21:43
+pair3-8899-w1  solved=True corrections=0 agent=$0.1427 agent_time=41.1s memory=$0.021
+pair3-8899-r1  solved=True corrections=0 agent=$0.213 agent_time=68.0s memory=$0.0183
+pair3-8899-w2  solved=True corrections=0 agent=$0.1389 agent_time=42.6s memory=$0.0122
+pair3-8899-r2  solved=True corrections=0 agent=$0.1726 agent_time=55.2s memory=$0.0135
+pair3-8899-w3  solved=True corrections=0 agent=$0.1694 agent_time=46.4s memory=$0.0213
+pair3-8899-r3  solved=True corrections=0 agent=$0.1435 agent_time=40.7s memory=$0.0165
+== boltons-pluralize 21:49
+pair3-8899-w1  solved=True corrections=0 agent=$0.3073 agent_time=117.4s memory=$0.0205
+pair3-8899-r1  solved=True corrections=0 agent=$0.3576 agent_time=123.2s memory=$0.0203
+pair3-8899-w2  solved=True corrections=0 agent=$0.3369 agent_time=113.3s memory=$0.0154
+pair3-8899-r2  solved=True corrections=0 agent=$0.293 agent_time=130.5s memory=$0.024
+pair3-8899-w3  solved=True corrections=2 agent=$1.1007 agent_time=128.9s memory=$0.0275
+pair3-8899-r3  solved=True corrections=0 agent=$0.3041 agent_time=113.4s memory=$0.0161
+== boltons-retryjitter 22:03
+pair3-8899-w1  solved=True corrections=0 agent=$0.1208 agent_time=30.7s memory=$0.0205
+pair3-8899-r1  solved=True corrections=0 agent=$0.1638 agent_time=58.8s memory=$0.0206
+pair3-8899-w2  solved=True corrections=0 agent=$0.0942 agent_time=26.7s memory=$0.0197
+pair3-8899-r2  solved=True corrections=0 agent=$0.1494 agent_time=43.7s memory=$0.0209
+pair3-8899-w3  solved=True corrections=0 agent=$0.1201 agent_time=29.3s memory=$0.0113
+pair3-8899-r3  solved=True corrections=0 agent=$0.1445 agent_time=38.0s memory=$0.0117
+== boltons-rounding 22:09
+pair3-8899-w1  solved=True corrections=0 agent=$0.1152 agent_time=28.5s memory=$0.0023
+pair3-8899-r1  solved=True corrections=0 agent=$0.1407 agent_time=32.8s memory=$0.004
+pair3-8899-w2  solved=True corrections=0 agent=$0.1502 agent_time=44.0s memory=$0.0025
+pair3-8899-r2  solved=True corrections=0 agent=$0.1212 agent_time=31.5s memory=$0.0036
+pair3-8899-w3  solved=True corrections=0 agent=$0.1277 agent_time=45.6s memory=$0.0022
+pair3-8899-r3  solved=True corrections=0 agent=$0.1354 agent_time=47.0s memory=$0.0036
+== boltons-seqledger 22:14
+pair3-8899-w1  solved=True corrections=0 agent=$0.2065 agent_time=61.2s memory=$0.0121
+pair3-8899-r1  solved=True corrections=0 agent=$0.1859 agent_time=60.3s memory=$0.0062
+pair3-8899-w2  solved=True corrections=0 agent=$0.1876 agent_time=53.7s memory=$0.0203
+pair3-8899-r2  solved=True corrections=0 agent=$0.1852 agent_time=51.7s memory=$0.0085
+pair3-8899-w3  solved=True corrections=0 agent=$0.1951 agent_time=56.8s memory=$0.0179
+pair3-8899-r3  solved=True corrections=0 agent=$0.1635 agent_time=45.8s memory=$0.0061
+== boltons-slalog-amended 22:21
+pair3-8899-w1  solved=True corrections=0 agent=$0.1721 agent_time=57.0s memory=$0.001
+pair3-8899-r1  solved=True corrections=0 agent=$0.1516 agent_time=44.1s memory=$0.0023
+pair3-8899-w2  solved=True corrections=0 agent=$0.1639 agent_time=50.0s memory=$0.0108
+pair3-8899-r2  solved=True corrections=0 agent=$0.2179 agent_time=74.6s memory=$0.0067
+pair3-8899-w3  solved=True corrections=0 agent=$0.1967 agent_time=63.7s memory=$0.0105
+pair3-8899-r3  solved=True corrections=0 agent=$0.1576 agent_time=50.7s memory=$0.0024
+== boltons-statetrans 22:29
+pair3-8899-w1  solved=True corrections=0 agent=$0.2354 agent_time=71.5s memory=$0.0184
+pair3-8899-r1  solved=True corrections=0 agent=$0.1631 agent_time=43.7s memory=$0.0143
+pair3-8899-w2  solved=True corrections=0 agent=$0.1999 agent_time=60.7s memory=$0.0414
+pair3-8899-r2  solved=True corrections=0 agent=$0.1692 agent_time=47.7s memory=$0.0073
+pair3-8899-w3  solved=True corrections=0 agent=$0.2764 agent_time=93.2s memory=$0.0314
+pair3-8899-r3  solved=True corrections=0 agent=$0.2004 agent_time=56.1s memory=$0.0202
+== boltons-tagmerge-amended 22:37
+pair3-8899-w1  solved=True corrections=0 agent=$0.1617 agent_time=53.1s memory=$0.0122
+pair3-8899-r1  solved=True corrections=0 agent=$0.1957 agent_time=60.9s memory=$0.0197
+pair3-8899-w2  solved=True corrections=0 agent=$0.1519 agent_time=67.9s memory=$0.012
+pair3-8899-r2  solved=True corrections=0 agent=$0.2073 agent_time=69.1s memory=$0.0131
+pair3-8899-w3  solved=True corrections=0 agent=$0.1777 agent_time=60.5s memory=$0.0215
+pair3-8899-r3  solved=True corrections=0 agent=$0.1605 agent_time=55.6s memory=$0.0041
+== boltons-under2camel 22:44
+pair3-8899-w1  solved=True corrections=0 agent=$0.1213 agent_time=43.4s memory=$0.0011
+pair3-8899-r1  solved=True corrections=0 agent=$0.1687 agent_time=36.1s memory=$0.0043
+pair3-8899-w2  solved=True corrections=0 agent=$0.1369 agent_time=36.7s memory=$0.0011
+pair3-8899-r2  solved=True corrections=0 agent=$0.1524 agent_time=41.4s memory=$0.0024
+pair3-8899-w3  solved=True corrections=0 agent=$0.138 agent_time=25.2s memory=$0.0009
+pair3-8899-r3  solved=True corrections=0 agent=$0.1347 agent_time=36.0s memory=$0.0025
+== boltons-unitparse-amended 22:50
+pair3-8899-w1  solved=True corrections=0 agent=$0.19 agent_time=61.7s memory=$0.0182
+pair3-8899-r1  solved=True corrections=0 agent=$0.2178 agent_time=64.6s memory=$0.0187
+pair3-8899-w2  solved=True corrections=0 agent=$0.1611 agent_time=47.7s memory=$0.0092
+pair3-8899-r2  solved=True corrections=0 agent=$0.158 agent_time=45.8s memory=$0.0137
+pair3-8899-w3  solved=True corrections=0 agent=$0.1885 agent_time=68.8s memory=$0.0182
+pair3-8899-r3  solved=True corrections=0 agent=$0.1919 agent_time=52.3s memory=$0.0201
+lane done 22:57

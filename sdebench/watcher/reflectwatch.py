@@ -22,7 +22,8 @@ HS = os.environ.get("WATCHER_HS_URL", "http://localhost:8899")
 
 HEADSUP_Q = ("Before I start on this request: which project decision recorded in memory (an exact value, a rule, "
              "an exception) about exactly the code this request will change must my fix respect, that the request "
-             "itself does not state? Tell me in at most 70 words, as 'Before you change <the code>: <every such rule, "
+             "itself does not state? Only what someone decided (a chosen value or rule, an exception, a rejected "
+             "option), not what the code already does: I can read that myself. Tell me in at most 70 words, as 'Before you change <the code>: <every such rule, "
              "in its final form>', copying exact literals verbatim. If memory records no such decision about this "
              "code, reply with nothing.")
 CONFLICT_Q = ("Does what I am doing right now (my plan, command or code change) contradict a project decision recorded "
@@ -67,6 +68,24 @@ def ask(bank: str, goal: str, m: Moment, sent: list[str], extra: dict | None = N
         return json.load(r)
 
 
+def best_quote(text: str, like: str) -> str:
+    """The source sentence sharing the most words with the note, less two per number the note does not
+    have: by word overlap alone the line stating the old value ("10 # Current setting") beat the rule (7)."""
+    want = set(W.tokens(like))
+    nums = {w for w in want if w[0].isdigit()}
+
+    def score(x: str) -> int:
+        t = set(W.tokens(x))
+        return len(want & t) - 2 * len({w for w in t if w[0].isdigit()} - nums)
+
+    # The penalty only ranks: "K is 1024, never 1000" still quotes a note that says 1024.
+    sents = [x.strip() for x in re.split(r"(?<=[.!?])\s+|\n+", text)
+             if 20 <= len(x.strip()) <= 300 and want & set(W.tokens(x))]
+    # On a tie the later sentence wins: a chat settles on its last word ("leave it at 7" after trying 5).
+    best = max(reversed(sents), key=score, default="")
+    return best
+
+
 def _readable(text: str) -> str:
     """A chat stored as JSON lines, as its messages' words: a quote must be text the agent can find."""
     out = []
@@ -92,7 +111,7 @@ def _source(bank: str, observation_id: str, note: str) -> tuple[str, str]:
     sources.sort(key=lambda f: f.get("mentioned_at") or f.get("occurred_start") or "", reverse=True)
     for f in sources:
         text = M._doc_text(bank, f["document_id"])
-        quote = W.best_sentence(_readable(text), note)
+        quote = best_quote(_readable(text), note)
         if quote:
             return M._by_subject(M.where_for(f["document_id"], f.get("metadata") or {}), text), quote
     return "project memory", ""

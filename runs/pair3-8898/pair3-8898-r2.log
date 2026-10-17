@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1014,
+  "tokens": {
+    "input": 26,
+    "output": 2563,
+    "reasoning": 0,
+    "cache_read": 408073,
+    "cache_write": 10283
+  },
+  "turns": 13,
+  "wall_s": 40.4,
+  "cost_usd": 0.1484,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 4,
+    "messages": [
+      "Before you change infraconf/units.py: parse_quantity must use kind-dependent parsing where memory suffixes are binary ('K'=1024, 'M'=1024**2, 'G'=1024**3, 'T'=1024**4) and bare numbers default to MiB; disk suffixes are decimal ('M'=1000**2, 'G'=1000**3, 'T'=1000**4), bare numbers default to GB, and 'K'/'k' raises ValueError. Suffixes are case-insensitive, quantities must be integers, and ValueError reports the resource kind and invalid suffix without echoing raw config blobs [chat:session-01]."
+    ],
+    "evidence": [
+      "6f36800d-20d3-42c2-9ee2-4fead903cbde"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=2563 cache_r=408073 cache_w=10283 | wall=40s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair3-8898-r2/result.json

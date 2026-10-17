@@ -35,3 +35,21 @@ v6.2 (2026-10-17, season rf4) — final
   - Plugin (hindsight-integrations/coding-agents, autoInject "watch"): notes delivered by a short
     sync PostToolUse hook + detached review (Claude Code's async hooks don't deliver mid-task;
     asyncRewake shows as "hook blocking error"). pwatch 3/3 solved first try, notes delivered.
+
+v6.3 (2026-10-18, seasons pair2..pair4) — reflect-only watcher, both arms on both lanes
+  - pair2 (135e96945): reflect 99/99, first try 97 vs v5 99; Claude $0.179 vs $0.162; 55.2s vs 49.2s.
+    Gap mostly trimstats: the heads-up described what the code already does ("60-sample window,
+    raises ValueError"), and the agent over-built.
+  - Heads-up question now asks only for decisions (a chosen value, rule, exception, rejected
+    option), not what the code already does.
+  - pair3: reflect 98/99 solved, first try 97 vs 96; Claude $0.179 vs $0.173; 52.4s vs 50.1s.
+    46/114 reflect notes carried memory ids (REF-ID: chat:session-01) -> abstain answer rule:
+    never write memory/document ids. Budget quote showed the old value (10) for a note saying 7
+    -> quote picker ranks down lines with numbers the note does not have; later line wins ties.
+  - Codex: plugin reads Codex's item_completed events; a new request keeps its turn over the
+    agent's first plan (fixes a dropped heads-up, both harnesses).
+  - pair4 (all fixes): 99/99 both; first try 97 vs 98; Claude $0.174 vs $0.169 (median $0.158 vs
+    $0.159); time 50.3s vs 50.0s (median paired -0.3s); memory $0.0099 vs $0.0144 (-31%);
+    Claude + memory $0.1843 vs $0.1836. See runs/reflect-final-score.txt.
+  - Tried and rejected for speed: flash-lite (missed the discount conflict 2/3), thinking minimal
+    (not supported on gemini-3.8-flash), thinking budget 0 (no faster than low).
