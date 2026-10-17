@@ -403,7 +403,7 @@ def squash(s: str) -> str:
 
 def render(v: Verdict) -> str:
     """The text the agent sees: the claim, then the exact words and where to read them."""
-    return f'{v.message} Source: {v.where} — "{v.quote}"'
+    return f'{v.message} Source: {v.where} — "{v.quote}"' if v.quote else f"{v.message} Source: {v.where}"
 
 
 # ---------------------------------------------------------------- the watcher
@@ -462,6 +462,9 @@ def build_watcher(task: dict, repo: Path) -> Watcher:
     """Memory backend: Hindsight recall when WATCHER_BANK names a bank (ingested by the harness),
     else the local BM25 over this project's chats and commits."""
     bank = os.environ.get("WATCHER_BANK")
+    if bank and os.environ.get("WATCHER_DECIDER") == "reflect":
+        import reflectwatch
+        return reflectwatch.ReflectWatcher(bank, task.get("bug_report", ""))
     if bank:
         import hsmemory
         return Watcher(task.get("bug_report", ""), lambda m: hsmemory.search(bank, m))

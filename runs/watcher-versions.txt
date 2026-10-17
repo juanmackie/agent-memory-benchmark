@@ -2,3 +2,19 @@
 2026-10-16 21:26:02 v4: SPEAK_AT 0.3 (0.3-0.9 -> judge), heads-up does not block later notes on same memory, commits cited by message
 2026-10-17 01:38:54 v5 (FROZEN for final pass): task-start search adds code-name sentences, keeps top 10 across queries
 2026-10-17 02:11:29 harness-only fix: claude_events skips string messages (drainplan final-w3 crash)
+
+v6 (2026-10-17) — the watcher on Hindsight reflect (client calls only the Hindsight API)
+  - One reflect call per moment: query = the heads-up / conflict question, context = the agent's
+    situation (request, what it just did, recent steps, code change, what it was already told),
+    search_queries = v5's searches (code-naming sentences + paragraphs at task start, the diff in
+    words for an edit, the agent's own words otherwise), abstain = true, observations only.
+  - Server (hindsight feat/reflect-watch): abstain + search_queries on reflect. With abstain, the
+    decision model is asked the caller's question about the context over the head of the round
+    (each search's best, in turn): none >= 0.9 -> empty answer, no LLM; otherwise one short LLM call
+    over only the picked memories, NONE = silence. based_on names the memory for dedupe/citation.
+  - Client keeps v5's rules: never the same memory twice (heads-up excluded), <= 3 notes, quote =
+    closest sentence of the newest source document (GET memories + documents, no model call).
+  - Server LLM for reflect: gemini-3.8-flash, thinking low (HINDSIGHT_API_REFLECT_LLM_EXTRA_BODY),
+    reflect prompt cache off. Jev calls metered by runs/hs/jev_proxy.py (the server does not meter them).
+  - Replay (8 tasks, 42 moments vs v5): 42/42 same speak/silent, $0.0011/moment (v5 ~$0.0026),
+    2.8s/moment (v5 3.3s), notes median 3.7s (v5 5.3s).

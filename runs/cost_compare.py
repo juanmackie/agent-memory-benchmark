@@ -121,6 +121,20 @@ def import_bank(path: Path, bank: str) -> None:
     wait_op(HUB, op)
 
 
+JEV_LOG = ROOT / "runs/hs" / f"jev-{os.environ.get('WATCHER_JEV_PORT', '8897')}.jsonl"
+
+
+def server_jev(t0: float, t1: float) -> dict:
+    """The server's own decision-model calls in a session window, from its metering proxy's log
+    (the server does not meter them). Each lane has its own server and proxy, so nothing mixes."""
+    calls = tokens = 0
+    for line in JEV_LOG.read_text().splitlines() if JEV_LOG.exists() else []:
+        e = json.loads(line)
+        if t0 <= e["ts"] <= t1:
+            calls, tokens = calls + 1, tokens + e.get("input_tokens", 0)
+    return {"calls": calls, "input": tokens, "cost": price("jev", tokens, 0, 0)}
+
+
 def env() -> dict:
     e = {**os.environ, "PATH": f"{ROOT}/runs/bin:" + os.environ["PATH"],
          "SDEBENCH_BOLTONS_HOST": str(Path.home() / "dev/_sdebench_hosts/boltons")}

@@ -36,13 +36,18 @@ def main() -> None:
         print(f"built {a.archive} setup=${C.server_cost(usage):.4f} ({round(time.time() - t0)}s)", flush=True)
     for i in range(1, a.runs + 1):
         for arm in a.arms.split(","):
-            run_id = f"{a.label}-{arm[0]}{i}"
+            run_id = f"{a.label}-{arm[0]}{i}"  # p, w, r
             bank = f"{a.label}-{run_id}"
             C.import_bank(Path(a.archive), bank)  # same memory every session, no model calls
             time.sleep(5)  # a restore can queue consolidation a moment later; it must not land in the session
             C.wait_idle(bank)
             t0, before = time.time(), C.counters()
-            if arm == "watcher":
+            if arm == "reflect":  # the watcher on reflect: Hindsight decides and writes, the client only asks
+                r = C.run_task(tj, run_id, ["--history", "full", "--watcher", "--watcher-follow",
+                                            "--watcher-memory", "hindsight"],
+                               {**e, "WATCHER_SHARED_BANK": bank, "WATCHER_DECIDER": "reflect"}, out / f"{run_id}.log")
+                client = C.watcher_client_usage(Path("/tmp/sdebench/run") / f"{task['task_id']}_full_{run_id}")
+            elif arm == "watcher":
                 r = C.run_task(tj, run_id, ["--history", "full", "--watcher", "--watcher-follow",
                                             "--watcher-memory", "hindsight"],
                                {**e, "WATCHER_SHARED_BANK": bank}, out / f"{run_id}.log")
@@ -54,9 +59,11 @@ def main() -> None:
                 client = {"cost": 0.0}
             C.wait_idle(bank)
             usage = C.server_usage(before, C.counters())
+            jev = C.server_jev(t0, time.time())
             row = {"task": a.codebase, "run": run_id, "arm": arm, "solved": r.get("solved"), "corrections": r.get("interventions"),
                    "agent_cost": r.get("cost_usd"), "agent_wall_s": r.get("wall_s"), "session_server": usage,
-                   "session_client": client, "memory_cost": round(C.server_cost(usage) + client["cost"], 4),
+                   "session_client": client, "session_jev": jev,
+                   "memory_cost": round(C.server_cost(usage) + client["cost"] + jev["cost"], 4),
                    "elapsed_s": round(time.time() - t0)}
             with (out / "duel.jsonl").open("a") as f:
                 f.write(json.dumps(row) + "\n")
