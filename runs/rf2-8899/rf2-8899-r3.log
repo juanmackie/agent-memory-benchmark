@@ -1,0 +1,47 @@
+planted hostallow in boltons
+planted hostallow in boltons
+[boltons-hostallow-001] history=full model=claude-sonnet-5 — initial attempt…
+planted hostallow in boltons
+{
+  "task_id": "boltons-hostallow-001",
+  "codebase": "boltons-hostallow",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.01s",
+  "patch_bytes": 1238,
+  "tokens": {
+    "input": 26,
+    "output": 5211,
+    "reasoning": 0,
+    "cache_read": 427631,
+    "cache_write": 13077
+  },
+  "turns": 13,
+  "wall_s": 62.5,
+  "cost_usd": 0.19,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 7,
+    "messages": [
+      "Before you change is_allowed in egressgate: host matching normalizes hostnames and allowlist entries to lowercase and strips a single trailing dot. Exact entries match only exact normalized hosts without covering subdomains; wildcard entries (such as *.example.com) match exactly one non-empty, dot-free label, explicitly excluding bare apex domains and deeper subdomains; IPv4 dotted-quad hosts match only exact IP entries and never wildcards. (REF-ID: chat:session-01)"
+    ],
+    "evidence": [
+      "ee2f9243-bd46-4718-90b0-19b58fd57375"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=5211 cache_r=427631 cache_w=13077 | wall=62s -> /tmp/sdebench/run/boltons-hostallow-001_full_rf2-8899-r3/result.json

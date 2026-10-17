@@ -1,0 +1,10 @@
+== boltons-cachekey 13:13
+rf3-8898-r1    solved=True corrections=0 agent=$0.2141 agent_time=60.7s memory=$0.0131
+rf3-8898-r2    solved=True corrections=0 agent=$0.1614 agent_time=41.3s memory=$0.006
+rf3-8898-r3    solved=True corrections=0 agent=$0.1593 agent_time=45.3s memory=$0.0103
+== boltons-dedupe 13:17
+rf3-8898-r1    solved=True corrections=0 agent=$0.1872 agent_time=59.2s memory=$0.0161
+rf3-8898-r2    solved=True corrections=0 agent=$0.1563 agent_time=45.1s memory=$0.0106
+rf3-8898-r3    solved=True corrections=1 agent=$0.606 agent_time=215.2s memory=$0.0332
+== boltons-deploywave 13:23
+rf3-8898-r1    solved=True corrections=0 agent=$0.2032 agent_time=59.0s memory=$0.0028

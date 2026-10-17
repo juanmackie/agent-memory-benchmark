@@ -15,7 +15,7 @@ import cost_compare as C
 sys.path.insert(0, str(C.ROOT / "sdebench/watcher"))
 import reflectwatch as RW  # noqa: E402
 
-JEV_LOG = C.ROOT / "runs/hs/jev-8897.jsonl"
+JEV_LOG = C.JEV_LOG
 
 
 def jev_since(t0: float) -> tuple[int, int]:

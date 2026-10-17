@@ -1,0 +1,47 @@
+built boltons-findhashtags @ 979fa9b6
+built boltons-findhashtags @ 979fa9b6
+[boltons-findhashtags-001] history=full model=claude-sonnet-5 — initial attempt…
+built boltons-findhashtags @ 979fa9b6
+{
+  "task_id": "boltons-findhashtags-001",
+  "codebase": "boltons-findhashtags",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "19 passed in 0.04s",
+  "patch_bytes": 692,
+  "tokens": {
+    "input": 32,
+    "output": 3261,
+    "reasoning": 0,
+    "cache_read": 506057,
+    "cache_write": 10478
+  },
+  "turns": 16,
+  "wall_s": 51.4,
+  "cost_usd": 0.1758,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 5,
+    "messages": [
+      "Before you change find_hashtags: pure-numeric tags are discarded to reduce clutter unless they represent 4-digit years between 1900 and 2099 (such as #2024), which are retained for campaign tracking. (REF-ID: chat:session-01)"
+    ],
+    "evidence": [
+      "81eec590-7d68-44fe-ab5d-2e6d0f1622a6"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=32 out=3261 cache_r=506057 cache_w=10478 | wall=51s -> /tmp/sdebench/run/boltons-findhashtags-001_full_rf2-8898-r1/result.json

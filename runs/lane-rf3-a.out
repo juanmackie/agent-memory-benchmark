@@ -1,0 +1,13 @@
+== boltons-budget 13:13
+rf3-8899-r1    solved=True corrections=0 agent=$0.1358 agent_time=38.1s memory=$0.0032
+rf3-8899-r2    solved=True corrections=0 agent=$0.2886 agent_time=106.5s memory=$0.0033
+rf3-8899-r3    solved=True corrections=0 agent=$0.1359 agent_time=33.6s memory=$0.0027
+== boltons-csvquote 13:17
+rf3-8899-r1    solved=True corrections=0 agent=$0.169 agent_time=46.5s memory=$0.0107
+rf3-8899-r2    solved=True corrections=0 agent=$0.1592 agent_time=43.3s memory=$0.0115
+rf3-8899-r3    solved=True corrections=0 agent=$0.1546 agent_time=44.7s memory=$0.023
+== boltons-dedupe-amended 13:20
+rf3-8899-r1    solved=True corrections=0 agent=$0.1592 agent_time=50.6s memory=$0.009
+rf3-8899-r2    solved=True corrections=0 agent=$0.182 agent_time=56.0s memory=$0.012
+rf3-8899-r3    solved=True corrections=0 agent=$0.1515 agent_time=52.3s memory=$0.0021
+== boltons-discount 13:24

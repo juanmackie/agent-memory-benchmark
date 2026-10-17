@@ -18,3 +18,20 @@ v6 (2026-10-17) — the watcher on Hindsight reflect (client calls only the Hind
     reflect prompt cache off. Jev calls metered by runs/hs/jev_proxy.py (the server does not meter them).
   - Replay (8 tasks, 42 moments vs v5): 42/42 same speak/silent, $0.0011/moment (v5 ~$0.0026),
     2.8s/moment (v5 3.3s), notes median 3.7s (v5 5.3s).
+
+v6.1 (2026-10-17, season rf2) — after season rf (99/99 solved, 95/99 first try, memory $0.0054/run,
+  but overage-amended 0/3 first try: the heads-up said NONE).
+  - The abstain answer reads the picked observation's source text (its source facts expanded to
+    their chunks, deduped, 8000 chars), as v5's writer read the source document. Source fact ids
+    are turned on for abstain (off by default in reflect's observation search).
+  - NONE rule tightened: flash wrote "Nothing conflicts." where the client question said
+    "reply with nothing".
+  - Replay (8 tasks): 42/42 agree after the NONE fix; memory $0.113 for the 8 runs vs v5 $0.149.
+
+v6.2 (2026-10-17, season rf4) — final
+  - Structured abstain answer {applies, answer} (no NONE sentinel); a settled pick (none < 0.3)
+    must write its answer, the LLM vetoes only in the unsure band (as v5's writer had no veto).
+  - rf4 vs same-day v5 control (v5c), 33 tasks x 3, two lanes: see runs/reflect-final-score.txt.
+  - Plugin (hindsight-integrations/coding-agents, autoInject "watch"): notes delivered by a short
+    sync PostToolUse hook + detached review (Claude Code's async hooks don't deliver mid-task;
+    asyncRewake shows as "hook blocking error"). pwatch 3/3 solved first try, notes delivered.

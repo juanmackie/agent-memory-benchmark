@@ -1,0 +1,47 @@
+planted deploywave in boltons
+planted deploywave in boltons
+[boltons-deploywave-001] history=full model=claude-sonnet-5 — initial attempt…
+planted deploywave in boltons
+{
+  "task_id": "boltons-deploywave-001",
+  "codebase": "boltons-deploywave",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "13 passed in 0.02s",
+  "patch_bytes": 1470,
+  "tokens": {
+    "input": 32,
+    "output": 4939,
+    "reasoning": 0,
+    "cache_read": 513437,
+    "cache_write": 12773
+  },
+  "turns": 16,
+  "wall_s": 59.0,
+  "cost_usd": 0.2032,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 6,
+    "messages": [
+      "Before you change plan_waves: services with canary: true form wave 0 ordered by name, regardless of dependencies (omitted if no canaries exist); remaining services deploy in the wave after their deepest in-release dependency (ignoring unresolvable dependencies); inside each wave order by tier ascending then name A-Z tiebreaker; return lists of service names."
+    ],
+    "evidence": [
+      "966df717-211a-4056-8e2a-9bbc18cdafee"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=32 out=4939 cache_r=513437 cache_w=12773 | wall=59s -> /tmp/sdebench/run/boltons-deploywave-001_full_rf3-8898-r1/result.json

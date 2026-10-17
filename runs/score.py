@@ -23,10 +23,10 @@ def stats(rs: list[dict]) -> dict:
 
 
 tasks = sorted({t for t, _ in rows})
-tot = {"plugin": [], "watcher": []}
+tot = {"plugin": [], "watcher": [], "reflect": [], "pwatch": []}
 print(f"{'task':28} {'arm':8} solved first-try  claude$   time  memory$")
 for t in tasks:
-    for arm in ("plugin", "watcher"):
+    for arm in ("plugin", "watcher", "reflect", "pwatch"):
         rs = rows.get((t, arm))
         if not rs:
             continue
@@ -39,5 +39,5 @@ for arm, rs in tot.items():
         s = stats(rs)
         print(f"TOTAL {arm:8} solved {s['solved']}/{s['n']}  first-try {s['first_try']}/{s['n']}  claude ${s['agent']:.3f}/run  "
               f"time {s['time']:.0f}s/run  memory ${s['mem']:.4f}/run")
-both = [t for t in tasks if (t, "plugin") in rows and (t, "watcher") in rows]
-print(f"tasks with both arms: {len(both)}")
+both = [t for t in tasks if (t, "watcher") in rows and (t, "reflect") in rows]
+print(f"tasks with v5 and reflect: {len(both)}")

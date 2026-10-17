@@ -36,7 +36,7 @@ def main() -> None:
         print(f"built {a.archive} setup=${C.server_cost(usage):.4f} ({round(time.time() - t0)}s)", flush=True)
     for i in range(1, a.runs + 1):
         for arm in a.arms.split(","):
-            run_id = f"{a.label}-{arm[0]}{i}"  # p, w, r
+            run_id = f"{a.label}-{'q' if arm == 'pwatch' else arm[0]}{i}"  # p, w, r, q (pwatch)
             bank = f"{a.label}-{run_id}"
             C.import_bank(Path(a.archive), bank)  # same memory every session, no model calls
             time.sleep(5)  # a restore can queue consolidation a moment later; it must not land in the session
@@ -52,10 +52,12 @@ def main() -> None:
                                             "--watcher-memory", "hindsight"],
                                {**e, "WATCHER_SHARED_BANK": bank}, out / f"{run_id}.log")
                 client = C.watcher_client_usage(Path("/tmp/sdebench/run") / f"{task['task_id']}_full_{run_id}")
-            else:
+            else:  # plugin: first-prompt reflect; pwatch: the plugin's own watcher (autoInject "watch")
                 r = C.run_task(tj, run_id, ["--history", "hscoding"],
                                {**e, "SDE_HSCODING_PLUGIN_DIR": str(C.PLUGIN), "SDE_HSCODING_BANK": bank,
-                                "SDE_HINDSIGHT_URL": C.HS}, out / f"{run_id}.log")
+                                "SDE_HINDSIGHT_URL": C.HS,
+                                **({"HINDSIGHT_AUTO_INJECT": "watch"} if arm == "pwatch" else {})},
+                               out / f"{run_id}.log")
                 client = {"cost": 0.0}
             C.wait_idle(bank)
             usage = C.server_usage(before, C.counters())

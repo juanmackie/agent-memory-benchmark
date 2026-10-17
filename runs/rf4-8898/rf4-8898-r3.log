@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1104,
+  "tokens": {
+    "input": 20,
+    "output": 2665,
+    "reasoning": 0,
+    "cache_read": 313347,
+    "cache_write": 10252
+  },
+  "turns": 11,
+  "wall_s": 37.1,
+  "cost_usd": 0.1304,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 3,
+    "messages": [
+      "Before you change infraconf/units.py: parse_quantity must evaluate memory suffixes ('K', 'M', 'G', 'T') as binary powers of 1024, with bare numbers defaulting to MiB; disk suffixes ('M', 'G', 'T') as decimal powers of 1000, with bare numbers defaulting to GB, and 'K'/'k' rejected with ValueError; suffixes are case-insensitive, values integers only, whitespace tolerated, and ValueErrors must report kind and suffix without raw config blobs."
+    ],
+    "evidence": [
+      "705d2138-cfad-4322-b864-4698bfbcb19b"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=20 out=2665 cache_r=313347 cache_w=10252 | wall=37s -> /tmp/sdebench/run/boltons-unitparse-001_full_rf4-8898-r3/result.json
