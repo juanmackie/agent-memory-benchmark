@@ -24,11 +24,12 @@ HEADSUP_Q = ("Before I start on this request: which project decision recorded in
              "an exception) about exactly the code this request will change must my fix respect, that the request "
              "itself does not state? Only what someone decided (a chosen value or rule, an exception, a rejected "
              "option), not what the code already does: I can read that myself. Tell me in at most 70 words, as 'Before you change <the code>: <every such rule, "
-             "in its final form>', copying exact literals verbatim. If memory records no such decision about this "
+             "in its final form; for an option memory records as rejected, also why, in a few words>', copying exact literals verbatim. If memory records no such decision about this "
              "code, reply with nothing.")
 CONFLICT_Q = ("Does what I am doing right now (my plan, command or code change) contradict a project decision recorded "
               "in memory, miss one, or repeat an option recorded as rejected? If so, tell me in at most 50 words the "
-              "recorded value or rule (exact literals verbatim) and what in my work disagrees. How I run, install or "
+              "recorded value or rule (exact literals verbatim) and what in my work disagrees; if I repeat a rejected "
+              "option, also why it was rejected, in a few words. How I run, install or "
               "check tests is never a conflict. If nothing conflicts, reply with nothing.")
 
 

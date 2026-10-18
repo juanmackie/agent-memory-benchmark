@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.04s",
+  "patch_bytes": 1046,
+  "tokens": {
+    "input": 26,
+    "output": 2958,
+    "reasoning": 0,
+    "cache_read": 413013,
+    "cache_write": 11892
+  },
+  "turns": 13,
+  "wall_s": 43.5,
+  "cost_usd": 0.1598,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 5,
+    "messages": [
+      "Before you change infraconf/units.py: memory suffixes use binary powers (K=1024, M=1024**2, G=1024**3, T=1024**4) and bare memory defaults to MiB (1024**2). Disk suffixes use decimal powers (M=1000**2, G=1000**3, T=1000**4) and bare disk defaults to GB (1000**3). Suffixes are case-insensitive; rejected binary across the board (disk storage is decimal) and raw bytes for bare numbers (legacy templates meant MiB/GB). 'K'/'k' is rejected for disk with ValueError because the vendor API has no kilobyte unit; integers only; whitespace tolerated; ValueError reports kind and suffix, never raw blobs."
+    ],
+    "evidence": [
+      "39e92d3f-66a5-44cc-aa74-739abfe8d7ab"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=2958 cache_r=413013 cache_w=11892 | wall=43s -> /tmp/sdebench/run/boltons-unitparse-001_full_rj-r1/result.json

@@ -1,0 +1,12 @@
+rj-r1          solved=True corrections=0 agent=$0.3331 agent_time=113.9s memory=$0.0266
+rj-r2          solved=True corrections=0 agent=$0.314 agent_time=128.8s memory=$0.0117
+rj-r3          solved=True corrections=0 agent=$0.377 agent_time=123.2s memory=$0.0297
+rj-r4          solved=True corrections=0 agent=$0.3552 agent_time=115.0s memory=$0.0266
+rj-r5          solved=True corrections=0 agent=$0.363 agent_time=118.0s memory=$0.0199
+rj-r6          solved=True corrections=0 agent=$0.3742 agent_time=105.2s memory=$0.0223
+rj-r1          solved=True corrections=0 agent=$0.1279 agent_time=37.7s memory=$0.0107
+rj-r2          solved=True corrections=0 agent=$0.153 agent_time=43.5s memory=$0.0073
+rj-r3          solved=True corrections=0 agent=$0.1837 agent_time=80.2s memory=$0.0195
+rj-r1          solved=True corrections=0 agent=$0.1598 agent_time=43.5s memory=$0.0045
+rj-r2          solved=True corrections=0 agent=$0.1516 agent_time=41.4s memory=$0.012
+probe done

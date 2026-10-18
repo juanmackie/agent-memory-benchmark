@@ -1,86 +1,88 @@
-# Watcher on Hindsight reflect (v6.3, season pair4) vs client-side watcher v5 — same night, both arms on both lanes
+# Watcher on Hindsight reflect (v6.4, season pair6) vs client-side watcher v5 — same night, both arms on both lanes
 task                         arm      solved first-try  claude$   time  memory$
-boltons-budget               watcher  3/3    3/3     0.162     46s  0.0104
-boltons-budget               reflect  3/3    3/3     0.164     52s  0.0034
-boltons-cachekey             watcher  3/3    3/3     0.167     51s  0.0120
-boltons-cachekey             reflect  3/3    3/3     0.184     58s  0.0214
-boltons-csvquote             watcher  3/3    3/3     0.138     38s  0.0178
-boltons-csvquote             reflect  3/3    3/3     0.166     51s  0.0162
-boltons-dedupe               watcher  3/3    3/3     0.185     62s  0.0192
-boltons-dedupe               reflect  3/3    3/3     0.162     56s  0.0130
-boltons-dedupe-amended       watcher  3/3    3/3     0.182     60s  0.0194
-boltons-dedupe-amended       reflect  3/3    3/3     0.174     57s  0.0088
-boltons-deploywave           watcher  3/3    3/3     0.181     69s  0.0104
-boltons-deploywave           reflect  3/3    3/3     0.194     65s  0.0030
-boltons-discount             watcher  3/3    3/3     0.129     34s  0.0178
-boltons-discount             reflect  3/3    3/3     0.101     33s  0.0105
-boltons-drainplan            watcher  3/3    3/3     0.170     49s  0.0203
-boltons-drainplan            reflect  3/3    3/3     0.148     38s  0.0133
-boltons-featflag             watcher  3/3    2/3     0.226     52s  0.0204
-boltons-featflag             reflect  3/3    3/3     0.147     44s  0.0087
-boltons-findhashtags         watcher  3/3    3/3     0.185     50s  0.0011
-boltons-findhashtags         reflect  3/3    3/3     0.143     39s  0.0020
-boltons-hostallow            watcher  3/3    3/3     0.163     50s  0.0071
-boltons-hostallow            reflect  3/3    3/3     0.183     59s  0.0072
-boltons-listmerge            watcher  3/3    3/3     0.136     34s  0.0082
-boltons-listmerge            reflect  3/3    3/3     0.173     48s  0.0113
-boltons-mimemap              watcher  3/3    3/3     0.190     54s  0.0127
-boltons-mimemap              reflect  3/3    3/3     0.191     55s  0.0123
-boltons-overage              watcher  3/3    3/3     0.201     65s  0.0158
-boltons-overage              reflect  3/3    3/3     0.181     65s  0.0073
-boltons-overage-amended      watcher  3/3    3/3     0.151     42s  0.0216
-boltons-overage-amended      reflect  3/3    3/3     0.142     41s  0.0114
-boltons-parseflag            watcher  3/3    3/3     0.111     34s  0.0099
-boltons-parseflag            reflect  3/3    3/3     0.107     28s  0.0040
-boltons-pluralize            watcher  3/3    3/3     0.331    112s  0.0159
-boltons-pluralize            reflect  3/3    2/3     0.647    130s  0.0295
-boltons-redact               watcher  3/3    3/3     0.139     42s  0.0179
-boltons-redact               reflect  3/3    2/3     0.230     53s  0.0194
-boltons-retryjitter          watcher  3/3    3/3     0.123     33s  0.0161
-boltons-retryjitter          reflect  3/3    3/3     0.119     31s  0.0120
-boltons-retryjitter-amended  watcher  3/3    3/3     0.134     37s  0.0167
-boltons-retryjitter-amended  reflect  3/3    3/3     0.114     31s  0.0026
-boltons-rounding             watcher  3/3    3/3     0.149     38s  0.0050
-boltons-rounding             reflect  3/3    3/3     0.151     38s  0.0063
-boltons-sched                watcher  3/3    3/3     0.138     35s  0.0174
-boltons-sched                reflect  3/3    3/3     0.145     40s  0.0192
-boltons-seqledger            watcher  3/3    3/3     0.209     65s  0.0160
-boltons-seqledger            reflect  3/3    3/3     0.189     58s  0.0138
-boltons-slalog               watcher  3/3    3/3     0.182     50s  0.0293
-boltons-slalog               reflect  3/3    3/3     0.187     61s  0.0156
-boltons-slalog-amended       watcher  3/3    3/3     0.183     58s  0.0103
-boltons-slalog-amended       reflect  3/3    3/3     0.167     58s  0.0023
-boltons-slugify              watcher  3/3    3/3     0.163     46s  0.0121
-boltons-slugify              reflect  3/3    3/3     0.152     43s  0.0033
-boltons-statetrans           watcher  3/3    3/3     0.219     66s  0.0272
-boltons-statetrans           reflect  3/3    3/3     0.166     47s  0.0111
-boltons-tagmerge             watcher  3/3    3/3     0.176     57s  0.0200
-boltons-tagmerge             reflect  3/3    3/3     0.164     55s  0.0044
-boltons-tagmerge-amended     watcher  3/3    3/3     0.173     59s  0.0154
-boltons-tagmerge-amended     reflect  3/3    3/3     0.158     54s  0.0054
-boltons-trimstats            watcher  3/3    3/3     0.141     40s  0.0072
-boltons-trimstats            reflect  3/3    3/3     0.148     43s  0.0077
-boltons-under2camel          watcher  3/3    3/3     0.133     32s  0.0009
-boltons-under2camel          reflect  3/3    3/3     0.130     34s  0.0020
-boltons-unitparse            watcher  3/3    3/3     0.148     41s  0.0115
-boltons-unitparse            reflect  3/3    3/3     0.154     45s  0.0117
-boltons-unitparse-amended    watcher  3/3    3/3     0.166     48s  0.0134
-boltons-unitparse-amended    reflect  3/3    3/3     0.173     52s  0.0070
+boltons-budget               watcher  3/3    3/3     0.159     42s  0.0043
+boltons-budget               reflect  3/3    3/3     0.162     44s  0.0033
+boltons-cachekey             watcher  3/3    3/3     0.176     58s  0.0149
+boltons-cachekey             reflect  3/3    3/3     0.179     58s  0.0131
+boltons-csvquote             watcher  3/3    3/3     0.154     45s  0.0310
+boltons-csvquote             reflect  3/3    3/3     0.141     44s  0.0084
+boltons-dedupe               watcher  3/3    3/3     0.177     66s  0.0209
+boltons-dedupe               reflect  3/3    3/3     0.189     68s  0.0206
+boltons-dedupe-amended       watcher  3/3    3/3     0.173     57s  0.0131
+boltons-dedupe-amended       reflect  3/3    3/3     0.150     51s  0.0087
+boltons-deploywave           watcher  3/3    3/3     0.183     65s  0.0063
+boltons-deploywave           reflect  3/3    3/3     0.202     68s  0.0051
+boltons-discount             watcher  3/3    3/3     0.133     37s  0.0116
+boltons-discount             reflect  3/3    3/3     0.126     33s  0.0130
+boltons-drainplan            watcher  3/3    3/3     0.195     53s  0.0321
+boltons-drainplan            reflect  3/3    3/3     0.149     39s  0.0087
+boltons-featflag             watcher  3/3    2/3     0.251     63s  0.0201
+boltons-featflag             reflect  2/3    2/3     0.414     72s  0.0245
+boltons-findhashtags         watcher  3/3    3/3     0.184     52s  0.0070
+boltons-findhashtags         reflect  3/3    3/3     0.158     41s  0.0031
+boltons-hostallow            watcher  3/3    3/3     0.185     62s  0.0189
+boltons-hostallow            reflect  3/3    3/3     0.173     55s  0.0092
+boltons-listmerge            watcher  3/3    3/3     0.158     42s  0.0210
+boltons-listmerge            reflect  3/3    3/3     0.155     41s  0.0051
+boltons-mimemap              watcher  3/3    3/3     0.181     54s  0.0126
+boltons-mimemap              reflect  3/3    3/3     0.183     57s  0.0100
+boltons-overage              watcher  3/3    3/3     0.154     55s  0.0163
+boltons-overage              reflect  3/3    3/3     0.174     56s  0.0086
+boltons-overage-amended      watcher  3/3    3/3     0.156     52s  0.0153
+boltons-overage-amended      reflect  3/3    3/3     0.147     44s  0.0097
+boltons-parseflag            watcher  3/3    3/3     0.106     28s  0.0070
+boltons-parseflag            reflect  3/3    3/3     0.102     26s  0.0042
+boltons-pluralize            watcher  3/3    3/3     0.300     96s  0.0180
+boltons-pluralize            reflect  3/3    3/3     0.345    112s  0.0292
+boltons-redact               watcher  3/3    2/3     0.242     53s  0.0310
+boltons-redact               reflect  3/3    3/3     0.154     45s  0.0156
+boltons-retryjitter          watcher  3/3    3/3     0.109     35s  0.0218
+boltons-retryjitter          reflect  3/3    3/3     0.127     34s  0.0187
+boltons-retryjitter-amended  watcher  3/3    3/3     0.117     33s  0.0164
+boltons-retryjitter-amended  reflect  3/3    3/3     0.112     33s  0.0028
+boltons-rounding             watcher  3/3    3/3     0.129     33s  0.0036
+boltons-rounding             reflect  3/3    3/3     0.145     39s  0.0076
+boltons-sched                watcher  3/3    3/3     0.138     40s  0.0142
+boltons-sched                reflect  3/3    3/3     0.153     43s  0.0149
+boltons-seqledger            watcher  3/3    3/3     0.194     68s  0.0196
+boltons-seqledger            reflect  3/3    3/3     0.188     60s  0.0129
+boltons-slalog               watcher  3/3    3/3     0.154     49s  0.0117
+boltons-slalog               reflect  3/3    3/3     0.193     65s  0.0101
+boltons-slalog-amended       watcher  3/3    3/3     0.171     59s  0.0076
+boltons-slalog-amended       reflect  3/3    3/3     0.162     61s  0.0043
+boltons-slugify              watcher  3/3    3/3     0.155     42s  0.0042
+boltons-slugify              reflect  3/3    3/3     0.152     42s  0.0042
+boltons-statetrans           watcher  3/3    3/3     0.193     62s  0.0219
+boltons-statetrans           reflect  3/3    3/3     0.184     54s  0.0144
+boltons-tagmerge             watcher  3/3    3/3     0.151     50s  0.0044
+boltons-tagmerge             reflect  3/3    3/3     0.147     50s  0.0050
+boltons-tagmerge-amended     watcher  3/3    3/3     0.194     68s  0.0128
+boltons-tagmerge-amended     reflect  3/3    3/3     0.163     59s  0.0054
+boltons-trimstats            watcher  3/3    3/3     0.141     39s  0.0071
+boltons-trimstats            reflect  3/3    3/3     0.145     41s  0.0062
+boltons-under2camel          watcher  3/3    3/3     0.143     36s  0.0011
+boltons-under2camel          reflect  3/3    3/3     0.144     42s  0.0025
+boltons-unitparse            watcher  3/3    3/3     0.174     48s  0.0080
+boltons-unitparse            reflect  3/3    3/3     0.169     51s  0.0101
+boltons-unitparse-amended    watcher  3/3    3/3     0.167     49s  0.0127
+boltons-unitparse-amended    reflect  3/3    3/3     0.194     58s  0.0103
 
-TOTAL watcher  solved 99/99  first-try 98/99  claude $0.169/run  time 50s/run  memory $0.0144/run
-TOTAL reflect  solved 99/99  first-try 97/99  claude $0.174/run  time 50s/run  memory $0.0099/run
+TOTAL watcher  solved 99/99  first-try 97/99  claude $0.170/run  time 51s/run  memory $0.0142/run
+TOTAL reflect  solved 98/99  first-try 98/99  claude $0.172/run  time 51s/run  memory $0.0100/run
 tasks with v5 and reflect: 33
 
-# Paired (python pairstat.py pair4-889*/duel.jsonl)
-watcher 99 ft 98 cost mean 0.169 med 0.159 wall mean 50.0 med 46.1 | ft-only cost 0.167 wall 49.9 mem 0.0144
-  misses: [('boltons-featflag', 'pair4-8899-w1')]
-reflect 99 ft 97 cost mean 0.174 med 0.158 wall mean 50.3 med 47.8 | ft-only cost 0.161 wall 48.9 mem 0.0099
-  misses: [('boltons-redact', 'pair4-8898-r1'), ('boltons-pluralize', 'pair4-8899-r1')]
-paired task diff reflect-watcher: cost mean +0.0052 med -0.0033 cheaper in 18/33; wall mean +0.3 med -0.3 faster in 18
+# Paired (bin/python pairstat.py pair6-889*/duel.jsonl)
+watcher 99 ft 97 cost mean 0.170 med 0.164 wall mean 51.3 med 49.8 | ft-only cost 0.164 wall 50.7 mem 0.0142
+  misses: [('boltons-redact', 'pair6-8898-w2'), ('boltons-featflag', 'pair6-8899-w1')]
+reflect 99 ft 98 cost mean 0.172 med 0.156 wall mean 51.2 med 49.0 | ft-only cost 0.165 wall 50.6 mem 0.0100
+  misses: [('boltons-featflag', 'pair6-8899-r1')]
+paired task diff reflect-watcher: cost mean +0.0026 med -0.0032 cheaper in 18/33; wall mean -0.1 med +0.0 faster in 16
 
-# Totals per run (Claude + memory): watcher $0.1836, reflect $0.1843 (+0.4%).
-# Excluding retried runs: reflect $0.161 / 48.9s, watcher $0.167 / 49.9s.
-# The mean gap is one run: pluralize r1 ($1.22, 165s, 2 corrections) where both reflect notes
-# were correct ("do not edit boltons/strutils.py, use our_pluralize") and the agent edited it anyway.
-# Notes with memory ids (REF-ID, chat:..., git:...): 0 (pair3: 46/114).
-# Earlier seasons: rf4 in reflect-score-rf4.txt; pair2/pair3 in watcher-versions.txt.
+# Claude + memory per run: watcher $0.1837, reflect $0.1821 (-0.9%). Time 51.3s vs 51.2s. First try 97 vs 98.
+# Memory alone: $0.0142 vs $0.0100 (-30%).
+# The one unsolved reflect run (featflag r1) is the agent refusing the recorded corp-user override as a
+# "privileged bypass" and calling the hidden test fabricated, three times; the note was correct. The same
+# refusal happened in pair5 r1; v5's featflag w1 needed a correction too.
+# v6.4 change: the heads-up and the conflict note say why, in a few words, only for an option memory records
+# as rejected (pair5's "a reason for every rule" garbled featflag and was reverted).
+# Earlier: pair4 in reflect-score-pair4.txt, rf4 in reflect-score-rf4.txt, all seasons in watcher-versions.txt.

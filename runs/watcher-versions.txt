@@ -60,3 +60,9 @@ v6.3 (2026-10-18, seasons pair2..pair4) — reflect-only watcher, both arms on b
   - Claude + memory per run by season (watcher | reflect): pair2 $0.1758 49.2s | $0.1887 55.2s;
     pair3 $0.1861 50.1s | $0.1896 52.4s; pair4 $0.1836 50.0s | $0.1843 50.3s; pair5 (reverted
     wording) $0.1776 48.6s | $0.1985 52.8s.
+
+v6.4 (2026-10-18, season pair6) — final
+  - Heads-up and conflict questions add: for an option memory records as rejected, also why, in a few
+    words. Probe: pluralize 6/6 first try, $0.353 / 117s (v5 ~$0.33 / 115s; reflect before ~$0.45 / 145s).
+  - pair6: Claude + memory $0.1821 vs v5 $0.1837; time 51.2s vs 51.3s; first try 98 vs 97; solved 98 vs 99
+    (featflag r1: the agent refused the recorded override as a "bypass", note correct); memory -30%.
