@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.03s",
+  "patch_bytes": 1116,
+  "tokens": {
+    "input": 26,
+    "output": 2769,
+    "reasoning": 0,
+    "cache_read": 410290,
+    "cache_write": 11789
+  },
+  "turns": 13,
+  "wall_s": 43.4,
+  "cost_usd": 0.157,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 4,
+    "messages": [
+      "Before you change infraconf/units.py: memory suffixes are binary - K=1024, M=1024**2, G=1024**3, T=1024**4 - case-insensitive, and a bare memory number means MiB; disk suffixes are decimal - M=1000**2, G=1000**3, T=1000**4 - case-insensitive, and a bare disk number means GB; 'K' or 'k' is valid for memory only and raises a ValueError for disk, since the vendor API has no kilobyte disk unit. Integers only, whitespace tolerated, unknown suffixes rejected."
+    ],
+    "evidence": [
+      "fe5caaf5-9f7d-49ad-9494-719560734951"
+    ],
+    "errors": 0,
+    "tokens_in": 12977,
+    "tokens_out": 484,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=2769 cache_r=410290 cache_w=11789 | wall=43s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair7-8898-w1/result.json
