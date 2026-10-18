@@ -1,0 +1,1 @@
+{"task": "boltons-unitparse", "run": "pdef-p1", "arm": "plugin", "solved": true, "corrections": 0, "agent_cost": 0.1991, "agent_wall_s": 43.8, "session_server": {"gemini-3.8-flash": {"reflect": {"input": 8812, "output": 390}}}, "session_client": {"cost": 0.0}, "session_jev": {"calls": 3, "input": 11679, "cost": 0.000490518}, "memory_cost": 0.0086, "elapsed_s": 51}

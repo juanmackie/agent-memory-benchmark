@@ -53,3 +53,10 @@ v6.3 (2026-10-18, seasons pair2..pair4) — reflect-only watcher, both arms on b
     Claude + memory $0.1843 vs $0.1836. See runs/reflect-final-score.txt.
   - Tried and rejected for speed: flash-lite (missed the discount conflict 2/3), thinking minimal
     (not supported on gemini-3.8-flash), thinking budget 0 (no faster than low).
+  - pair5 (tried, reverted): both questions also asked for "the reason memory records, in a few words"
+    (v5's pluralize notes carried the why). Replay 40/42, but the season got worse: reflect first
+    try 95 vs 97, featflag failed once (notes gained garbled reasons, "to prevent percent=0
+    enrollment"); Claude + memory $0.1985 vs $0.1776; 52.8s vs 48.6s.
+  - Claude + memory per run by season (watcher | reflect): pair2 $0.1758 49.2s | $0.1887 55.2s;
+    pair3 $0.1861 50.1s | $0.1896 52.4s; pair4 $0.1836 50.0s | $0.1843 50.3s; pair5 (reverted
+    wording) $0.1776 48.6s | $0.1985 52.8s.
