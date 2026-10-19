@@ -1,0 +1,2 @@
+{"moments": 4, "v5_speak": 2, "speak": 2, "agree": 4, "ms": 15933, "llm_in": 17840, "llm_out": 355, "jev_tok": 14649, "v5_ms": 14833, "missed": [], "extra": [], "cost": 0.01533, "task": "boltons-pluralize", "run": "final-w1", "extra_args": "{}"}
+{"moments": 4, "v5_speak": 1, "speak": 1, "agree": 4, "ms": 10952, "llm_in": 5910, "llm_out": 174, "jev_tok": 12129, "v5_ms": 12468, "missed": [], "extra": [], "cost": 0.00559, "task": "boltons-deploywave", "run": "final-w1", "extra_args": "{}"}

@@ -78,3 +78,23 @@ v6.5 (2026-10-18, season pair8) — server: a settled abstain pick writes only t
   - Pooled pair6+7+8 (99 paired runs per season, by task): Claude + memory +$0.0034 [-0.0031, +0.0104]
     = tie; time +1.8s [+0.1, +3.6] on the mean, +0.3s median per task (driven by a few long runs:
     pluralize, csvquote, trimstats); first try 292 vs 294; memory cost -30%.
+
+v6.6 (season pair9): word caps 50/40 and "why in at most 8 words". Typical run -0.5s but notes dropped
+  rules (deploywave); mean +3.0s, +$0.014 (one featflag run at $1.02). Reverted the caps.
+v6.7 (season pair10): + server: the answer follows the memory's source where its summary is stale
+  (statetrans summary said "linear", source recap was branching; hindsight 8090aefac). +1.4s, +$0.008.
+v6.8 (pair11): caps back to 70/50, rules "in the words the memory states it". First try 99 vs 97,
+  Claude+memory $0.1763 vs $0.1838, time +1.9s.
+v6.9 (pair12-14): heads-up drops the why (conflict note keeps it; hindsight f01fa7d7a).
+  pair12 +0.5s/+$0.0003, pair13 +1.9s/+$0.007, pair14 +0.6s/+$0.0045.
+  Pooled: time +1.0s [-1.3, +3.2], typical task -0.9s; Claude+memory +$0.004 [-0.005, +0.013]; first try 292 vs 294.
+v6.10 (pair15-16): notes in v5's style: heads-up "each rule a fix could get wrong, no advice beyond the
+  rules", conflict note without the why (hindsight 8447ead76). pair15 +0.4s/-$0.0013 (faster on 20/33
+  tasks), pair16 +3.9s/+$0.009. Pooled: time +2.2s [-0.0, +4.6], typical task +0.0s; Claude+memory
+  +$0.004 [-0.005, +0.014]; first try 194 vs 197; memory -22%.
+Where the gap is (pair11-16, 594 runs per arm): tool time equal (0.5s); the heads-up is delivered at the
+  same time (8.4s vs 8.6s) and before the first edit as often (97% vs 95%), but the first edit comes 1.2s
+  later; the agent writes ~110 more output tokens per run (mostly hidden thinking). Fewer mid-task
+  conflict notes than v5 (17 vs 27 per 198 runs).
+Tried and rejected: flash-lite as the reflect model (heads-up 4.5s -> 3.1s, but replay 39/42 with two
+  restating notes in the LLM-decides band).

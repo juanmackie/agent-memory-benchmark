@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1030,
+  "tokens": {
+    "input": 28,
+    "output": 2623,
+    "reasoning": 0,
+    "cache_read": 442867,
+    "cache_write": 10412
+  },
+  "turns": 14,
+  "wall_s": 41.4,
+  "cost_usd": 0.1565,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 5,
+    "messages": [
+      "Before you change parse_quantity in infraconf/units.py: memory suffixes evaluate to binary powers of 1024 ('K'=1024, 'M'=1024**2, 'G'=1024**3, 'T'=1024**4) with bare numbers defaulting to MiB (1024**2); disk suffixes evaluate to decimal powers of 1000 ('M'=1000**2, 'G'=1000**3, 'T'=1000**4) with bare numbers defaulting to GB (1000**3), and 'K'/'k' rejected with a ValueError. Suffixes are case-insensitive, integers only, and ValueErrors report kind and suffix without whole config blobs."
+    ],
+    "evidence": [
+      "2225b986-e6d7-45d5-a98d-f34f50084bd0"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=28 out=2623 cache_r=442867 cache_w=10412 | wall=41s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair13-8898-r1/result.json

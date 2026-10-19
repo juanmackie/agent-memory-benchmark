@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-amended-001",
+  "codebase": "boltons-unitparse-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1097,
+  "tokens": {
+    "input": 26,
+    "output": 3032,
+    "reasoning": 0,
+    "cache_read": 403633,
+    "cache_write": 9905
+  },
+  "turns": 13,
+  "wall_s": 45.2,
+  "cost_usd": 0.1507,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 3,
+    "messages": [
+      "Before you change parse_quantity, note the final unit handling rules: memory keeps binary suffixes (including K = 1024) and defaults bare numbers to MiB; disk uses decimal suffixes (M is 1000^2, G is 1000^3, T is 1000^4), defaults bare numbers to decimal gigabytes (GB), and rejects 'K' suffixes with ValueError."
+    ],
+    "evidence": [
+      "140c78fb-9bae-4824-b3d7-23828fe2f4b1"
+    ],
+    "errors": 0,
+    "tokens_in": 11318,
+    "tokens_out": 321,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=3032 cache_r=403633 cache_w=9905 | wall=45s -> /tmp/sdebench/run/boltons-unitparse-amended-001_full_pair15-8899-w3/result.json

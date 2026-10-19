@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-amended-001",
+  "codebase": "boltons-unitparse-amended",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1343,
+  "tokens": {
+    "input": 26,
+    "output": 4277,
+    "reasoning": 0,
+    "cache_read": 413150,
+    "cache_write": 12013
+  },
+  "turns": 13,
+  "wall_s": 50.8,
+  "cost_usd": 0.1735,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 4,
+    "messages": [
+      "Before you change parse_quantity: memory keeps binary suffixes and bare numbers default to MiB; disk uses decimal suffixes ('M' = 1000\u00b2, 'G' = 1000\u00b3, 'T' = 1000\u2074) with bare numbers defaulting to decimal GB, and rejects 'K' with ValueError. Rejected uniform binary multipliers: storage vendor sells decimal gigabytes."
+    ],
+    "evidence": [
+      "9b13dc05-3b6f-4226-92bb-93a38d022a6a"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=4277 cache_r=413150 cache_w=12013 | wall=51s -> /tmp/sdebench/run/boltons-unitparse-amended-001_full_pair10-8899-r2/result.json

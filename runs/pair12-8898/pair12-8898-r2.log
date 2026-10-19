@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1035,
+  "tokens": {
+    "input": 26,
+    "output": 2814,
+    "reasoning": 0,
+    "cache_read": 416627,
+    "cache_write": 10976
+  },
+  "turns": 13,
+  "wall_s": 45.1,
+  "cost_usd": 0.1554,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 5,
+    "messages": [
+      "Before you change parse_quantity: memory suffixes evaluate to binary powers of 1024 ('K'=1024, 'M'=1024**2, 'G'=1024**3, 'T'=1024**4), with bare numbers defaulting to MiB (256*1024**2 bytes); disk suffixes evaluate to decimal powers of 1000 ('M'=1000**2, 'G'=1000**3, 'T'=1000**4), with bare numbers defaulting to GB (1000**3), and 'K'/'k' rejected with a ValueError; suffixes are case-insensitive, quantities are integers only, whitespace is tolerated, and ValueErrors include the kind and suffix without echoing the whole config blob."
+    ],
+    "evidence": [
+      "0e6642dc-be25-4f1e-9320-45b52a15a699"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=26 out=2814 cache_r=416627 cache_w=10976 | wall=45s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair12-8898-r2/result.json

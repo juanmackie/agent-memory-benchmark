@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1035,
+  "tokens": {
+    "input": 24,
+    "output": 2796,
+    "reasoning": 0,
+    "cache_read": 381078,
+    "cache_write": 11272
+  },
+  "turns": 14,
+  "wall_s": 41.1,
+  "cost_usd": 0.1493,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 7,
+    "messages": [
+      "Before you change infraconf/units.py: parse_quantity must use kind-dependent tables: memory suffixes evaluate to 1024 powers ('K'=1024, 'M'=1024**2, 'G'=1024**3, 'T'=1024**4) with bare numbers defaulting to MiB; disk suffixes evaluate to decimal powers ('M'=1000**2, 'G'=1000**3, 'T'=1000**4) with bare numbers defaulting to GB; disk 'K'/'k' is rejected with ValueError because vendor API has no kilobyte disk unit; suffixes are case-insensitive; rejected uniform binary across board because wrong as decimal across the board."
+    ],
+    "evidence": [
+      "1bce8eaf-2dda-4ec8-98cb-c38c0a9ab3c3"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=24 out=2796 cache_r=381078 cache_w=11272 | wall=41s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair9-8898-r1/result.json

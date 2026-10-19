@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1046,
+  "tokens": {
+    "input": 24,
+    "output": 3016,
+    "reasoning": 0,
+    "cache_read": 381150,
+    "cache_write": 10680
+  },
+  "turns": 14,
+  "wall_s": 44.6,
+  "cost_usd": 0.1492,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 5,
+    "messages": [
+      "Before you change parse_quantity: memory suffixes are binary powers of 1024 ('K'=1024, 'M'=1024**2, 'G'=1024**3, 'T'=1024**4), bare memory numbers default to MiB. Disk suffixes are decimal powers of 1000 ('M', 'G', 'T'), bare disk defaults to GB. 'K'/'k' for disk raises ValueError because vendor API lacks kilobyte disk unit."
+    ],
+    "evidence": [
+      "09f62344-3adb-41d5-89e9-d49494b57655"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=24 out=3016 cache_r=381150 cache_w=10680 | wall=45s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair10-8898-r2/result.json
