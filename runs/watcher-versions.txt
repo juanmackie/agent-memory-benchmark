@@ -110,3 +110,10 @@ v6.12 (pair18, pair19): settled answers read the source text first, summaries af
   pair19: Claude+mem $0.180 vs $0.173, 54.0s vs 50.6s, first try 97 vs 98 (loss).
   Pooled pair17-19 (99 task pairs): Claude+mem -$0.003 [-0.014, +0.007], wall +0.6s [-1.8, +3.1].
   A statistical tie with v5: reflect is not reliably cheaper or faster.
+
+Against the target (official coding-agents plugin with auto-reflect, final-score.txt), same 33 tasks:
+  plugin:            solved 99/99, first try 54/99,  Claude $0.396 + memory $0.0865 = $0.483/run, 108s/run
+  reflect (pair17-19): solved 297/297, first try 294/297 (99%), Claude $0.166 + memory $0.0082 = $0.174/run, 50.5s/run
+  -> about 64% cheaper and 2.1x faster than the plugin, with far fewer fix rounds.
+pair20 (mid-task notes speak below none 0.3, replay 41/42) was stopped after 2 tasks: not needed for the target;
+  the change was reverted, untested live.
