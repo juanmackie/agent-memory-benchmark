@@ -65,7 +65,7 @@ def ask(bank: str, goal: str, m: Moment, sent: list[str], extra: dict | None = N
     req = urllib.request.Request(f"{HS}/v1/default/banks/{bank}/reflect", json.dumps(body).encode(),
                                  {"Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=120) as r:
-        return json.load(r)
+        return {**json.load(r), "_request": body}
 
 
 def best_quote(text: str, like: str) -> str:
@@ -140,10 +140,13 @@ class ReflectWatcher:
         v = Verdict(False, ms=int((time.time() - t0) * 1000))
         v.decision = {"abstained": bool(r.get("abstained")), "llm_in": u.get("input_tokens"),
                       "llm_out": u.get("output_tokens"),
-                      "steps": [c.get("scope") for c in ((r.get("trace") or {}).get("llm_calls") or [])]}
+                      "steps": [c.get("scope") for c in ((r.get("trace") or {}).get("llm_calls") or [])],
+                      "detail": next((c.get("detail") for c in ((r.get("trace") or {}).get("llm_calls") or [])
+                                      if c.get("scope") == "decision_pick"), None)}
         W.CALLS.append({"ts": t0, "service": "hindsight", "name": "reflect", "ms": v.ms,
-                        "request": json.dumps({"query": m.trigger, "search_queries": search_queries(m)})[:4000],
-                        "response": json.dumps({k: r.get(k) for k in ("text", "abstained", "usage")})[:4000]})
+                        "request": json.dumps(r.get("_request"), indent=1)[:12000],
+                        "response": json.dumps({k: r.get(k) for k in ("text", "abstained", "usage", "trace")},
+                                               indent=1)[:12000]})
         text = (r.get("text") or "").strip()
         used = [x["id"] for x in ((r.get("based_on") or {}).get("memories") or [])]
         if not text or (used and set(used) <= self.evidence_sent):

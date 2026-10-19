@@ -84,12 +84,73 @@ def approx_from_trace(d: Path) -> list[dict]:
     return out
 
 
+# The decision model's calls, as the bench's metering proxy logged them: what it was asked, the
+# memories it was offered and the probability it gave each. A reflect watcher's moment is matched to
+# its pick by time (inside the reflect call) and by its context (the task's request is in it).
+PICKS = Path(__file__).resolve().parents[1] / "hs" / "pick_bodies.jsonl"
+# The server's thresholds (hindsight-api-slim engine/reflect/agent.py): at or above ABSTAIN_AT "none"
+# the moment is silent with no LLM call; below ANSWER_AT the writer model words the note; between,
+# the reflect LLM judges whether to speak.
+ABSTAIN_AT, ANSWER_AT, PICK_FLOOR = 0.9, 0.1, 0.1
+_picks: dict = {"mtime": 0, "rows": []}
+
+
+def picks() -> list[dict]:
+    if not PICKS.exists():
+        return []
+    m = PICKS.stat().st_mtime
+    if m != _picks["mtime"]:
+        rows = []
+        for e in jsonl(PICKS):
+            q = (e.get("body") or {}).get("questions", {}).get("pick")
+            a = (e.get("answer") or {}).get("pick")
+            if not q or not a:
+                continue
+            rows.append({"ts": e["ts"], "state": e["body"].get("state", ""), "question": q.get("instructions", ""),
+                         "criteria": q.get("criteria", {}), "p": a.get("probabilities", {})})
+        _picks.update(mtime=m, rows=rows)
+    return _picks["rows"]
+
+
+def pick_for(call: dict, goal: str) -> dict | None:
+    """The decision-model pick made inside this reflect call, read as the edge it decided."""
+    lo, hi = call["ts"] - 0.5, call["ts"] + call.get("ms", 0) / 1000 + 0.5
+    key = goal[:120]
+    hit = next((r for r in picks() if lo <= r["ts"] <= hi and key and key in r["state"]), None)
+    if not hit:
+        return None
+    none = float(hit["p"].get("none", 1.0))
+    best = max((v for k, v in hit["p"].items() if k != "none"), default=0.0)
+    offered = [{"text": text.split(": ", 1)[1] if ": " in text else text, "p": float(hit["p"].get(k, 0.0)),
+                "kept": none < ABSTAIN_AT and (hit["p"].get(k, 0.0) >= PICK_FLOOR or (hit["p"].get(k, 0.0) == best and best > 0))}
+               for k, text in hit["criteria"].items() if k != "none"]
+    path = ("silent" if none >= ABSTAIN_AT else "settled" if none < ANSWER_AT else "judged")
+    return {"none": none, "path": path, "question": hit["question"], "offered": offered,
+            "context": hit["state"].split("\n\nMEMORY:", 1)[0]}
+
+
 def run_view(name: str) -> dict:
     d = RUNS / name
     events, exact = agent_events(d)
+    goal = ""
+    if (d / "trace.json").exists():
+        goal = json.loads((d / "trace.json").read_text()).get("bug_report", "")
+    pending_pick = None
     for e in jsonl(d / "watcher.jsonl"):
         k = e.get("event")
         ev = {"ts": e["ts"], "lane": "watcher", "kind": k, **e}
+        if k == "call" and e.get("name") == "reflect":
+            pending_pick = pick_for(e, goal) if goal else None
+            try:
+                answer = (json.loads(e.get("response") or "{}").get("text") or "").strip()
+            except ValueError:
+                answer = ""
+            if pending_pick is None:
+                pending_pick = {"path": "none-asked", "answer": answer}
+            else:
+                pending_pick["answer"] = answer
+        if k == "review" and pending_pick is not None:
+            ev["pick"], pending_pick = pending_pick, None
         if k == "call":
             ev["end"] = e["ts"] + e.get("ms", 0) / 1000
         if k == "review":  # logged when the review ENDS; show it from when it started

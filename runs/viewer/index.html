@@ -78,6 +78,25 @@ header details pre { white-space: pre-wrap; max-height: 160px; overflow: auto; }
   border-radius: 50%; animation: r .8s linear infinite; }
 @keyframes r { to { transform: rotate(360deg); } }
 .empty { color: var(--muted); padding: 40px; text-align: center; }
+.edge { display: inline-flex; gap: 4px; align-items: center; font-size: 11px; margin-left: 6px; white-space: nowrap; }
+.pill { padding: 1px 7px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); }
+.pill.silent { color: var(--muted); }
+.pill.judged { border-color: #b8860b; color: #b8860b; }
+.pill.settled { border-color: var(--ok); color: var(--ok); }
+.scale { position: relative; height: 22px; margin: 6px 0 2px; border-radius: 6px; overflow: hidden;
+  display: grid; grid-template-columns: 10fr 80fr 10fr; font-size: 10px; }
+.scale > span { display: flex; align-items: center; justify-content: center; color: var(--ink); opacity: .85; }
+.scale .z1 { background: color-mix(in srgb, var(--ok) 22%, transparent); }
+.scale .z2 { background: color-mix(in srgb, #b8860b 18%, transparent); }
+.scale .z3 { background: color-mix(in srgb, var(--muted) 22%, transparent); }
+.scale .mark { position: absolute; top: 0; bottom: 0; width: 3px; background: var(--watch); }
+.why { font-size: 13px; margin: 4px 0; }
+.mem { display: grid; grid-template-columns: 54px 1fr; gap: 8px; align-items: start; margin: 3px 0; font-size: 12px; }
+.mem .pb { height: 8px; border-radius: 4px; background: var(--line); margin-top: 5px; position: relative; overflow: hidden; }
+.mem .pb i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--watch); }
+.mem.dim { opacity: .45; }
+.mem .pv { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.sum { margin-top: 4px; font-size: 12px; color: var(--muted); }
 .approx { color: var(--bad); font-size: 12px; }
 @media (max-width: 800px) {
   .app { grid-template-columns: 1fr; grid-template-rows: 200px 1fr; }
@@ -147,7 +166,8 @@ async function fetchRun(name) {
   $("title").textContent = v.name;
   $("meta").innerHTML = (v.live ? "<span class='dot'></span>running now · " : "") +
     (m.solved != null ? `${m.solved ? "<span class='pass'>solved</span>" : "<span class='fail'>not solved</span>"} · ${m.interventions} corrections · $${(m.cost_usd || 0).toFixed(2)} · ${Math.round(m.wall_s || 0)}s agent time · ` : "") +
-    `${v.events.length} events` + (v.exact ? "" : " · <span class='approx'>old run: agent step times are approximate (spread evenly per round)</span>");
+    `${v.events.length} events` + (v.exact ? "" : " · <span class='approx'>old run: agent step times are approximate (spread evenly per round)</span>") +
+    edgeSummary(v.events);
   $("bug").hidden = !v.task.bug_report; $("bugtext").textContent = v.task.bug_report || "";
   $("live").hidden = !v.live;
   if (!v.live) follow = false;
@@ -165,7 +185,7 @@ async function pick(name) {
 function card(e, now) {
   const id = events().indexOf(e), isOpen = open.has(id);
   const running = (e.end && now < e.end - t0) || (e.kind === "tool" && e.result == null && view.exact && view.live);
-  let k = "", x = "", body = "", cls = e.lane, msg = "";
+  let k = "", x = "", body = "", cls = e.lane, msg = "", edge = "";
   if (e.lane === "agent" && e.kind === "tool") {
     let inp = {}; try { inp = JSON.parse(e.input || "{}"); } catch { inp = { raw: e.input }; }
     k = e.tool; x = inp.command || inp.file_path || inp.pattern || inp.path || inp.arg || inp.description || e.input || "";
@@ -200,7 +220,12 @@ function card(e, now) {
     else { k = `Silent · on ${what}`; x = e.judged === false ? "nothing new to judge" : "nothing to say"; }
     if (!running) x += ` · lookup ${e.recall_ms}ms` + (e.ms ? ` · judge ${(e.ms / 1000).toFixed(1)}s` : "");
     if (!running && e.decision && e.decision.choice) x += ` · Jev: p(no conflict)=${e.decision.none}`;
-    body = (e.speak ? `<div class="lbl">Quote · ${esc(e.where)}</div><pre>${esc(e.quote)}</pre>` : "") +
+    if (!running && e.pick) {
+      const [c, l] = PATH[e.pick.path];
+      edge = `<span class="edge"><span class="pill ${c}">${e.pick.none != null ? "none " + e.pick.none.toFixed(2) + " → " : ""}${l}</span></span>`;
+      x = x.replace(/ · lookup 0ms/, "");
+    }
+    body = edgeView(e) + (e.speak ? `<div class="lbl">Quote · ${esc(e.where)}</div><pre>${esc(e.quote)}</pre>` : "") +
       (e.trigger && e.trigger !== "edit" && e.trigger_text ? `<div class="lbl">What started it</div><pre>${esc(e.trigger_text)}</pre>` : "") +
       (e.diff ? `<div class="lbl">Change it looked at</div><pre>${esc(e.diff)}</pre>` : "") +
       ((e.memories || []).length ? `<div class="lbl">What memory returned</div>` + e.memories.map((m) => `<pre>${esc(m)}</pre>`).join("")
@@ -215,12 +240,52 @@ function card(e, now) {
   } else { k = e.kind; x = JSON.stringify(e); }
   return `<div class="row"><div class="t">${fmt(e.ts - t0)}</div>
     <div class="card ${cls}" data-i="${id}">
-      <div class="h"><span class="k">${k}</span><span class="x">${esc(String(x).slice(0, 300))}</span>${tag(e)}</div>
+      <div class="h"><span class="k">${k}</span>${edge}<span class="x">${esc(String(x).slice(0, 300))}</span>${tag(e)}</div>
       ${msg ? `<div class="msg">${esc(msg)}</div>` : ""}
       ${isOpen ? body : ""}
     </div></div>`;
 }
 const events = () => (view ? view.events : []);
+
+// The watcher's decision edges, read from the decision model's pick (see serve.py pick_for):
+//   none >= 0.9  -> silent, no LLM call;  0.1 <= none < 0.9 -> the reflect LLM judges;
+//   none < 0.1   -> settled: the fast writer words the note.
+const PATH = {
+  silent: ["silent", "silent · no LLM", "The decision model put “none of these memories answers” at or above 0.9, so reflect returned empty with no LLM call."],
+  judged: ["judged", "LLM judges", "Unsure (none between 0.1 and 0.9): the reflect LLM read the kept memories and their source, and decided whether to speak."],
+  settled: ["settled", "settled · writer", "Sure (none below 0.1): the fast writer model worded the note from the kept memories' source text, with no further judgement."],
+  "none-asked": ["silent", "no decision call", "Nothing reached the decision model (the search found nothing, or the moment had nothing to search)."],
+};
+function edgeSummary(evs) {
+  const r = evs.filter((e) => e.kind === "review" && e.pick);
+  if (!r.length) return "";
+  const c = {}; r.forEach((e) => { c[e.pick.path] = (c[e.pick.path] || 0) + 1; });
+  const spoke = r.filter((e) => e.speak).length;
+  return `<div class="sum">Watcher checks: ${r.length} · ` + Object.entries(c).map(([k, n]) => `${PATH[k][1]} ${n}`).join(" · ") +
+    ` · spoke ${spoke}</div>`;
+}
+function edgeView(e) {
+  const p = e.pick;
+  if (!p) return "";
+  const [cls, label, why] = PATH[p.path];
+  let out = `<div class="lbl">Decision edge</div><div class="why"><span class="pill ${cls}">${label}</span> ${why}</div>`;
+  if (p.none != null) {
+    out += `<div class="scale"><span class="z1">settled &lt;0.1</span><span class="z2">LLM judges</span><span class="z3">silent ≥0.9</span>
+      <i class="mark" style="left:calc(${(p.none * 100).toFixed(1)}% - 1px)"></i></div>
+      <div class="pv">none = ${p.none.toFixed(2)} (how likely the decision model found that no offered memory answers)</div>`;
+  }
+  const outcome = e.speak ? "Spoke: the note above reached the agent's next tool result."
+    : p.answer ? "Reflect answered, but the watcher dropped it: every memory it cites was already said this session (or the 3-note cap was reached)."
+    : p.path === "judged" ? "The LLM judged that nothing applies: silent." : p.path === "settled" ? "The writer returned nothing: silent." : "Silent.";
+  out += `<div class="lbl">Outcome</div><div class="why">${esc(outcome)}</div>`;
+  if (p.answer && !e.speak) out += `<pre>${esc(p.answer)}</pre>`;
+  if (p.offered && p.offered.length) {
+    out += `<div class="lbl">Memories offered to the decision model (bar = probability the answer depends on it; bright = kept for the answer)</div>` +
+      p.offered.slice().sort((a, b) => b.p - a.p).map((m) => `<div class="mem ${m.kept ? "" : "dim"}"><div><div class="pb"><i style="width:${(m.p * 100).toFixed(0)}%"></i></div><div class="pv">${m.p.toFixed(2)}</div></div><div>${esc(m.text)}</div></div>`).join("");
+  }
+  if (p.question) out += `<div class="lbl">Question the decision model was asked</div><pre>${esc(p.question)}</pre>`;
+  return out;
+}
 // how the watcher treated this step: started a check, or only context for the next one
 function tag(e) {
   if (!e.watch || e.lane === "watcher") return "";
