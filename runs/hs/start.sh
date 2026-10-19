@@ -16,6 +16,7 @@ export HINDSIGHT_API_REFLECT_DECISION_MODEL_PROVIDER=typesafe
 [ "${WATCHER_REFLECT_MODEL:-gemini-3.8-flash}" = gemini-3.5-flash-lite ] || export HINDSIGHT_API_REFLECT_LLM_EXTRA_BODY="{\"thinking_config\": {\"thinking_level\": \"${WATCHER_THINKING:-low}\"}}"
 export HINDSIGHT_API_REFLECT_PROMPT_CACHE_ENABLED=false
 export HINDSIGHT_API_REFLECT_LLM_MODEL=${WATCHER_REFLECT_MODEL:-gemini-3.8-flash}
+export HINDSIGHT_API_REFLECT_ABSTAIN_WRITER_LLM_MODEL=${WATCHER_ABSTAIN_WRITER-gemini-3.5-flash-lite}
 export HINDSIGHT_API_REFLECT_DECISION_MODEL_API_KEY=$(grep '^JEV_KEY=' ~/nicolo-secrets.env | cut -d= -f2- | tr -d '"')
 export HINDSIGHT_API_REFLECT_DECISION_MODEL_BASE_URL=http://127.0.0.1:${4:-8897}
 PY=$(uv run --quiet python -c 'import sys; print(sys.executable)')

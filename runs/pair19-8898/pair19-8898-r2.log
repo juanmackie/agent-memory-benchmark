@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1023,
+  "tokens": {
+    "input": 28,
+    "output": 3050,
+    "reasoning": 0,
+    "cache_read": 447284,
+    "cache_write": 11073
+  },
+  "turns": 14,
+  "wall_s": 45.5,
+  "cost_usd": 0.1643,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 5,
+    "messages": [
+      "Before you change infraconf/units.py: memory K/M/G/T as 1024 powers, disk M/G/T as 1000 powers, both case-insensitive, and anything outside the table is a ValueError like today. A bare memory value means MiB: that's what every legacy template meant, so 256 is 256*1024**2 bytes. A bare disk value means GB - 1000**3 per unit. For memory yes: K or k is 1024. For disk, no - reject it with a ValueError. Integers only, same as today - the vendor API takes integer byte counts and the templates were all written that way. Leading and trailing whitespace stays tolerated though, the YAML pipeline pads values sometimes. kind and suffix, but never echo the whole config blob into the exception"
+    ],
+    "evidence": [
+      "39f0b741-792d-436f-9e3e-1f3eb787f41b"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=28 out=3050 cache_r=447284 cache_w=11073 | wall=45s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair19-8898-r2/result.json

@@ -1,0 +1,47 @@
+built boltons-under2camel @ 979fa9b6
+built boltons-under2camel @ 979fa9b6
+[boltons-under2camel-001] history=full model=claude-sonnet-5 — initial attempt…
+built boltons-under2camel @ 979fa9b6
+{
+  "task_id": "boltons-under2camel-001",
+  "codebase": "boltons-under2camel",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "20 passed in 0.05s",
+  "patch_bytes": 941,
+  "tokens": {
+    "input": 24,
+    "output": 1904,
+    "reasoning": 0,
+    "cache_read": 364680,
+    "cache_write": 8322
+  },
+  "turns": 12,
+  "wall_s": 34.3,
+  "cost_usd": 0.1253,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 5,
+    "messages": [
+      "Before you change under2camel: the acronym set is exactly {HTTP, API, SKU, GDPR}, and everything else (including db, sql, url) title-cases normally. So 'sku_count' -> 'SKUCount', 'gdpr_flag' -> 'GDPRFlag', 'db_name' -> 'DbName', 'url_path' -> 'UrlPath'."
+    ],
+    "evidence": [
+      "019ec563-0ed4-4d65-9e6b-edbe5029ec42"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=24 out=1904 cache_r=364680 cache_w=8322 | wall=34s -> /tmp/sdebench/run/boltons-under2camel-001_full_pair19-8899-r2/result.json

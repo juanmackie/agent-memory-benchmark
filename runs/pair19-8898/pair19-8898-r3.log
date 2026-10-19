@@ -1,0 +1,47 @@
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
+{
+  "task_id": "boltons-unitparse-001",
+  "codebase": "boltons-unitparse",
+  "variant": "base",
+  "history": "full",
+  "agent": "claude-code",
+  "model": "claude-sonnet-5",
+  "solved": true,
+  "interventions": 0,
+  "capped": false,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1035,
+  "tokens": {
+    "input": 28,
+    "output": 3537,
+    "reasoning": 0,
+    "cache_read": 447105,
+    "cache_write": 11598
+  },
+  "turns": 15,
+  "wall_s": 39.1,
+  "cost_usd": 0.1712,
+  "memory_diag": null,
+  "memory_usage": null,
+  "credited": null,
+  "credited_reply": null,
+  "hindsight_calls": null,
+  "watcher": {
+    "reviews": 6,
+    "messages": [
+      "Before you change infraconf/units.py: memory K/M/G/T as 1024 powers, disk M/G/T as 1000 powers, both case-insensitive, and anything outside the table is a ValueError like today. A bare memory value means MiB: that's what every legacy template meant, so 256 is 256*1024**2 bytes. A bare disk value means GB - 1000**3 per unit. For memory yes: K or k is 1024. For disk, no - reject it with a ValueError. Integers only, same as today. Leading and trailing whitespace stays tolerated though."
+    ],
+    "evidence": [
+      "056565e1-bdcb-43c8-b898-9b331a15f263"
+    ],
+    "errors": 0,
+    "tokens_in": 0,
+    "tokens_out": 0,
+    "end_of_turn_deliveries": 0
+  }
+}
+
+RESULT history=full: solved=True interventions=0 | tokens in=28 out=3537 cache_r=447105 cache_w=11598 | wall=39s -> /tmp/sdebench/run/boltons-unitparse-001_full_pair19-8898-r3/result.json

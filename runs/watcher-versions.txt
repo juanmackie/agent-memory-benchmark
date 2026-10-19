@@ -98,3 +98,15 @@ Where the gap is (pair11-16, 594 runs per arm): tool time equal (0.5s); the head
   conflict notes than v5 (17 vs 27 per 198 runs).
 Tried and rejected: flash-lite as the reflect model (heads-up 4.5s -> 3.1s, but replay 39/42 with two
   restating notes in the LLM-decides band).
+
+v6.11 (pair17): settled heads-ups written by gemini-3.5-flash-lite (HINDSIGHT_API_REFLECT_ABSTAIN_WRITER_LLM_MODEL),
+  borderline picks stay on flash. Replay heads-up 4.5s -> 3.2s, 40/42 agree.
+  pair17: Claude+mem $0.1739 vs v5 $0.1694, 49.5s vs 48.8s, first try 98 vs 98. Lost slightly.
+  Found: the settled writer copied the observation summary and dropped rules only the source said
+  (deploywave: "canary dependencies are assumed already live" missing in every reflect note, present in v5's).
+v6.12 (pair18, pair19): settled answers read the source text first, summaries after (borderline picks unchanged);
+  heads-up asks for "every rule the memory's source text records ... not only its summary". Replay 40/42, 3.2s.
+  pair18: Claude+mem $0.169 vs $0.189, 48.1s vs 50.4s, first try 99 vs 96 (win driven by 3 costly v5 misses).
+  pair19 (32/33 tasks scored at wrap-up): $0.179 vs $0.172, 53.5s vs 50.0s, first try 94 vs 96 (loss).
+  Pooled pair17-19 (98 task pairs): Claude+mem -$0.003 [-0.013, +0.007], wall +0.6s [-1.8, +3.0].
+  A statistical tie with v5: reflect is not reliably cheaper or faster.
