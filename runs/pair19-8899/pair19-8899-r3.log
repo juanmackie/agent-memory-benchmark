@@ -1,10 +1,10 @@
-built boltons-under2camel @ 979fa9b6
-built boltons-under2camel @ 979fa9b6
-[boltons-under2camel-001] history=full model=claude-sonnet-5 — initial attempt…
-built boltons-under2camel @ 979fa9b6
+planted unitparse in boltons
+planted unitparse in boltons
+[boltons-unitparse-amended-001] history=full model=claude-sonnet-5 — initial attempt…
+planted unitparse in boltons
 {
-  "task_id": "boltons-under2camel-001",
-  "codebase": "boltons-under2camel",
+  "task_id": "boltons-unitparse-amended-001",
+  "codebase": "boltons-unitparse-amended",
   "variant": "base",
   "history": "full",
   "agent": "claude-code",
@@ -12,30 +12,30 @@ built boltons-under2camel @ 979fa9b6
   "solved": true,
   "interventions": 0,
   "capped": false,
-  "final_pytest": "20 passed in 0.04s",
-  "patch_bytes": 867,
+  "final_pytest": "14 passed in 0.02s",
+  "patch_bytes": 1047,
   "tokens": {
-    "input": 24,
-    "output": 2149,
+    "input": 28,
+    "output": 4324,
     "reasoning": 0,
-    "cache_read": 371517,
-    "cache_write": 8983
+    "cache_read": 441365,
+    "cache_write": 11267
   },
-  "turns": 12,
-  "wall_s": 34.8,
-  "cost_usd": 0.1318,
+  "turns": 14,
+  "wall_s": 58.4,
+  "cost_usd": 0.1766,
   "memory_diag": null,
   "memory_usage": null,
   "credited": null,
   "credited_reply": null,
   "hindsight_calls": null,
   "watcher": {
-    "reviews": 6,
+    "reviews": 3,
     "messages": [
-      "Before you change under2camel: the acronym set is exactly {HTTP, API, SKU, GDPR}, and everything else (including db, sql, url) title-cases normally. So 'sku_count' -> 'SKUCount', 'gdpr_flag' -> 'GDPRFlag', 'db_name' -> 'DbName', 'url_path' -> 'UrlPath'."
+      "Before you change parse_quantity: memory = binary suffixes, bare MiB; disk = decimal suffixes, bare GB, K invalid (ValueError)."
     ],
     "evidence": [
-      "92f27de9-dc22-4c6b-b9cf-cfb810a6120c"
+      "81248cd3-9b55-458b-928d-c30b7f4de45d"
     ],
     "errors": 0,
     "tokens_in": 0,
@@ -44,4 +44,4 @@ built boltons-under2camel @ 979fa9b6
   }
 }
 
-RESULT history=full: solved=True interventions=0 | tokens in=24 out=2149 cache_r=371517 cache_w=8983 | wall=35s -> /tmp/sdebench/run/boltons-under2camel-001_full_pair19-8899-r3/result.json
+RESULT history=full: solved=True interventions=0 | tokens in=28 out=4324 cache_r=441365 cache_w=11267 | wall=58s -> /tmp/sdebench/run/boltons-unitparse-amended-001_full_pair19-8899-r3/result.json

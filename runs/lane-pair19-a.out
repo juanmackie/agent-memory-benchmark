@@ -112,3 +112,9 @@ pair19-8899-w3 solved=True corrections=0 agent=$0.1313 agent_time=25.4s memory=$
 pair19-8899-r3 solved=True corrections=0 agent=$0.1318 agent_time=34.8s memory=$0.0033
 == boltons-unitparse-amended 09:21
 pair19-8899-w1 solved=True corrections=0 agent=$0.1785 agent_time=77.4s memory=$0.0093
+pair19-8899-r1 solved=True corrections=0 agent=$0.2117 agent_time=78.1s memory=$0.0146
+pair19-8899-w2 solved=True corrections=0 agent=$0.198 agent_time=70.0s memory=$0.0191
+pair19-8899-r2 solved=True corrections=0 agent=$0.1866 agent_time=66.5s memory=$0.0094
+pair19-8899-w3 solved=True corrections=0 agent=$0.174 agent_time=64.3s memory=$0.0184
+pair19-8899-r3 solved=True corrections=0 agent=$0.1766 agent_time=58.4s memory=$0.0107
+lane done 09:30

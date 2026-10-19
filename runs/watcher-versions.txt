@@ -107,6 +107,6 @@ v6.11 (pair17): settled heads-ups written by gemini-3.5-flash-lite (HINDSIGHT_AP
 v6.12 (pair18, pair19): settled answers read the source text first, summaries after (borderline picks unchanged);
   heads-up asks for "every rule the memory's source text records ... not only its summary". Replay 40/42, 3.2s.
   pair18: Claude+mem $0.169 vs $0.189, 48.1s vs 50.4s, first try 99 vs 96 (win driven by 3 costly v5 misses).
-  pair19 (32/33 tasks scored at wrap-up): $0.179 vs $0.172, 53.5s vs 50.0s, first try 94 vs 96 (loss).
-  Pooled pair17-19 (98 task pairs): Claude+mem -$0.003 [-0.013, +0.007], wall +0.6s [-1.8, +3.0].
+  pair19: Claude+mem $0.180 vs $0.173, 54.0s vs 50.6s, first try 97 vs 98 (loss).
+  Pooled pair17-19 (99 task pairs): Claude+mem -$0.003 [-0.014, +0.007], wall +0.6s [-1.8, +3.1].
   A statistical tie with v5: reflect is not reliably cheaper or faster.
