@@ -1,0 +1,16 @@
+# Isolated Hermes Agent (NousResearch) — parallels sdebench-agent-pi. Pinned to an exact upstream
+# commit. Model auth is the Codex login (~/.codex/auth.json, mounted read-only at runtime and
+# imported into Hermes' own store by the harness); none baked in. Runs headless with
+# `hermes -z PROMPT --yolo` (the container is the sandbox). Memory arm: Hermes' own bundled Hindsight
+# memory plugin (plugins/memory/hindsight), configured by the harness at container start.
+FROM python:3.12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates ripgrep \
+    && rm -rf /var/lib/apt/lists/*
+ARG HERMES_SHA=5eb99eb2844b22ebb723711b8e6a0bbb80bb5f04
+# Hermes refuses wheel builds (shell installer / Docker / Nix only); the supported source path is an
+# editable install of a checkout. hindsight-client: what the bundled Hindsight memory plugin talks to
+# the server with (not a core Hermes dependency).
+RUN git clone --filter=blob:none https://github.com/NousResearch/hermes-agent /opt/hermes \
+    && git -C /opt/hermes checkout -q ${HERMES_SHA} \
+    && pip install --no-cache-dir -e /opt/hermes "hindsight-client>=0.10.1,<1"
+WORKDIR /work

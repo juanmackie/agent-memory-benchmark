@@ -9,7 +9,7 @@ corpus into the selected provider (isolation_unit = task), then this mode dispat
   - any other provider => generic arm: `provider.retrieve(bug_report)` and the top memories are
     injected into the task prompt (`provided` arm) — how any AMB memory system runs the benchmark.
 
-Env: SDE_AGENT (opencode|claude-code|codex|pi), SDE_HINDSIGHT_URL (Hindsight server, default :8888),
+Env: SDE_AGENT (opencode|claude-code|codex|pi|hermes), SDE_HINDSIGHT_URL (Hindsight server, default :8888),
 SDE_HSCODING_PLUGIN_DIR (plugin dir with dist/ built; hscoding only), SDE_MODEL.
 """
 import asyncio
@@ -34,7 +34,8 @@ class CodingMode(ResponseMode):
     description = "Build the task repo, run a coding agent with test-feedback interventions, grade by pytest."
 
     _AGENT_MODEL = {"opencode": "google/gemini-3.5-flash", "claude-code": "claude-sonnet-5",
-                    "codex": "gpt-5.4-mini", "pi": "openai-codex/gpt-5.6-luna"}
+                    "codex": "gpt-5.4-mini", "pi": "openai-codex/gpt-5.6-luna",
+                    "hermes": "gpt-5.6-luna"}
 
     def __init__(self, model: str | None = None):
         self._agent = os.environ.get("SDE_AGENT", "opencode")   # --agent, so claude runs land in the UI
@@ -95,8 +96,9 @@ class CodingMode(ResponseMode):
         # the memory it is supposed to measure, so its score says nothing about memory. Rerun the
         # whole task (a fresh container and session) instead of scoring it, up to
         # SDE_REFLECT_RETRIES times; the attempts are recorded. Only for the reflect injection: a
-        # pages/recall arm never reflects on its own.
-        reflect_arm = arm == "hscoding" and os.environ.get("HINDSIGHT_AUTO_INJECT", "reflect") == "reflect"
+        # pages/recall arm never reflects on its own, nor does hermes (its own plugin recalls, no diag log).
+        reflect_arm = (arm == "hscoding" and self._agent != "hermes"
+                       and os.environ.get("HINDSIGHT_AUTO_INJECT", "reflect") == "reflect")
         retries = int(os.environ.get("SDE_REFLECT_RETRIES", "3")) if reflect_arm else 0
         t0 = time.perf_counter()
         for attempt in range(retries + 1):

@@ -1,18 +1,19 @@
 """sdebench harness — run a coding agent on a regression task and grade it.
 
 Flow: build the repo -> ship the agent the bug report + failing regression test -> run the agent
-(--agent opencode|claude-code|codex) -> on a failing grade, feed the pytest tail back and resume
+(--agent opencode|claude-code|codex|pi|hermes) -> on a failing grade, feed the pytest tail back and resume
 (the corrections loop, cap --max-interventions) -> capture the SOURCE diff (tests excluded) ->
 grade in Docker against FAIL_TO_PASS + PASS_TO_PASS + HIDDEN_TO_PASS from pristine copies.
 
 Usage:
     uv run python sdebench/harness/run.py --task <task.json> --agent opencode --history full     # vanilla
     uv run python sdebench/harness/run.py --task <task.json> --agent codex   --history hscoding  # memory
+    uv run python sdebench/harness/run.py --task <task.json> --agent hermes  --history full     # Hermes (Codex login)
 
 Metrics reported: solved (binary), interventions, turns, wall, tokens, cost (from PRICES;
 claude-code self-reports).
 """
-import argparse, json, os, re, shutil, subprocess, time
+import argparse, json, os, re, shutil, subprocess, sys, time
 from pathlib import Path
 
 HARNESS = Path(__file__).resolve().parent
@@ -44,6 +45,8 @@ PRICES = {
     # cache writes $0.25. Priced the same whichever pi provider (API key or Codex subscription) runs it.
     "openai-codex/gpt-5.6-luna": {"input": 0.20, "cache_read": 0.02, "cache_write": 0.25, "output": 1.20},
     "openai/gpt-5.6-luna": {"input": 0.20, "cache_read": 0.02, "cache_write": 0.25, "output": 1.20},
+    # the same model under Hermes' naming (provider openai-codex + bare model id)
+    "gpt-5.6-luna": {"input": 0.20, "cache_read": 0.02, "cache_write": 0.25, "output": 1.20},
 }
 
 
@@ -277,9 +280,16 @@ def gen_index_doc(task: dict) -> str:
 _AGENT_IMAGES = {"opencode": os.environ.get("SDE_AGENT_IMAGE", "sdebench-agent"),
                  "claude-code": os.environ.get("SDE_AGENT_IMAGE_CLAUDE", "sdebench-agent-claude"),
                  "codex": os.environ.get("SDE_AGENT_IMAGE_CODEX", "sdebench-agent-codex"),
-                 "pi": os.environ.get("SDE_AGENT_IMAGE_PI", "sdebench-agent-pi")}
+                 "pi": os.environ.get("SDE_AGENT_IMAGE_PI", "sdebench-agent-pi"),
+                 "hermes": os.environ.get("SDE_AGENT_IMAGE_HERMES", "sdebench-agent-hermes")}
 _AGENT_MODEL = {"opencode": "google/gemini-3.5-flash", "claude-code": "claude-sonnet-5",
-                "codex": "gpt-5.4-mini", "pi": "openai-codex/gpt-5.6-luna"}
+                "codex": "gpt-5.4-mini", "pi": "openai-codex/gpt-5.6-luna", "hermes": "gpt-5.6-luna"}
+# Hermes runs on the Codex subscription (provider openai-codex): the Codex CLI login is mounted
+# read-only and imported into Hermes' own auth store at container start. No Gemini key reaches it.
+_CODEX_AUTH = os.path.expanduser(os.environ.get("SDE_CODEX_AUTH", str(Path.home() / ".codex" / "auth.json")))
+# Optional: a hindsight-integrations/hermes checkout copied over the Hindsight memory plugin Hermes
+# bundles, to test an unreleased plugin version. Unset = the bundled plugin, as Hermes ships it.
+_HERMES_PLUGIN_DIR = os.path.expanduser(os.environ.get("SDE_HERMES_PLUGIN_DIR", ""))
 # The hindsight-coding-agents plugin package (dist/ built) — memory arms only. No default that
 # assumes a particular machine layout: point SDE_HSCODING_PLUGIN_DIR at a checkout of
 # hindsight-integrations/hindsight-coding-agents (or the npm-installed package dir).
@@ -303,12 +313,12 @@ PLUGIN_DIAG = "/tmp/hindsight-plugin.log"
 PLUGIN_USAGE = "/tmp/hindsight-usage.jsonl"
 
 
-def _mem_docker_env(env: dict) -> list[str]:
+def _mem_docker_env(env: dict, gemini: bool = True) -> list[str]:
     """Docker -e flags carrying model auth + memory settings (both agents read HINDSIGHT_*; the
     opencode plugin also gets a config file, the claude hook reads these env vars directly)."""
     denv: list[str] = ["-e", f"HINDSIGHT_DIAG_FILE={PLUGIN_DIAG}", "-e", f"HINDSIGHT_USAGE_FILE={PLUGIN_USAGE}"]
     key = env.get("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY", "")
-    if key:
+    if key and gemini:
         denv += ["-e", f"GEMINI_API_KEY={key}", "-e", f"GOOGLE_GENERATIVE_AI_API_KEY={key}"]
     okey = env.get("OPENAI_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
     if okey:
@@ -337,9 +347,11 @@ def start_agent_container(workdir: Path, env: dict, agent: str = "opencode") -> 
         mounts += ["-v", f"{_CLAUDE_CREDS}:/root/.claude/.credentials.json"]  # rw: claude may refresh it
     if agent == "pi":
         mounts += ["-v", f"{_PI_AUTH}:/root/.pi/agent/auth.json"]  # rw: pi refreshes OAuth tokens
+    if agent == "hermes":
+        mounts += ["-v", f"{_CODEX_AUTH}:/root/.codex/auth.json:ro"]  # imported, never written
     cmd = ["docker", "run", "-d", "--rm", *mounts, "-w", "/work",
            "--add-host", "host.docker.internal:host-gateway",
-           *_mem_docker_env(env), _AGENT_IMAGES[agent], "sleep", "infinity"]
+           *_mem_docker_env(env, gemini=agent != "hermes"), _AGENT_IMAGES[agent], "sleep", "infinity"]
     cid = ""
     for attempt in range(4):  # `docker run` can transiently exit 125 under load — retry
         p = subprocess.run(cmd, capture_output=True, text=True)
@@ -422,7 +434,41 @@ def start_agent_container(workdir: Path, env: dict, agent: str = "opencode") -> 
         out = (inst.stdout or "") + (inst.stderr or "")
         if inst.returncode != 0 or "extension registered" not in out:
             raise RuntimeError(f"plugin install failed in the pi container (rc={inst.returncode}): {out[-600:]}")
+    if agent == "hermes":
+        _setup_hermes(cid, env)
     return cid
+
+
+def _setup_hermes(cid: str, env: dict) -> None:
+    """Hermes config: gpt-5.6-luna on the Codex login; in the memory arm also Hermes' own Hindsight
+    memory plugin (`memory.provider: hindsight`) against the bench's server and bank."""
+    def dex(script: str, data: str = "") -> None:
+        p = subprocess.run(["docker", "exec", "-i", cid, "sh", "-c", script], input=data,
+                           capture_output=True, text=True)
+        if p.returncode != 0:
+            raise RuntimeError(f"hermes setup failed: {script[:80]}: {(p.stderr or p.stdout)[-400:]}")
+    mem = bool(env.get("HINDSIGHT_BANK_ID"))
+    # terminal.cwd: one-shot Hermes otherwise runs its tools in $HOME, not the repo it was started in.
+    cfg = (f"model:\n  default: {_AGENT_MODEL['hermes']}\n  provider: openai-codex\nterminal:\n  cwd: /work\n"
+           + ("memory:\n  provider: hindsight\n" if mem else ""))
+    dex("mkdir -p /root/.hermes && cat > /root/.hermes/config.yaml", cfg)
+    # The Codex login: what `hermes auth` does when told to import the Codex CLI's credentials
+    # (~/.codex/auth.json, mounted read-only), without its prompt. Hermes keeps its own copy.
+    dex("$(head -1 $(command -v hermes) | sed 's/^#!//') -c 'from hermes_cli.auth import "
+        "_import_codex_cli_tokens as i, _save_codex_tokens as s; t = i(); assert t, \"no Codex login\"; s(t)'")
+    if not mem:
+        return
+    if _HERMES_PLUGIN_DIR:
+        # Copied, not mounted: a mount would show the agent the plugin dir (its .venv, its tests).
+        src = Path(_HERMES_PLUGIN_DIR)
+        for f in [*src.glob("*.py"), src / "plugin.yaml"]:
+            dex(f"cat > /opt/hermes/plugins/memory/hindsight/{f.name}", f.read_text())
+    # Trial isolation (as the other arms' retainSessions=false): auto_retain off, nothing is saved
+    # into the bank. recall_sync: by default the plugin recalls in the background for the NEXT turn,
+    # so a one-shot task would get no memory at all; this recalls against the current prompt.
+    hs = {"mode": "local_external", "api_url": _container_url(env.get("HINDSIGHT_API_URL", HINDSIGHT_URL)),
+          "bank_id": env["HINDSIGHT_BANK_ID"], "auto_retain": False, "recall_sync": True}
+    dex("mkdir -p /root/.hermes/hindsight && cat > /root/.hermes/hindsight/config.json", json.dumps(hs))
 
 
 def stop_agent_container(cid: str) -> None:
@@ -572,6 +618,52 @@ def _parse_pi(stdout: str, elapsed: float) -> dict:
     return {"elapsed": elapsed, "tokens": tok, "turns": turns, "trajectory": traj}
 
 
+# One Hermes turn, in the container: `hermes -z` (one-shot; prints only the final reply), then its
+# --usage-file report plus this turn's messages from Hermes' session store, as one JSON line.
+_HERMES_TURN = r"""t=$(date +%s)
+hermes -z "$0" --yolo "$@" --usage-file /tmp/hermes-usage.json >/tmp/hermes-reply.txt 2>/tmp/hermes-err.txt
+python - "$t" <<'PY'
+import json, sqlite3, sys
+u = json.load(open("/tmp/hermes-usage.json"))
+rows = sqlite3.connect("/root/.hermes/state.db").execute(
+    "select role, content, tool_calls, tool_name from messages where session_id=? and timestamp>=? order by id",
+    (u.get("session_id") or "", float(sys.argv[1]) - 1)).fetchall()
+print(json.dumps({"usage": u, "messages": [dict(zip(("role", "content", "tool_calls", "tool_name"), r)) for r in rows],
+                  "stderr": open("/tmp/hermes-err.txt").read()[-400:]}))
+PY"""
+
+
+def _parse_hermes(stdout: str, elapsed: float) -> dict:
+    """Parse the _HERMES_TURN line: Hermes' --usage-file report (token totals for this run, api_calls)
+    and the turn's messages from its session store (assistant text + tool calls)."""
+    doc = json.loads(stdout.strip().splitlines()[-1])
+    u = doc["usage"]
+    if u.get("failed"):
+        # Fail LOUDLY, as for the other agents: a dead agent otherwise reads as an empty turn.
+        raise RuntimeError(f"hermes agent error: {str(u.get('failure') or doc.get('stderr'))[:300]}")
+    reasoning = u.get("reasoning_tokens") or 0
+    # Hermes' output_tokens include the reasoning (total = prompt + output); compute_cost bills
+    # output + reasoning, so split them here.
+    tok = {"input": u.get("input_tokens") or 0, "output": max((u.get("output_tokens") or 0) - reasoning, 0),
+           "reasoning": reasoning, "cache_read": u.get("cache_read_tokens") or 0,
+           "cache_write": u.get("cache_write_tokens") or 0}
+    traj = []
+    for m in doc["messages"]:
+        if m["role"] != "assistant":
+            continue
+        if m.get("content"):
+            traj.append({"k": "say", "text": str(m["content"])[:1500]})
+        for tc in json.loads(m.get("tool_calls") or "[]"):
+            fn = tc.get("function") or {}
+            try:
+                a = json.loads(fn.get("arguments") or "{}")
+            except ValueError:
+                a = {}
+            arg = str(a.get("command") or a.get("path") or a.get("file_path") or json.dumps(a))[:160]
+            traj.append({"k": "tool", "tool": str(fn.get("name", "")).lower(), "arg": arg, "input": "", "out": ""})
+    return {"elapsed": elapsed, "tokens": tok, "turns": u.get("api_calls") or 0, "trajectory": traj}
+
+
 def run_agent(cid: str, model: str, timeout: int, message: str, resume: bool = False,
               agent: str = "opencode", system_append: str | None = None) -> dict:
     # One turn: exec the agent into the already-running per-task container (session store lives inside,
@@ -600,6 +692,15 @@ def run_agent(cid: str, model: str, timeout: int, message: str, resume: bool = F
         if proc.returncode != 0 and not proc.stdout.strip():
             raise RuntimeError(f"pi agent failed (rc={proc.returncode}): {(proc.stderr or '')[-300:]}")
         return _parse_pi(proc.stdout, time.perf_counter() - t0)
+    if agent == "hermes":
+        # -c resumes the container's latest session: the corrections continue the same Hermes session.
+        cmd = ["docker", "exec", "-w", "/work", cid, "sh", "-c", _HERMES_TURN, message,
+               "-m", model, "--provider", "openai-codex", *(["-c"] if resume else [])]
+        t0 = time.perf_counter()
+        proc = subprocess.run(cmd, timeout=timeout, capture_output=True, text=True)
+        if proc.returncode != 0 or not proc.stdout.strip():
+            raise RuntimeError(f"hermes agent failed (rc={proc.returncode}): {(proc.stderr or '')[-300:]}")
+        return _parse_hermes(proc.stdout, time.perf_counter() - t0)
     if agent == "codex":
         base = ["docker", "exec", "-w", "/work", cid, "codex", "exec", "--json", "-m", model,
                 "--dangerously-bypass-approvals-and-sandbox",   # the container IS the sandbox
@@ -813,7 +914,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--task", required=True, help="path to a task.json (sdebench/datasets/boltons-*/tasks/main/task.json)")
     ap.add_argument("--history", choices=["full", "squashed", "hindsight", "hscoding", "memtool", "inject", "oracle", "hybrid", "index", "provided", "conversations", "skill"], default="full")
-    ap.add_argument("--agent", choices=["opencode", "claude-code", "codex", "pi"], default="opencode")
+    ap.add_argument("--agent", choices=["opencode", "claude-code", "codex", "pi", "hermes"], default="opencode")
     ap.add_argument("--model", default=None, help="agent model; defaults per --agent")
     ap.add_argument("--timeout", type=int, default=900)
     ap.add_argument("--run-id", default="r1")
@@ -849,7 +950,8 @@ def main():
         if _em:
             task["bug_report"] = task["bug_report"] + "\n\nRelevant memory (surfaced for you by your memory system):\n" + _em
     elif args.history == "hscoding":
-        if not _PLUGIN_DIR or not (Path(_PLUGIN_DIR) / "dist").is_dir():
+        # hermes uses its own bundled Hindsight memory plugin, not the coding-agents package
+        if args.agent != "hermes" and (not _PLUGIN_DIR or not (Path(_PLUGIN_DIR) / "dist").is_dir()):
             sys.exit("hscoding arm needs SDE_HSCODING_PLUGIN_DIR -> a hindsight-coding-agents "
                      "checkout with dist/ built")
         build_repo(task, repo, "full")              # full repo; memory via the hindsight-coding-agents
@@ -961,7 +1063,7 @@ def main():
         # A memory arm whose reflect silently failed is NOT a memory run — record and shout.
         mem_diag = None
         mem_usage = None
-        if memory_bank:
+        if memory_bank and args.agent != "hermes":  # the coding-agents plugin's logs (hermes uses its own plugin)
             _p = subprocess.run(["docker", "exec", cid, "cat", PLUGIN_DIAG],
                                 capture_output=True, text=True)
             mem_diag = [json.loads(l) for l in (_p.stdout or "").splitlines() if l.strip()] or None
