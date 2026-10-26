@@ -9,6 +9,7 @@ from .mem0_cloud import Mem0CloudMemoryProvider
 from .hybrid_search import HybridSearchMemoryProvider
 from .ogham import OghamMemoryProvider
 from .supermemory import SupermemoryMemoryProvider
+from .mnemosyne import MnemosyneMemoryProvider
 from .none import NoMemoryProvider
 from .hscoding import HsCodingProvider
 
@@ -28,6 +29,7 @@ REGISTRY: dict[str, type[MemoryProvider]] = {
     "ogham": OghamMemoryProvider,
     "qdrant": HybridSearchMemoryProvider,
     "supermemory": SupermemoryMemoryProvider,
+    "mnemosyne": MnemosyneMemoryProvider,
 }
 # legacy aliases (docs/scripts used these); canonical names above
 REGISTRY["none"] = NoMemoryProvider

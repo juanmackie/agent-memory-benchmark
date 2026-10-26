@@ -110,7 +110,7 @@ class HybridSearchMemoryProvider(MemoryProvider):
         ]
         client.upsert(collection_name=_COLLECTION, points=points)
 
-    async def async_retrieve(self, query: str, k: int = 50, user_id: str | None = None, query_timestamp: str | None = None):
+    async def async_retrieve(self, query: str, k: int = 50, user_id: str | None = None, query_timestamp: str | None = None, filters: dict | None = None):
         import asyncio
         return await asyncio.to_thread(self.retrieve, query, k, user_id, query_timestamp)
 
